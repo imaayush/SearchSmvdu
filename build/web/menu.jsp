@@ -1,4 +1,4 @@
-<div id="wrapper">
+    <div id="wrapper">
             <!--BEGIN SIDEBAR MENU-->
             <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
                 data-position="right" class="navbar-default navbar-static-side">
@@ -6,6 +6,7 @@
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
+                      <div class="clearfix"></div>
                     <li><a href="index.jsp"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Home</span></a></li>
@@ -54,14 +55,7 @@
                     </i><span class="menu-title">Tv Shows</span></a>
                        
                     </li>
-                    <li><a href="Pages.html"><i class="fa fa-file-o fa-fw">
-                        <div class="icon-bg bg-yellow"></div>
-                    </i><span class="menu-title">Sing up</span></a>
-                       
-                    </li>
-                    
-                   
-                   
                 </ul>
             </div>
         </nav>
+          

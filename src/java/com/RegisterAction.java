@@ -90,6 +90,13 @@ public class RegisterAction extends ActionSupport {
             ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
                 addActionMessage("User Name not avaible...!!!");
+            } else {
+                String query1 = "select * from user where email='" + email + "'";
+                st = con.createStatement();
+                rs = st.executeQuery(query1);
+                if(rs.next()){
+                    addActionMessage("Email not avaible...!!!");
+                }
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
@@ -105,11 +112,11 @@ public class RegisterAction extends ActionSupport {
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
-                 return "fail";
-                
+                return "fail";
+
             } else {
 
-                query = "insert into user(Name, Password, Email, Username, Gender) values('" + fname + " " + lname + "', '" + password + "', '" + email + "', '" + username + "', '" + gender + "')";
+                query = "insert into user(Name, Password, Email, Username, Gender, image) values('" + fname + " " + lname + "', '" + password + "', '" + email + "', '" + username + "', '" + gender + "', 'images/profile.jpg')";
 
                 try {
                     st = con.createStatement();

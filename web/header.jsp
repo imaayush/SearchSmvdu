@@ -25,22 +25,20 @@
         <link type="text/css" rel="stylesheet" href="styles/jplist-custom.css">
     </head>
     <body>
-        <div>
-
+        <div >
+         
             <!--BEGIN BACK TO TOP-->
-            <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+            <a id="totop" href="#" ><i class="fa fa-angle-up"></i></a>
             <!--END BACK TO TOP-->
             <!--BEGIN TOPBAR-->
-            <div id="header-topbar-option-demo" class="page-header-topbar">
+            <div id="header-topbar-option-demo" class="page-header-topbar"  >
                 <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="navbar-header">
                         <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                         <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
-                    <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+                    <div class="topbar-main">
 
-                        <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs" style="width: 45%;">
-                            <div class="input-icon right text-white"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control text-white"/></div>
-                        </form>
+                        
                         <div style="float:right; margin-top:0.7%; margin-right: 3%">
                             <button onclick="window.location.href='LoginFrom'" class="btn btn-white">Upload</button>
                             
@@ -50,5 +48,6 @@
                     </div>
                 </nav>
 
+            
             </div>
             <!--END TOPBAR-->

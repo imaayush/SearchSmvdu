@@ -48,6 +48,7 @@ public class loginAction extends ActionSupport implements SessionAware {
         this.password = password;
     }
 
+    @Override
     public void validate() {
 
         String query = "select Password from user where UserName='" + username + "'";
@@ -71,7 +72,7 @@ public class loginAction extends ActionSupport implements SessionAware {
     @Override
     public String execute() throws Exception {
 
-        String query = "select Password from user where UserName='" + username + "'";
+        String query = "select Password ,Email from user where UserName='" + username + "'";
         Connection con = Connections.conn();
         Statement st;
         try {
@@ -79,14 +80,11 @@ public class loginAction extends ActionSupport implements SessionAware {
             ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
                 if (!rs.getString(1).equals(password)) {
-
                     return "fail";
-
                 } else {
-
+                    sessionMap.put("email",rs.getString(2));
                     sessionMap.put("username", username);
                     return "success";
-
                 }
             }
 
