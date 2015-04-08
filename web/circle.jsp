@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="col-lg-12">
-
+                    <form action="Addtocircle" method="post" >
                     <div class="page-content">
                         <div class="row">
                             <div class="col-lg-12">
@@ -38,7 +38,7 @@
                                         <div id="grid-layout-table-1" class="box jplist">
                                             <div class="jplist-ios-button"><i class="fa fa-sort"></i>jPList Actions</div>
                                             <div class="jplist-panel box panel-top">
-                                                
+
                                             </div>
                                             <div class="box text-shadow">
                                                 <table class="demo-tbl"><!--<item>1</item>-->
@@ -49,9 +49,16 @@
                                                                 <!--<data></data>-->
                                                                 <td class="td-block"><p class="date"></p>
 
-                                                                    <p class="title"><s:property value="name"/></p>
+                                                                    <p class="title">
+                                                                        <a href="<s:url  action="ViewProfile">
+                                                                               <s:param name="UserName" value="%{UserName}" /> </s:url>"> 
+                                                                           
+                                                                           <s:property value="name"/>
+                                                                        </a>
+
+                                                                    </p>
                                                                     </br>
-                                                                    <p class="desc"><button class="btn btn-blue" value="" name="">Add to Circle</button></p>
+                                                                    <p class="desc"><button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2">Add to Circle</button></p>
 
                                                                     <p class="like"></p></td>
                                                             </tr>
@@ -71,7 +78,7 @@
                                                         <li><span data-number="all"> view all</span></li>
                                                     </ul>
                                                 </div>
-                                                
+
                                                 <div data-type="{start} - {end} of {all}" data-control-type="pagination-info" data-control-name="paging" data-control-action="paging" class="jplist-label btn btn-default"></div>
                                                 <div data-control-type="pagination" data-control-name="paging" data-control-action="paging" data-control-animate-to-top="true" class="jplist-pagination"></div>
                                             </div>
@@ -81,7 +88,7 @@
                             </div>
                         </div>
                     </div>
-
+                    </form>
                 </div>
 
             </div>

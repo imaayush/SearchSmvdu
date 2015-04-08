@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -29,6 +30,43 @@ public class viewAction extends ActionSupport {
     private String gender;
     private String name;
     private String image;
+    private String circle;
+    private String likes;
+
+    public String getCircle() {
+        return circle;
+    }
+
+    public void setCircle(String circle) {
+        this.circle = circle;
+    }
+
+    public String getLikes() {
+        return likes;
+    }
+
+    public void setLikes(String likes) {
+        this.likes = likes;
+    }
+
+    ArrayList<Files> file1 = new ArrayList<Files>();
+    ArrayList<Loginfo> loginfo = new ArrayList<Loginfo>();
+
+    public ArrayList<Loginfo> getLoginfo() {
+        return loginfo;
+    }
+
+    public void setLoginfo(ArrayList<Loginfo> loginfo) {
+        this.loginfo = loginfo;
+    }
+
+    public ArrayList<Files> getFile1() {
+        return file1;
+    }
+
+    public void setFile1(ArrayList<Files> file1) {
+        this.file1 = file1;
+    }
 
     public String getUsername() {
         return username;
@@ -84,15 +122,43 @@ public class viewAction extends ActionSupport {
         String User = (String) session.getAttribute("username");
         Statement ps = con.createStatement();
         ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image from user where UserName='" + User + "'");
+        String x = LikeCircle.likecount(User);
+        setLikes(x);
 
+        x = LikeCircle.circlecount(User);
+        setCircle(x);
         while (rs.next()) {
             setName(rs.getString(1));
             setEmail(rs.getString(2));
             setGender(rs.getString(3));
             setImage(rs.getString(4));
         }
+        ps = con.createStatement();
+        rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles from files where username='" + User + "'");
 
+        while (rs.next()) {
+            Files f = new Files();
+            f.setFilename(rs.getString(1));
+            f.setFiletags(rs.getString(2));
+            f.setFiledes(rs.getString(3));
+            f.setIdfiles(rs.getString(4));
+            file1.add(f);
+        }
         con.close();
+        con = Connections.conn();
+        ps = con.createStatement();
+        rs = ps.executeQuery("select active,activeid ,time from log where username='" + User + "'");
+        while (rs.next()) {
+
+            Loginfo p = new Loginfo();
+
+            p.setActive(rs.getString(1));
+            p.setActiveid(rs.getString(2));
+            p.setTime(rs.getString(3));
+
+            loginfo.add(p);
+        }
+
         return "success";
     }
 

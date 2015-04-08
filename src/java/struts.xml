@@ -5,7 +5,7 @@
 <struts>
     <!-- Configuration for the default package. -->
     <constant name="struts.devMode" value="true"></constant>  
-    <package name="default" extends="struts-default">
+    <package name="default"  extends="struts-default">
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" default="false" /> 
         </result-types>
@@ -14,54 +14,88 @@
             <result name="success" type="tiles">/admin</result> 
             <result name="fail">/Login.jsp</result> 
         </action>
+        
         <action name="Register" class="com.RegisterAction">
             <result name="success">/Login.jsp</result> 
             <result name="fail">/Register.jsp</result> 
         </action>
+        
         <action name="LoginFrom">
             <result >Login.jsp</result> 
         </action>
+        
         <action name="UploadFrom" >
             <result name="success" type="tiles">/upload</result> 
         </action>
+        
         <action name="Addcircle" class="com.AddAction" >
-           <result name="success" type="tiles">/circle</result>
-           <result name="fail" type="tiles">/admin</result>
+            <result name="success" type="tiles">/circle</result>
+            <result name="fail" type="tiles">/admin</result>
         </action>
         
         <action name="Myprofile" class="com.viewAction" method="execute">
             <result name="success" type="tiles">/myprofile</result> 
             <result name="fail" type="tiles">/Login.jsp</result> 
         </action>
+        
         <action name="Logout" class="com.loginAction" method="logout">  
             <result name="success">/Login.jsp</result>  
         </action>  
+        
         <action name="Uploadphoto" class="com.UploadAction" >  
             <result name="success" type="tiles">/myprofile</result>  
             <result name="fail">/admin.jsp</result>  
         </action> 
+        
         <action name="Editprofile" class="com.EditAction" >  
             <result name="success" type="tiles">/myprofile</result>  
             <result name="fail">/admin.jsp</result>  
         </action> 
         
         <action name="Mailbox" class="com.MailAction">
-
             <result name="success" type="tiles">/mailbox</result>
-
             <result name="fail">/admin.jsp</result>
-
         </action>
 
-
+        <action name="Uploadfile" class="com.FileuploadAction">
+            <result name="success" type="tiles">/admin</result>
+            <result name="fail">/upload</result>
+        </action>
+        
         <action name="Sendemail" class="com.SendemailAction">
-
             <result name="success" type="tiles">/mailbox</result>
-
             <result name="fail">/admin.jsp</result>
-
+        </action>
+       
+        <action name="ViewProfile" class="com.ViewProfileAction">
+            <result name="success" type="tiles">/ViewProfile</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
+        <action name="Addtocircle" class="com.AddtocircleAction">
+            <result name="success" type="redirect">/Addcircle</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
+        <action name="Addtocircle1" class="com.AddtocircleAction">
+            <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
+        <action name="addtolike" class="com.AddtocircleAction" method ="like">
+            <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
+        <action name="fileview" class="com.fileviewAction">
+            <result name="success" type="tiles">/Fileview</result>
+            <result name="fail">/admin.jsp</result>
         </action>
         
-        
+        <action name="downloadfile" class="com.DownloadAction">
+            <result name="success" type="redirect">/fileview</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
+          <action name="search" class="com.SearchAction">
+            <result name="success" type="tiles">/searchview</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
     </package>
+     
 </struts>

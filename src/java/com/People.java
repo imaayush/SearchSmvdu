@@ -10,7 +10,24 @@ package com;
  * @author knight
  */
 public class People {
-    String photo , name ,email;
+
+    String photo, name, email, UserName,id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String UserName) {
+        this.UserName = UserName;
+    }
 
     public String getPhoto() {
         return photo;
@@ -35,5 +52,5 @@ public class People {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
 }

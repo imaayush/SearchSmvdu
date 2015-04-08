@@ -1,3 +1,4 @@
+<%@taglib uri="/struts-tags" prefix="s"%>
 <script src="bootstrap-tagsinput/dist/bootstrap-tagsinput.js" type="text/javascript"></script>
 <link href="bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -41,18 +42,18 @@
                             <div class="panel-heading">
                                 Upload file Details</div>
                             <div class="panel-body pan">
-                                <form action="#">
+                                <form action="Uploadfile" method="post" enctype="multipart/form-data">
                                     <div class="form-body pal">
                                         <div class="form-group">
                                             <div class="input-icon right">
 
-                                                <input id="inputName" type="text" placeholder="File Name" class="form-control"></div>
+                                                <input id="inputName"  type="text" placeholder="File Name" class="form-control" name="fname" required/></div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-icon right">
 
 
-                                                <input id="inputName" type="text" placeholder="File tags" class="form-control"></div>
+                                                <input id="inputName" type="text" placeholder="File tags" class="form-control" name="ftag" required/></div>
 
 
 
@@ -60,23 +61,21 @@
                                     </div>
                                     <div class="form-group" style="margin-left: 3%">
                                         <div class="input-icon right">
-                                            <textarea rows="4" cols="82">
-Description 
-                                            </textarea>
+                                            <textarea rows="4" cols="82" placeholder="Description" class="form-control" name="fdesc"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-icon right" style="margin-left: 0%">
                                                 <label for="inputEmail3" ><br><span><strong>Upload File</strong></span></label>
-                                                <input id="inputConfirmPassword" type="file"  class="form-control"></div>
-                                        </div>
+                                                <input type="file"  class="form-control" name="file" required/></div>
+                                    </div>
 
 
-                                        <div class="form-body pal" style="height:150px;">
+                                        <%--<div class="form-body pal" style="height:150px;">
                                             <div class="form-group" >
                                                 <div class="col-lg-8" style="margin-left:-6%;" >
                                                     <label for="inputEmail3" ><br><span><strong>Image of File</strong></span></label>
 
-                                                    <input type="file" id="uploadImage" class="form-control" name="username"  onchange="PreviewImage();" required></div>
+                                                    <input type="file" id="uploadImage" class="form-control" name="username"  onchange="PreviewImage();"></div>
                                                 <div class="col-xs-4 col-md-4 thumb">
 
                                                     <img class="img-thumbnail" id="uploadPreview" src="images/profile.jpg" alt="" style="max-height:150px; max-width:150px;min-height:100px; min-width:100px;">
@@ -96,20 +95,17 @@ Description
 
                                                 </script>
                                             </div>
-
-
-
-                                        </div>
+                                        </div>--%>
                                         <hr>
                                         <div class="form-group mbn">
                                             <div class="checkbox">
                                                 <label>
-                                                    <div class="icheckbox_minimal-grey" style="position: relative;"><input tabindex="5" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp; I agree with the Terms and Conditions</label></div>
+                                                    <div class="icheckbox_minimal-grey" style="position: relative;"><input tabindex="5" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);" required><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp; I agree with the Terms and Conditions</label></div>
                                         </div>
                                     </div>
                                     <div class="form-actions text-right pal">
-                                        <button type="submit" class="btn btn-primary">
-                                            Submit</button>
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            Upload</button>
                                     </div>
                                 </form>
                             </div>

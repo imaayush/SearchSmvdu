@@ -64,7 +64,7 @@ public class UploadAction extends ActionSupport implements SessionAware {
         //throw new UnsupportedOperationException("Not supported yet.");
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username = (String) session.getAttribute("username");
-        filePath = "C:\\Users\\knight\\Documents\\NetBeansProjects\\SearchSmvdu\\web\\img";        
+        filePath = "C:\\Users\\knight\\Documents\\NetBeansProjects\\SearchSmvdu\\web\\img\\";        
         File destfile = new File(filePath, username + ".jpg");
         FileUtils.copyFile(getFile(), destfile);
         String path = "img/" + username + ".jpg";

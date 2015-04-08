@@ -39,16 +39,16 @@ public class AddAction extends ActionSupport {
         String username = (String) session.getAttribute("username");
         Statement ps = con.createStatement();
         
-        ResultSet rs = ps.executeQuery("select name ,email,image from user where username!='"+username+"'");
+        ResultSet rs = ps.executeQuery("select name ,UserName,image,id from user where username!='"+username+"'");
         
         while (rs.next()) {
             
             People p = new People();
             
             p.setName(rs.getString(1));
-            p.setEmail(rs.getString(2));
+            p.setUserName(rs.getString(2));
             p.setPhoto(rs.getString(3));
-            
+             p.setId(rs.getString(4));
             people.add(p);
         }
         

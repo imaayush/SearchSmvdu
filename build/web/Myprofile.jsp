@@ -1,12 +1,12 @@
 <%@ taglib uri="/struts-tags" prefix="s" %>
-<s:bean id="user" name="com.viewAction"/>
+
 
 <div id="page-wrapper">
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
             <div class="page-title">
-                Popular on SMVDU</div>
+                Profile View</div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <li><i class="fa fa-home"></i>&nbsp;<a href="index.jsp">Home</a></li>
@@ -32,175 +32,209 @@
                 <div class="col-lg-12">
 
                     <div class="page-content">
-                        <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="profile" style="width:100%;">
+                                            <div style="margin-bottom: 15px" class="row" >
+                                                <div class="col-xs-12 col-sm-2 text-center">
+                                                    <figure><img src="<s:property value="image"/>" alt="" style="display: inline-block" class="img-responsive img-circle">
+                                                        <figcaption class="ratings"><p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p></figcaption>
+                                                    </figure>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-8">
+                                                    <h2>
+                                                        <s:property value="name"/></h2>
+                                                    <p>
+                                                        <strong>Email:</strong> <s:property value="email"/></p>
+                                                    <p>
+                                                        <strong>Status:</strong> Active</p>
+                                                    <p>
+                                                        <strong class="mrs">Member&nbsp;&nbsp;Since:</strong><span class="label label-green mrs">Jun 03, 2014</p>
+                                                        <p><button type="button" class="btn  btn-blue" data-toggle="modal" data-target="#myModal">
+                                                Upload Photo</button><jsp:include page="/uploadphoto.jsp"></jsp:include></p>
+                                                </div>
 
-                            <div class="row mtl" >
-                                <div class="col-md-3" >
-                                    <div class="form-group">
-
-                                        <div class="text-center mbl"><img src="<s:property value="image"/>" alt="" class="img-responsive"></div>
-                                        <div class="text-center mbl"><button type="button" class="btn  btn-blue" data-toggle="modal" data-target="#myModal">
-                                                Upload</button></div>
-                                                <jsp:include page="/uploadphoto.jsp"></jsp:include>
-                                        </div>
-                                        <table class="table table-striped table-hover"style="margin-left: -22%;">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Name</td>
-                                                    <td><s:property value="name"/><br/> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Email</td>
-                                                <td><s:property value="email"/><br/> </td></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>Status</td>
-                                                <td><span class="label label-success">Active</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td> Rating</td>
-                                                <td><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Member&nbsp;&nbsp;Since</td>
-                                                <td> Jun 03, 2014</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-md-9" >
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a href="#tab-timeline" data-toggle="tab">Timeline</a></li>
-                                        <li><a href="#tab-edit" data-toggle="tab">Edit Profile</a></li>
-                                        <li><a href="#tab-messages" data-toggle="tab">Circle</a></li>
-                                        <li><a href="#tab-messages" data-toggle="tab">File Uploaded</a></li>
-                                    </ul>
-                                    <div id="generalTabContent" class="tab-content">
-                                        <jsp:include page="/timeline.jsp"></jsp:include>
-                                            <div id="tab-edit" class="tab-pane fade in">
-                                                <form action="Editprofile" method="post" class="form-horizontal"><h3>Account Setting</h3>
-
-                                                <%--<div class="form-group"><label class="col-sm-3 control-label">Email</label>
-
-                                                        <div class="col-sm-9 controls">
-                                                            <div class="row">
-                                                                <div class="col-xs-9"><input type="email" placeholder="email@yourcompany.com" class="form-control"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group"><label class="col-sm-3 control-label">Username</label>
-
-                                                        <div class="col-sm-9 controls">
-                                                            <div class="row">
-                                                                <div class="col-xs-9"><input type="text" name="username" placeholder="username" class="form-control"/></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>--%>
-                                                <div class="form-group"><label class="col-sm-3 control-label">Password</label>
-
-                                                    <div class="col-sm-9 controls">
-                                                        <div class="row">
-                                                            <div class="col-xs-9">
-                                                                <input type="password" name="password" placeholder="password" class="form-control"/>                                                                
-                                                            </div>
-                                                        </div>
+                                            </div>
+                                            <div class="row text-center divider">
+                                                <div class="col-xs-12 col-sm-4 emphasis">
+                                                    <h2>
+                                                        <strong><s:property value="circle"/></strong></h2>
+                                                    <p>
+                                                        <small>Circle</small>
+                                                    </p>
+                                                    
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 emphasis">
+                                                    <h2>
+                                                        <strong><s:property value="likes"/></strong></h2>
+                                                    <p>
+                                                        <small>Likes</small>
+                                                    </p>
+                                                    
+                                                </div>
+                                                <div class="col-xs-12 col-sm-4 emphasis">
+                                                    <h2>
+                                                        <strong>43</strong></h2>
+                                                    <p>
+                                                        <small>Snippets</small>
+                                                    </p>
+                                                    <div class="btn-group dropup">
+                                                        <button type="button" data-toggle="dropdown" class="btn btn-orange dropdown-toggle">
+                                                            <span class="fa fa-gear"></span>&nbsp; Options
+                                                        </button>
+                                                        <ul role="menu" class="dropdown-menu pull-right text-left">
+                                                            <li><a href="#"><span class="fa fa-envelope"></span>&nbsp; Send an email</a></li>
+                                                            <li><a href="#"><span class="fa fa-list"></span>&nbsp; Add or remove from a list</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="#"><span class="fa fa-warning"></span>&nbsp; Report this user for spam</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="#" role="button" class="btn disabled">Unfollow</a></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="form-group"><label class="col-sm-3 control-label">Confirm Password</label>
+                                            </div>
 
-                                                    <div class="col-sm-9 controls">
-                                                        <div class="row">
-                                                            <div class="col-xs-9">
-                                                                <input type="password" name="repassword" placeholder="password" class="form-control"/>
+                                            <div class="row divider" style="margin-top: 2%; padding: 2%;">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#tab-timeline" data-toggle="tab">Timeline</a></li>
+                                                    <li><a href="#tab-edit" data-toggle="tab">Edit Profile</a></li>
+                                                    <li><a href="#tab-circle" data-toggle="tab">Circle</a></li>
+                                                    <li><a href="#tab-file" data-toggle="tab">File Uploaded</a></li>
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <h3>Profile Setting</h3>
+                                                </ul> 
+                                                <div id="generalTabContent" class="tab-content">
+                                                    <jsp:include page="/timeline.jsp"></jsp:include>
+                                                        <div id="tab-edit" class="tab-pane fade in">
+                                                            <form action="Editprofile" method="post" class="form-horizontal"><h3>Account Setting</h3>
 
-                                                <div class="form-group"><label class="col-sm-3 control-label">First Name</label>
+                                                            <div class="form-group"><label class="col-sm-3 control-label">Password</label>
 
-                                                    <div class="col-sm-9 controls">
-                                                        <div class="row">
-                                                            <div class="col-xs-9"><input type="text" name="fname" placeholder="first name" class="form-control"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group"><label class="col-sm-3 control-label">Last Name</label>
-
-                                                    <div class="col-sm-9 controls">
-                                                        <div class="row">
-                                                            <div class="col-xs-9"><input type="text" name="lname" placeholder="last name" class="form-control"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group"><label class="col-sm-3 control-label">Gender</label>
-
-                                                    <div class="col-sm-9 controls">
-                                                        <div class="row">
-                                                            <div class="col-xs-9">
-                                                                <div class="radio">
-                                                                    <label class="radio-inline"><div class="iradio_minimal-grey" style="position: relative;"><input type="radio" value="Male" name="gender" checked="checked" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp;
-                                                                        Male</label>
-                                                                    <label class="radio-inline"><div class="iradio_minimal-grey" style="position: relative;"><input type="radio" value="Female" name="gender" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp;
-                                                                        Female</label>
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-9">
+                                                                            <input type="password" name="password" placeholder="password" class="form-control"/>                                                                
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="form-group"><label class="col-sm-3 control-label">Confirm Password</label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-9">
+                                                                            <input type="password" name="repassword" placeholder="password" class="form-control"/>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <h3>Profile Setting</h3>
+
+                                                            <div class="form-group"><label class="col-sm-3 control-label">First Name</label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-9"><input type="text" name="fname" placeholder="first name" class="form-control"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group"><label class="col-sm-3 control-label">Last Name</label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-9"><input type="text" name="lname" placeholder="last name" class="form-control"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group"><label class="col-sm-3 control-label">Gender</label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-9">
+                                                                            <div class="radio">
+                                                                                <label class="radio-inline"><div class="iradio_minimal-grey" style="position: relative;"><input type="radio" value="Male" name="gender" checked="checked" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp;
+                                                                                    Male</label>
+                                                                                <label class="radio-inline"><div class="iradio_minimal-grey" style="position: relative;"><input type="radio" value="Female" name="gender" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp;
+                                                                                    Female</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group"><label class="col-sm-3 control-label">Birthday</label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-6"><input id="datepicker-normal" name="dates" type="date" class="form-control"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group"><label class="col-sm-3 control-label">About</label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-9"><textarea rows="3" name="about" class="form-control"></textarea></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                            <h3>Contact Setting</h3>
+
+                                                            <div class="form-group"><label class="col-sm-3 control-label">Mobile Phone</label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-9"><input type="text" name="mobile" placeholder="mobile phone" class="form-control"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <hr>
+                                                            <button type="submit" class="btn btn-green btn-block">Finish</button>
+                                                        </form>
+                                                    </div>
+                                                    <div id="tab-circle" class="tab-pane fade in">
+                                                        <div class="row mbl">
+
+                                                            <div class="col-lg-6">
+                                                                <div class="input-group"><input type="text" class="form-control"><span class="input-group-btn"><button type="button" class="btn btn-white">Search</button></span></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="list-group">
+                                                            <a href="#" class="list-group-item"><div class="icheckbox_minimal-grey" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>Sed ut perspiciatis unde</span>&nbsp;
+                                                                - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</span><span class="badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span></a>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group"><label class="col-sm-3 control-label">Birthday</label>
+                                                    <div id="tab-file" class="tab-pane fade in">
+                                                        <div class="row mbl">
 
-                                                    <div class="col-sm-9 controls">
-                                                        <div class="row">
-                                                            <div class="col-xs-6"><input id="datepicker-normal" name="dates" type="date" class="form-control"></div>
+                                                            <div class="col-lg-6">
+                                                                <div class="input-group"><input type="text" class="form-control"><span class="input-group-btn"><button type="button" class="btn btn-white">Search</button></span></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="list-group">
+                                                            <s:iterator  value="file1">  
+                                                                <fieldset>
+                                                                    <a href="<s:url  action="fileview">
+                                                                           <s:param name="fileid" value="%{idfiles}" /> </s:url>" class="list-group-item">     
+                                                                        <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="filename"/></span><span><s:property value="filedes"/></span>
+                                                                    </a>
+                                                                </fieldset>
+                                                            </s:iterator> 
                                                         </div>
                                                     </div>
-                                                </div>
-
-
-                                                <div class="form-group"><label class="col-sm-3 control-label">About</label>
-
-                                                    <div class="col-sm-9 controls">
-                                                        <div class="row">
-                                                            <div class="col-xs-9"><textarea rows="3" name="about" class="form-control"></textarea></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <h3>Contact Setting</h3>
-
-                                                <div class="form-group"><label class="col-sm-3 control-label">Mobile Phone</label>
-
-                                                    <div class="col-sm-9 controls">
-                                                        <div class="row">
-                                                            <div class="col-xs-9"><input type="text" name="mobile" placeholder="mobile phone" class="form-control"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <hr>
-                                                <button type="submit" class="btn btn-green btn-block">Finish</button>
-                                            </form>
-                                        </div>
-                                        <div id="tab-messages" class="tab-pane fade in">
-                                            <div class="row mbl">
-                                                <div class="col-lg-6"><span style="margin-left: 15px"></span><div class="icheckbox_minimal-grey" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div><a href="#" class="btn btn-success btn-sm mlm mrm"><i class="fa fa-send-o"></i>&nbsp;
-                                                        Write Mail</a><a href="#" class="btn btn-white btn-sm"><i class="fa fa-trash-o"></i>&nbsp;
-                                                        Delete</a></div>
-                                                <div class="col-lg-6">
-                                                    <div class="input-group"><input type="text" class="form-control"><span class="input-group-btn"><button type="button" class="btn btn-white">Search</button></span></div>
                                                 </div>
                                             </div>
-                                            <div class="list-group">
-                                                <%--Code here--%>
-                                            </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -263,21 +297,6 @@
 
 <!--CORE JAVASCRIPT-->
 <script src="script/main.js"></script>
-<script>        (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-145464-12', 'auto');
-    ga('send', 'pageview');
 
-
-</script>
 </body>
 </html>
