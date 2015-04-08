@@ -168,6 +168,7 @@
 
 <!--CORE JAVASCRIPT-->
 <script src="script/main.js"></script>
+<<<<<<< HEAD
 <script>        (function (i, s, o, g, r, a, m) {
                                                         i['GoogleAnalyticsObject'] = r;
                                                         i[r] = i[r] || function () {
@@ -184,5 +185,8 @@
 
 
 </script>
+=======
+
+>>>>>>> 2141b8fffc697fdadf9a4a60018845c1d06f6d6b
 </body>
 </html>
