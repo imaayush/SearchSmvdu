@@ -45,14 +45,13 @@
                                                     <s:iterator  value="people">  
                                                         <fieldset>
                                                             <tr class="tbl-item"><!--<img/>-->
-                                                                <td class="img" style="width:160px;"><img src="<s:property value="photo"/>" alt="" title="" style="width:100%; height:40%;max-width:150px; "/></td>
+                                                                <td class="img" style="width:160px;"><img src="<s:property value="photo"/>" alt="" title="" style="width:100%; height:40%;max-width:150px; max-height:180px;"/></td>
                                                                 <!--<data></data>-->
                                                                 <td class="td-block"><p class="date"></p>
 
                                                                     <p class="title">
                                                                         <a href="<s:url  action="ViewProfile">
-                                                                               <s:param name="UserName" value="%{UserName}" /> </s:url>"> 
-                                                                           
+                                                                               <s:param name="UserName" value="%{UserName}" /> </s:url>">                                                                            
                                                                            <s:property value="name"/>
                                                                         </a>
 
