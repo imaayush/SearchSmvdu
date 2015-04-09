@@ -63,9 +63,11 @@
                                                     <p>
                                                         <small>likes</small>
                                                     </p>
-                                                    <button class="btn btn-yellow btn-block">
+                                                    <form action="likefile">
+                                                    <button class="btn btn-yellow btn-block" value="<s:property value="idfiles"/>" name="idfiles">
                                                         <span class="fa fa-plus-circle"></span>&nbsp; Like
                                                     </button>
+                                                    </form>
                                                 </div>
                                                 <div class="col-xs-8 col-sm-3 emphasis">
                                                     <h2>
@@ -73,9 +75,11 @@
                                                     <p>
                                                         <small>Recommendation</small>
                                                     </p>
-                                                    <button class="btn btn-blue btn-block">
+                                                     <form action="recommendfile">
+                                                    <button class="btn btn-blue btn-block" value="<s:property value="idfiles"/>" name="idfiles">
                                                         <span class="fa fa-user"></span>&nbsp; Recommended
                                                     </button>
+                                                     </form>
                                                 </div>
                                                 <div class="col-xs-8 col-sm-3 emphasis">
                                                     <h2>

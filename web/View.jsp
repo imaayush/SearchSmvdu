@@ -107,7 +107,9 @@
                                                     <li role="presentation" class="active"><a href="#">Time Line</a></li>
                                                     
                                                 </ul> 
-                                                <jsp:include page="/timeline.jsp"></jsp:include>
+                                                <div class="col-lg-12">
+                                                    <jsp:include page="/timeline.jsp"></jsp:include>
+                                                </div>
                                             </div>
                                         </div>
 

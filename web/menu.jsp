@@ -2,7 +2,7 @@
             <!--BEGIN SIDEBAR MENU-->
             <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
                 data-position="right" class="navbar-default navbar-static-side">
-                <div class="sidebar-collapse menu-scroll" style="position: fixed;">
+            <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
                     
                      <div class="clearfix"></div>
@@ -25,32 +25,32 @@
                     </i><span class="menu-title">video Lectures</span></a>
                       
                     </li>
-                    <li><a href="#"><i class="fa fa-sitemap fa-fw">
+                    <li><a href="Dropdown.html"><i class="fa fa-sitemap fa-fw">
                         <div class="icon-bg bg-dark"></div>
                     </i><span class="menu-title">Software</span></a>
                       
                     </li>
-                    <li><a href="#"><i class="fa fa-send-o fa-fw">
+                    <li><a href="UIElements.html"><i class="fa fa-send-o fa-fw">
                         <div class="icon-bg bg-green"></div>
                     </i><span class="menu-title">Music</span></a>
                        
                     </li>
-                    <li><a href="#"><i class="fa fa-edit fa-fw">
+                    <li><a href="Forms.html"><i class="fa fa-edit fa-fw">
                         <div class="icon-bg bg-violet"></div>
                     </i><span class="menu-title">Sports</span></a>
                       
                     </li>
-                    <li><a href="#"><i class="fa fa-th-list fa-fw">
+                    <li><a href="Tables.html"><i class="fa fa-th-list fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Movies</span></a>
                           
                     </li>
-                    <li class="active"><a href="#"><i class="fa fa-database fa-fw">
+                    <li class="active"><a href="DataGrid.html"><i class="fa fa-database fa-fw">
                         <div class="icon-bg bg-red"></div>
                     </i><span class="menu-title">Games</span></a>
                       
                     </li>
-                    <li><a href="#"><i class="fa fa-file-o fa-fw">
+                    <li><a href="Pages.html"><i class="fa fa-file-o fa-fw">
                         <div class="icon-bg bg-yellow"></div>
                     </i><span class="menu-title">Tv Shows</span></a>
                        

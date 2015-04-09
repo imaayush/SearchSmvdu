@@ -53,4 +53,10 @@
         <put-attribute name="chat" value="/chat.jsp" />
         <put-attribute name="SearchResult" value="/SearchResult.jsp" />
     </definition> 
+     <definition name="/home" template="/layout.jsp">
+        <put-attribute name="header" value="/temp_header.jsp" />
+        <put-attribute name="menu" value="/menu.jsp" />
+        <put-attribute name="chat" value="/chat.jsp" />
+        <put-attribute name="SearchResult" value="/Home.jsp" />
+    </definition> 
 </tiles-definitions>
