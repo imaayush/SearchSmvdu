@@ -104,7 +104,13 @@
             <result name="success" type="redirect">/fileview</result>
             <result name="fail">/admin.jsp</result>
         </action>
-          <action name="search" class="com.SearchAction">
+        
+        <action name="search" class="com.SearchAction">
+            <result name="success" type="tiles">/searchview</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
+        
+        <action name="searchtags" class="com.SearchtagsAction">
             <result name="success" type="tiles">/searchview</result>
             <result name="fail">/admin.jsp</result>
         </action>

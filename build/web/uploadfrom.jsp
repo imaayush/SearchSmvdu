@@ -168,6 +168,9 @@
 
 <!--CORE JAVASCRIPT-->
 <script src="script/main.js"></script>
+<<<<<<< HEAD
+
+=======
 <script>        (function (i, s, o, g, r, a, m) {
                                                         i['GoogleAnalyticsObject'] = r;
                                                         i[r] = i[r] || function () {
@@ -184,5 +187,6 @@
 
 
 </script>
+>>>>>>> upstream/master
 </body>
 </html>
