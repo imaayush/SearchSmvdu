@@ -40,21 +40,27 @@
 
                                             <div class="box text-shadow">
                                                 <table class="demo-tbl"><!--<item>1</item>-->
-                                                    <s:iterator  value="file2">  
+                                                    <s:iterator  value="note">  
                                                         <fieldset>
                                                             <tr class="tbl-item"><!--<img/>-->
-                                                                <td class="img" style="width:160px;"><img src="images/movie.jpg" alt="" title="" style="max-width:160px; max-height:160px;"/></td>
+
                                                                 <!--<data></data>-->
-                                                                <td class="td-block"><p class="date">03/15/2012</p>
+                                                                <td class="td-block"><p class="date">time</p>
 
-                                                                    <p class="title"><a href="<s:url  action="fileview">
-                                                                               <s:param name="fileid" value="%{idfiles}" /> </s:url>" >     
-                                                            <s:property value="filename"/>
-                                                        </a></p>
+                                                                    <p class="title"> <a href="<s:url  action="ViewProfile">
+                                                                                             <s:param name="UserName" value="%{username}" /> </s:url>">                                                                            
+                                                                                         <s:property value="username"/>
+                                                                        </a>
+                                                                        &nbsp;<s:property value="notifications"/> &nbsp;a
+                                                                        &nbsp; <s:property value="filetags"/>     </p>
+                                                                    <p class="title"> <a href="<s:url  action="fileview">
+                                                                                             <s:param name="fileid" value="%{fileid}" /> </s:url>" >     
+                                                                                         <s:property value="filename"/>
+                                                                        </a>     </p>
+                                                                    <p class="desc">Uploaded By &nbsp;&nbsp;<s:property value="fileusername"/> </p>
+                                                                    <p class="desc"><s:property value="filedis"/></p>
 
-                                                                    <p class="desc"><s:property value="filedes"/></p>
-
-                                                                    <p class="like">5 Likes</p></td>
+                                                                  
                                                             </tr>
 
 

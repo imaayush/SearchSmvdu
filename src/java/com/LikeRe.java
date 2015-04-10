@@ -46,7 +46,7 @@ public class LikeRe extends ActionSupport {
             Connection con = Connections.conn();
             setNotification("Liked");
             String time = "12:00 PM";
-            String query = "insert into notifications(notification, fileid,circle,time) values('" + notification + "','" + idfiles + "','" + username + "','" + time + "')";
+            String query = "insert into notifications(notification, idfiles,username,time) values('" + notification + "','" + idfiles + "','" + username + "','" + time + "')";
 
             Statement st = con.createStatement();
             st.executeUpdate(query);
@@ -67,7 +67,7 @@ public class LikeRe extends ActionSupport {
             Connection con = Connections.conn();
             setNotification("Recommended");
             String time = "12:00 PM";
-            String query = "insert into notifications(notification, fileid,circle,time) values('" + notification + "','" + idfiles + "','" + username + "','" + time + "')";
+            String query = "insert into notifications(notification,idfiles,username,time) values('" + notification + "','" + idfiles + "','" + username + "','" + time + "')";
 
             Statement st = con.createStatement();
             st.executeUpdate(query);

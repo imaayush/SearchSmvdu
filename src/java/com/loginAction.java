@@ -11,7 +11,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.SessionMap;
 
 import org.apache.struts2.interceptor.SessionAware;
@@ -26,6 +29,15 @@ public class loginAction extends ActionSupport implements SessionAware {
     private String password;
     private SessionMap<String, Object> sessionMap;
     Connection con = Connections.conn();
+    ArrayList<Notification> note = new ArrayList<Notification>();
+
+    public ArrayList<Notification> getNote() {
+        return note;
+    }
+
+    public void setNote(ArrayList<Notification> note) {
+        this.note = note;
+    }
 
     @Override
     public void setSession(Map<String, Object> sessionMap) {
@@ -61,7 +73,7 @@ public class loginAction extends ActionSupport implements SessionAware {
                 if (!rs.getString(1).equals(password)) {
                     addActionMessage("Worng Password...!!!");
                 }
-            } 
+            }
 
         } catch (SQLException ex) {
             System.out.println(ex.toString());
@@ -82,8 +94,9 @@ public class loginAction extends ActionSupport implements SessionAware {
                 if (!rs.getString(1).equals(password)) {
                     return "fail";
                 } else {
-                    sessionMap.put("email",rs.getString(2));
+                    sessionMap.put("email", rs.getString(2));
                     sessionMap.put("username", username);
+                    selectcircle();
                     return "success";
                 }
             }
@@ -93,6 +106,33 @@ public class loginAction extends ActionSupport implements SessionAware {
         }
 
         return "fail";
+    }
+
+    public String selectcircle() {
+        HttpSession session = ServletActionContext.getRequest().getSession(false);
+        String username1 = (String) session.getAttribute("username");
+        Connection con = Connections.conn();
+        String query = "select DISTINCT  notification ,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles where circle.circlename='" + username1 + "'";
+        try {
+
+            Statement ps = con.createStatement();
+
+            ResultSet rs = ps.executeQuery(query);
+
+            while (rs.next()) {
+                Notification n = new Notification();
+                n.setNotifications(rs.getString(1));
+                n.setUsername(rs.getString(2));
+                n.setFileusername(rs.getString(3));
+                n.setFileid(rs.getString(4));
+                n.setFiledis(rs.getString(5));
+                n.setFiletags(rs.getString(6));
+                n.setFilename(rs.getString(7));
+                note.add(n);
+            }
+        } catch (SQLException ex) {
+        }
+        return "success";
     }
 
     public String logout() {
