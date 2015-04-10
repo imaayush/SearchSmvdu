@@ -52,19 +52,19 @@
                                                         <strong>Status:</strong> Active</p>
                                                     <p>
                                                         <strong class="mrs">Member&nbsp;&nbsp;Since:</strong><span class="label label-green mrs">Jun 03, 2014</p>
-                                                        <p><button type="button" class="btn  btn-blue" data-toggle="modal" data-target="#myModal">
-                                                Upload Photo</button><jsp:include page="/uploadphoto.jsp"></jsp:include></p>
-                                                </div>
+                                                    <p><button type="button" class="btn  btn-blue" data-toggle="modal" data-target="#myModal">
+                                                            Upload Photo</button><jsp:include page="/uploadphoto.jsp"></jsp:include></p>
+                                                    </div>
 
-                                            </div>
-                                            <div class="row text-center divider">
-                                                <div class="col-xs-12 col-sm-4 emphasis">
-                                                    <h2>
-                                                        <strong><s:property value="circle"/></strong></h2>
+                                                </div>
+                                                <div class="row text-center divider">
+                                                    <div class="col-xs-12 col-sm-4 emphasis">
+                                                        <h2>
+                                                            <strong><s:property value="circle"/></strong></h2>
                                                     <p>
                                                         <small>Circle</small>
                                                     </p>
-                                                    
+
                                                 </div>
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
@@ -72,7 +72,7 @@
                                                     <p>
                                                         <small>Likes</small>
                                                     </p>
-                                                    
+
                                                 </div>
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
@@ -109,107 +109,135 @@
                                                         <div id="tab-edit" class="tab-pane fade in">
                                                             <form action="Editprofile" method="post" class="form-horizontal"><h3>Account Setting</h3>
 
-                                                            <div class="form-group"><label class="col-sm-3 control-label">Password</label>
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Password</label>
 
-                                                                <div class="col-sm-9 controls">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-9">
-                                                                            <input type="password" name="password" placeholder="password" class="form-control"/>                                                                
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group"><label class="col-sm-3 control-label">Confirm Password</label>
-
-                                                                <div class="col-sm-9 controls">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-9">
-                                                                            <input type="password" name="repassword" placeholder="password" class="form-control"/>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <hr>
-                                                            <h3>Profile Setting</h3>
-
-                                                            <div class="form-group"><label class="col-sm-3 control-label">First Name</label>
-
-                                                                <div class="col-sm-9 controls">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-9"><input type="text" name="fname" placeholder="first name" class="form-control"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group"><label class="col-sm-3 control-label">Last Name</label>
-
-                                                                <div class="col-sm-9 controls">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-9"><input type="text" name="lname" placeholder="last name" class="form-control"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group"><label class="col-sm-3 control-label">Gender</label>
-
-                                                                <div class="col-sm-9 controls">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-9">
-                                                                            <div class="radio">
-                                                                                <label class="radio-inline"><div class="iradio_minimal-grey" style="position: relative;"><input type="radio" value="Male" name="gender" checked="checked" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp;
-                                                                                    Male</label>
-                                                                                <label class="radio-inline"><div class="iradio_minimal-grey" style="position: relative;"><input type="radio" value="Female" name="gender" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp;
-                                                                                    Female</label>
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9">
+                                                                                <input type="password" name="password" placeholder="password" class="form-control"/>                                                                
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-group"><label class="col-sm-3 control-label">Birthday</label>
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Confirm Password</label>
 
-                                                                <div class="col-sm-9 controls">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-6"><input id="datepicker-normal" name="dates" type="date" class="form-control"></div>
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9">
+                                                                                <input type="password" name="repassword" placeholder="password" class="form-control"/>
+
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                                <hr>
+                                                                <h3>Profile Setting</h3>
 
+                                                                <div class="form-group"><label class="col-sm-3 control-label">First Name</label>
 
-                                                            <div class="form-group"><label class="col-sm-3 control-label">About</label>
-
-                                                                <div class="col-sm-9 controls">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-9"><textarea rows="3" name="about" class="form-control"></textarea></div>
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9"><input type="text" name="fname" placeholder="first name" class="form-control"></div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <hr>
-                                                            <h3>Contact Setting</h3>
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Last Name</label>
 
-                                                            <div class="form-group"><label class="col-sm-3 control-label">Mobile Phone</label>
-
-                                                                <div class="col-sm-9 controls">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-9"><input type="text" name="mobile" placeholder="mobile phone" class="form-control"></div>
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9"><input type="text" name="lname" placeholder="last name" class="form-control"></div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Gender</label>
+
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9">
+                                                                                <div class="radio">
+                                                                                    <label class="radio-inline"><div class="iradio_minimal-grey" style="position: relative;"><input type="radio" value="Male" name="gender" checked="checked" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp;
+                                                                                        Male</label>
+                                                                                    <label class="radio-inline"><div class="iradio_minimal-grey" style="position: relative;"><input type="radio" value="Female" name="gender" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp;
+                                                                                        Female</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Birthday</label>
+
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-6"><input id="datepicker-normal" name="dates" type="date" class="form-control"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="form-group"><label class="col-sm-3 control-label">About</label>
+
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9"><textarea rows="3" name="about" class="form-control"></textarea></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <h3>Contact Setting</h3>
+
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Mobile Phone</label>
+
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9"><input type="text" name="mobile" placeholder="mobile phone" class="form-control"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
 
 
-                                                            <hr>
-                                                            <button type="submit" class="btn btn-green btn-block">Finish</button>
-                                                        </form>
-                                                    </div>
-                                                    <div id="tab-circle" class="tab-pane fade in">
-                                                        <div class="row mbl">
-
-                                                            <div class="col-lg-6">
-                                                                <div class="input-group"><input type="text" class="form-control"><span class="input-group-btn"><button type="button" class="btn btn-white">Search</button></span></div>
-                                                            </div>
+                                                                <hr>
+                                                                <button type="submit" class="btn btn-green btn-block">Finish</button>
+                                                            </form>
                                                         </div>
-                                                        <div class="list-group">
-                                                            <a href="#" class="list-group-item"><div class="icheckbox_minimal-grey" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>Sed ut perspiciatis unde</span>&nbsp;
-                                                                - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</span><span class="badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span></a>
+                                                        <div id="tab-circle" class="tab-pane fade in">
+                                                            <div class="row mbl">
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="input-group"><input type="text" class="form-control"><span class="input-group-btn"><button type="button" class="btn btn-white">Search</button></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box text-shadow">
+
+
+                                                            <s:iterator  value="people">  
+                                                                <fieldset>
+                                                                    <div class="list-group-item" style="height:50px;"> 
+
+                                                                        <div style="width:10%; float:left;height:40px; margin-top:-0.5%;"><img src="<s:property value="photo"/>" alt="" title="" style="width:100%; max-width:40px; max-height:40px;"/></div>
+                                                                        <!--<data></data>--><form action="" >
+                                                                        <div style="width:88%; float:left; height:40px;"><p class="date"></p>
+
+                                                                            <p class="title">
+                                                                                <a href="<s:url  action="ViewProfile">
+                                                                                       <s:param name="UserName" value="%{UserName}" /> </s:url>">                                                                            
+                                                                                   <s:property value="name"/>
+                                                                                </a>
+                                                                            
+                                                                                   <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2" style="float:right;">Remove from  Circle</button>
+                                                                            </p>
+
+                                                                           
+
+                                                                        </div>
+                                                                            </form>
+
+                                                                    </div>
+
+                                                                </fieldset>
+                                                            </s:iterator> 
+
+
                                                         </div>
                                                     </div>
                                                     <div id="tab-file" class="tab-pane fade in">

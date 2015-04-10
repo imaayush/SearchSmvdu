@@ -28,6 +28,32 @@
         <link type="text/css" rel="stylesheet" href="styles/pace.css">
         <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
         <link type="text/css" rel="stylesheet" href="styles/jplist-custom.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>       
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <%
+            Connection con = Connections.conn();
+
+            String query = "select filename from files";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            String Autostr = "";
+             while(rs.next()) {
+                Autostr = Autostr+"," + rs.getString(1);
+            }
+        %>
+        <script>
+            $(function () {
+                var s = "<%=Autostr%>";
+                var availableTags = s.split(",");
+               
+                $("#tags").autocomplete({
+                     autoFocus: true,
+                    source: availableTags
+                });
+            });
+        </script>
+
     </head>
     <body>
         <div>
@@ -47,21 +73,21 @@
                     <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
 
                         <form id="topbar-search" action="search" method="" class="hidden-sm hidden-xs" style="width:35%;">
-                            <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control text-white" name="searchtext"/></div>
+                            <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input id="tags"  type="text" placeholder="Search here..." class="form-control text-white" name="searchtext"/></div>
                         </form>
                         <div class="news-update-box hidden-xs">
                             <button onclick="window.location.href = 'UploadFrom'" class="btn btn-white" >Upload</button>
                         </div>
                         <ul class="nav navbar navbar-top-links navbar-right mbn">
                             <%
-                                Connection con = Connections.conn();
+                                con = Connections.conn();
                                 String username;
                                 String image_path = "";
                                 HttpSession hs = request.getSession();
                                 username = (String) hs.getAttribute("username");
-                                String query = "select image from user where username='" + username + "'";
-                                Statement st = con.createStatement();
-                                ResultSet rs = st.executeQuery(query);
+                                query = "select image from user where username='" + username + "'";
+                                st = con.createStatement();
+                                rs = st.executeQuery(query);
                                 if (rs.next()) {
                                     image_path = rs.getString(1);
                                 }
@@ -93,7 +119,9 @@
                         <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
                     <div class="topbar-main">
 
-
+                        <form id="topbar-search" action="search" method="" class="hidden-sm hidden-xs" style="width:35%;">
+                            <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input id="tags"  onkeyup="showData(this.value);" type="text" placeholder="Search here..." class="form-control text-blue" name="searchtext"/></div>
+                        </form>
                         <div style="float:right; margin-top:0.7%; margin-right: 3%">
                             <button onclick="window.location.href = 'LoginFrom'" class="btn btn-white">Upload</button>
 

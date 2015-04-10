@@ -28,8 +28,26 @@ public class loginAction extends ActionSupport implements SessionAware {
     private String username;
     private String password;
     private SessionMap<String, Object> sessionMap;
+    String searchtext,Autostr;
+
+    public String getAutostr() {
+        return Autostr;
+    }
+
+    public void setAutostr(String Autostr) {
+        this.Autostr = Autostr;
+    }
+    
     Connection con = Connections.conn();
     ArrayList<Notification> note = new ArrayList<Notification>();
+
+    public String getSearchtext() {
+        return searchtext;
+    }
+
+    public void setSearchtext(String searchtext) {
+        this.searchtext = searchtext;
+    }
 
     public ArrayList<Notification> getNote() {
         return note;
@@ -132,6 +150,24 @@ public class loginAction extends ActionSupport implements SessionAware {
             }
         } catch (SQLException ex) {
         }
+        return "success";
+    }
+
+    public String autocomplete1() {
+        try {
+            
+            Connection con = Connections.conn();
+
+            String query = "select filename from files where filename like "+searchtext ;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                Autostr = Autostr + "," + rs.getString(1);
+            }
+        } catch (SQLException ex) {
+        }
+
         return "success";
     }
 

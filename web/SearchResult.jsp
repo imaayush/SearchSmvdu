@@ -48,12 +48,16 @@
                                                                 <td class="td-block"><p class="date">03/15/2012</p>
 
                                                                     <p class="title"><a href="<s:url  action="fileview">
-                                                                               <s:param name="fileid" value="%{idfiles}" /> </s:url>" >     
-                                                            <s:property value="filename"/>
-                                                        </a></p>
+                                                                                            <s:param name="fileid" value="%{idfiles}" /> </s:url>" >     
+                                                                                        <s:property value="filename"/>
+                                                                        </a></p>
 
-                                                                    <p class="desc"><s:property value="filedes"/></p>
 
+                                                                    <p class="desc">
+                                                 
+                                                                        <s:set name="myenv" value="filedes.replaceAll(searchtext,'\" '+searchtext+' \"')"/>
+                                                                        <s:property value="myenv"/></p>
+                                                                    
                                                                     <p class="like">5 Likes</p></td>
                                                             </tr>
 

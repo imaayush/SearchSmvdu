@@ -126,6 +126,7 @@
             <result name="success" type="tiles">/home</result>
             <result name="fail">/admin.jsp</result>
         </action>
+        
     </package>
      
 </struts>

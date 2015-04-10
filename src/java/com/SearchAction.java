@@ -17,11 +17,19 @@ import java.util.ArrayList;
  * @author knight
  */
 public class SearchAction extends ActionSupport {
-    private String searchtext ;
+    private String searchtext ,Autostr ;
     ArrayList<Files> file2 = new ArrayList<Files>();
 
     public ArrayList<Files> getFile2() {
         return file2;
+    }
+
+    public String getAutostr() {
+        return Autostr;
+    }
+
+    public void setAutostr(String Autostr) {
+        this.Autostr = Autostr;
     }
 
     public void setFile2(ArrayList<Files> file2) {
@@ -42,7 +50,7 @@ public class SearchAction extends ActionSupport {
     public String execute() throws Exception {
        Connection con = Connections.conn();
         Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles from files where filename='" + searchtext + "'");
+        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles from files where filename like '%"+searchtext+"' or filetags like '%"+ searchtext+"' or filedescription like '%"+ searchtext+"%'" );
 
         while (rs.next()) {
             Files f = new Files();
@@ -55,5 +63,6 @@ public class SearchAction extends ActionSupport {
         con.close();
         return "success";
     }
+    
     
 }
