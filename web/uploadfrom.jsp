@@ -51,17 +51,9 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="input-icon right">
-                                                <select id="inputName" class="form-control" name="ftag">
-                                                    <option>Select Tag</option>
-                                                    <option>Video</option>
-                                                    <option>Movie</option>
-                                                    <option>Software</option>
-                                                    <option>Music</option>
-                                                    <option>Sport</option>
-                                                    <option>Game</option>
-                                                    <option>Tv Show</option>
-                                                </select>
-                                            </div>
+
+
+                                                <input id="inputName" type="text" placeholder="File tags" class="form-control" name="ftag" required/></div>
 
 
 
@@ -75,7 +67,7 @@
                                             <div class="input-icon right" style="margin-left: 0%">
                                                 <label for="inputEmail3" ><br><span><strong>Upload File</strong></span></label>
                                                 <input type="file"  class="form-control" name="file" required/></div>
-                                        </div>
+                                    </div>
 
 
                                         <%--<div class="form-body pal" style="height:150px;">
@@ -176,6 +168,25 @@
 
 <!--CORE JAVASCRIPT-->
 <script src="script/main.js"></script>
+<<<<<<< HEAD
 
+=======
+<script>        (function (i, s, o, g, r, a, m) {
+                                                        i['GoogleAnalyticsObject'] = r;
+                                                        i[r] = i[r] || function () {
+                                                            (i[r].q = i[r].q || []).push(arguments)
+                                                        }, i[r].l = 1 * new Date();
+                                                        a = s.createElement(o),
+                                                                m = s.getElementsByTagName(o)[0];
+                                                        a.async = 1;
+                                                        a.src = g;
+                                                        m.parentNode.insertBefore(a, m)
+                                                    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                                                    ga('create', 'UA-145464-12', 'auto');
+                                                    ga('send', 'pageview');
+
+
+</script>
+>>>>>>> upstream/master
 </body>
 </html>
