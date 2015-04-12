@@ -14,7 +14,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.dispatcher.SessionMap;
 
 /**
  *
@@ -101,7 +100,6 @@ public class ViewProfileAction extends ActionSupport {
     public String execute() throws Exception {
         Connection con = Connections.conn();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-
         String User = request.getParameter("UserName");
         setUserName(User);
         Statement ps = con.createStatement();
@@ -120,7 +118,7 @@ public class ViewProfileAction extends ActionSupport {
         con.close();
         con = Connections.conn();
         ps = con.createStatement();
-        rs = ps.executeQuery("select active,activeid ,time from log where username='" + User + "'");
+        rs = ps.executeQuery("select active,activeid,time from log where username='" + User + "'");
         while (rs.next()) {
 
             Loginfo p = new Loginfo();
@@ -128,12 +126,9 @@ public class ViewProfileAction extends ActionSupport {
             p.setActive(rs.getString(1));
             p.setActiveid(rs.getString(2));
             p.setTime(rs.getString(3));
-
-            loginfo.add(p);
-        }
-        
+            
+            loginfo.add(p);            
+        }        
         return "success";
-
     }
-
 }

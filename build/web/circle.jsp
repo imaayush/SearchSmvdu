@@ -1,3 +1,13 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="com.opensymphony.xwork2.ActionContext"%>
+<%@page import="com.opensymphony.xwork2.util.ValueStack"%>
+<%@page import="com.Loginfo"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="JavaSrc.Connections"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@taglib uri="/struts-tags" prefix="s" %>
 
 <div id="page-wrapper">
@@ -8,7 +18,7 @@
                 Add to Circle</div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
-            <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a></li>
+            <li><i class="fa fa-home"></i>&nbsp;<a href="home">Home</a></li>
 
         </ol>
         <div class="clearfix">
@@ -29,7 +39,7 @@
                 </div>
 
                 <div class="col-lg-12">
-                    <form action="Addtocircle" method="post" >
+
                     <div class="page-content">
                         <div class="row">
                             <div class="col-lg-12">
@@ -41,24 +51,53 @@
 
                                             </div>
                                             <div class="box text-shadow">
+                                                <%!
+                                                    String userincircle;
+                                                    Connection con = Connections.conn();
+                                                    String circlename;
+                                                    Statement ps;
+                                                    ResultSet rs;
+                                                %>
                                                 <table class="demo-tbl"><!--<item>1</item>-->
                                                     <s:iterator  value="people">  
                                                         <fieldset>
                                                             <tr class="tbl-item"><!--<img/>-->
                                                                 <td class="img" style="width:160px;"><img src="<s:property value="photo"/>" alt="" title="" style="width:100%; height:40%;max-width:150px; max-height:180px;"/></td>
                                                                 <!--<data></data>-->
-                                                                <td class="td-block"><p class="date"></p>
-
+                                                                <td class="td-block">
+                                                                    <p class="date"></p>
                                                                     <p class="title">
                                                                         <a href="<s:url  action="ViewProfile">
                                                                                <s:param name="UserName" value="%{UserName}" /> </s:url>">                                                                            
                                                                            <s:property value="name"/>
                                                                         </a>
-
                                                                     </p>
                                                                     </br>
-                                                                    <p class="desc"><button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2">Add to Circle</button></p>
+                                                                    <p class="desc">
 
+                                                                        <%
+
+                                                                            circlename = (String) session.getAttribute("username");
+                                                                            userincircle = (String) request.getAttribute("UserName");
+                                                                            System.out.println(circlename);
+                                                                            System.out.println(userincircle);
+                                                                            ps = con.createStatement();
+                                                                            rs = ps.executeQuery("select * from circle where circlename='" + circlename + "' AND username='" + userincircle + "'");
+                                                                            if (rs.next()) {
+                                                                        %>
+                                                                    <form action="Removefromcircle" method="post" >
+                                                                        <button class="btn btn-red" value="<s:property value="UserName"/>" name="username2">Remove from Circle</button></p>
+                                                                    </form>
+                                                                    <%
+                                                                    } else {
+                                                                    %>
+                                                                    <form action="Addtocircle" method="post" >
+                                                                        <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2">Add to Circle</button></p>
+                                                                    </form>
+                                                                    <%
+                                                                        }
+                                                                    %> 
+                                                                    </p>
                                                                     <p class="like"></p></td>
                                                             </tr>
                                                             <!--<item>2</item>-->
@@ -87,9 +126,7 @@
                             </div>
                         </div>
                     </div>
-                    </form>
                 </div>
-
             </div>
         </div>
     </div>

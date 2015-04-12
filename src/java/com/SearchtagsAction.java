@@ -50,7 +50,7 @@ public class SearchtagsAction extends ActionSupport {
         System.out.println(tagname);
         setSearchtext(tagname);
         Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles from files where filetags='" + tagname + "'");
+        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles, datetime from files where filetags='" + tagname + "'");
 
         while (rs.next()) {
             Files f = new Files();
@@ -58,6 +58,7 @@ public class SearchtagsAction extends ActionSupport {
             f.setFiletags(rs.getString(2));
             f.setFiledes(rs.getString(3));
             f.setIdfiles(rs.getString(4));
+            f.setDatetime(rs.getTimestamp(5));
             file2.add(f);
         }
         con.close();

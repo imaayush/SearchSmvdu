@@ -19,7 +19,7 @@ public class Connections {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/share", "root", "Aayush123");
-            System.out.println("Connection established Successfully");
+            //System.out.println("Connection established Successfully");
         } catch (Exception e) {
            System.out.print(e.toString());
         }

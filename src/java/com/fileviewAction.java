@@ -20,10 +20,10 @@ import org.apache.struts2.ServletActionContext;
  * @author knight
  */
 public class fileviewAction extends ActionSupport {
-    
+
     public fileviewAction() {
     }
-    String filename ,filetags, filedes,idfiles ;
+    String filename, filetags, filedes, idfiles, countLiked, countRecommended, countDownloaded;
     File file;
 
     public String getFilename() {
@@ -66,23 +66,52 @@ public class fileviewAction extends ActionSupport {
         this.file = file;
     }
 
+    public String getCountLiked() {
+        return countLiked;
+    }
+
+    public void setCountLiked(String countLiked) {
+        this.countLiked = countLiked;
+    }
+
+    public String getCountRecommended() {
+        return countRecommended;
+    }
+
+    public void setCountRecommended(String countRecommended) {
+        this.countRecommended = countRecommended;
+    }
+
+    public String getCountDownloaded() {
+        return countDownloaded;
+    }
+
+    public void setCountDownloaded(String countDownloaded) {
+        this.countDownloaded = countDownloaded;
+    }
+
     public String execute() throws Exception {
         Connection con = Connections.conn();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         String fileid = request.getParameter("fileid");
         Statement ps = con.createStatement();
         ResultSet rs = ps.executeQuery("select filename,filetags,filedescription,idfiles from files where idfiles ='" + fileid + "'");
-        
+
         while (rs.next()) {
-           
-           setFilename(rs.getString(1));
-           setFiletags(rs.getString(2));
-           setFiledes(rs.getString(3));
+
+            setFilename(rs.getString(1));
+            setFiletags(rs.getString(2));
+            setFiledes(rs.getString(3));
             setIdfiles(rs.getString(4));
-            
+
         }
+        
+        setCountLiked(CountLDRFile.countLike(Integer.parseInt(fileid)));
+        setCountRecommended(CountLDRFile.countRecommend(Integer.parseInt(fileid)));
+        setCountDownloaded(CountLDRFile.countDownload(Integer.parseInt(fileid)));
+        
         con.close();
-      return "success";
+        return "success";
     }
-    
+
 }

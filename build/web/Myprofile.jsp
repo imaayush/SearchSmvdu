@@ -9,7 +9,7 @@
                 Profile View</div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
-            <li><i class="fa fa-home"></i>&nbsp;<a href="index.jsp">Home</a></li>
+            <li><i class="fa fa-home"></i>&nbsp;<a href="home">Home</a></li>
 
         </ol>
         <div class="clearfix">

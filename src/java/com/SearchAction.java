@@ -42,7 +42,7 @@ public class SearchAction extends ActionSupport {
     public String execute() throws Exception {
        Connection con = Connections.conn();
         Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles from files where filename='" + searchtext + "'");
+        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription,idfiles,datetime from files where filename='" + searchtext + "'");
 
         while (rs.next()) {
             Files f = new Files();
@@ -50,6 +50,7 @@ public class SearchAction extends ActionSupport {
             f.setFiletags(rs.getString(2));
             f.setFiledes(rs.getString(3));
             f.setIdfiles(rs.getString(4));
+            f.setDatetime(rs.getTimestamp(5));
             file2.add(f);
         }
         con.close();
