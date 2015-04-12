@@ -1,3 +1,7 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="JavaSrc.Connections"%>
+<%@page import="java.sql.Connection"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 
 
@@ -62,11 +66,31 @@
                                                     <p>
                                                         <small>Circle</small>
                                                     </p>
-                                                    <form action="Addtocircle1" >
-                                                    <button class="btn btn-yellow btn-block" value="<s:property value="UserName"/>" name="username2" >
-                                                        <span class="fa fa-plus-circle"></span>&nbsp; Add to Circle
-                                                    </button>
+
+                                                    <%! String userincircle;%> 
+                                                    <%
+                                                        Connection con = Connections.conn();
+                                                        String circlename = (String) session.getAttribute("username");
+                                                        userincircle = (String) request.getAttribute("UserName");
+                                                        System.out.println(circlename);
+                                                        System.out.println(userincircle);
+                                                        Statement ps = con.createStatement();
+                                                        ResultSet rs = ps.executeQuery("select * from circle where circlename='" + circlename + "' AND username='" + userincircle + "'");
+                                                        if (rs.next()) {
+                                                    %>                                                    
+                                                    <form action="Removefromcircle1" method="post" >
+                                                        <button class="btn btn-yellow btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-minus-circle"></span>&nbsp;Remove from Circle</button></p>
                                                     </form>
+                                                    <%
+                                                    } else {
+                                                    %>
+                                                    <form action="Addtocircle1" method="post" >
+                                                        <button class="btn btn-yellow btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-plus-circle"></span>&nbsp;Add to Circle</button></p>
+                                                    </form>
+                                                    <%
+                                                        }
+                                                    %> 
+
                                                 </div>
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
@@ -74,11 +98,30 @@
                                                     <p>
                                                         <small>Likes</small>
                                                     </p>
-                                                    <form action="addtolike" >
-                                                    <button class="btn btn-blue btn-block" value="<s:property value="UserName"/>" name="username2">
-                                                        <span class="fa fa-user"></span>&nbsp; Like
-                                                    </button>
+
+                                                    <%! String liketo;%> 
+                                                    <%
+                                                        String likefrom = (String) session.getAttribute("username");
+                                                        liketo = (String) request.getAttribute("UserName");
+                                                        System.out.println(likefrom);
+                                                        System.out.println(liketo);
+                                                        Statement ps1 = con.createStatement();
+                                                        ResultSet rs1 = ps1.executeQuery("select * from likeuser where likes='" + likefrom + "'AND username='" + liketo + "'");
+                                                        if (rs1.next()) {
+                                                    %>                                                    
+                                                    <form action="addtounlike" method="post" >
+                                                        <button class="btn btn btn-blue btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-user"></span>&nbsp;Unlike</button></p>
                                                     </form>
+                                                    <%
+                                                    } else {
+                                                    %>
+                                                    <form action="addtolike" method="post" >
+                                                        <button class="btn btn btn-blue btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-user"></span>&nbsp;Like</button></p>
+                                                    </form>
+                                                    <%
+                                                        }
+                                                    %>
+
                                                 </div>
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
@@ -105,7 +148,7 @@
                                             <div class="row divider" style="margin-top: 2%; padding: 2%;">
                                                 <ul class="nav nav-tabs">
                                                     <li role="presentation" class="active"><a href="#">Time Line</a></li>
-                                                    
+
                                                 </ul> 
                                                 <div class="col-lg-12">
                                                     <jsp:include page="/timeline.jsp"></jsp:include>

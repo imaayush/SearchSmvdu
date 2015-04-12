@@ -18,7 +18,7 @@ import java.sql.Statement;
 public class LikeCircle {
    
     
-    public  static String likecount( String likes) throws SQLException{
+    public  static String likecount(String likes) throws SQLException{
         Connection con = Connections.conn();
         Statement ps = con.createStatement();
         int count1 =0;

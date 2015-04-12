@@ -8,7 +8,6 @@ package com;
 import JavaSrc.Connections;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -143,7 +142,7 @@ public class viewAction extends ActionSupport {
             setImage(rs.getString(4));
         }
         ps = con.createStatement();
-        rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles from files where username='" + User + "'");
+        rs = ps.executeQuery("select filename,filetags,filedescription,idfiles from files where username='" + User + "'");
 
         while (rs.next()) {
             Files f = new Files();

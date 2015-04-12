@@ -11,7 +11,7 @@ package com;
  */
 public class Loginfo {
     String  active ,time ,activeid;
-
+    
     public String getActive() {
         return active;
     }
@@ -34,7 +34,5 @@ public class Loginfo {
 
     public void setActiveid(String activeid) {
         this.activeid = activeid;
-    }
-    
-    
+    }   
 }

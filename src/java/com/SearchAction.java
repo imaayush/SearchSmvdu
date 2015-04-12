@@ -58,6 +58,7 @@ public class SearchAction extends ActionSupport {
             f.setFiletags(rs.getString(2));
             f.setFiledes(rs.getString(3));
             f.setIdfiles(rs.getString(4));
+            f.setDatetime(rs.getTimestamp(5));
             file2.add(f);
         }
         con.close();
