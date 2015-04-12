@@ -1,3 +1,7 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="JavaSrc.Connections"%>
+<%@page import="java.sql.Connection"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <s:bean id="file" name="com.fileviewAction"/>
 <div id="page-wrapper">
@@ -59,38 +63,71 @@
                                             <div class="row text-center divider">
                                                 <div class="col-xs-8 col-sm-3 emphasis">
                                                     <h2>
-                                                        <strong>20,7K</strong></h2>
+                                                        <strong><s:property value="countLiked"/></strong></h2>
                                                     <p>
                                                         <small>likes</small>
                                                     </p>
-                                                    <form action="likefile">
-                                                    <button class="btn btn-yellow btn-block" value="<s:property value="idfiles"/>" name="idfiles">
-                                                        <span class="fa fa-plus-circle"></span>&nbsp; Like
-                                                    </button>
+                                                    <%
+                                                        Connection con = Connections.conn();
+                                                        String username = (String) session.getAttribute("username");
+                                                        String fileid = (String) request.getAttribute("idfiles");
+                                                        System.out.println(username);
+                                                        System.out.println(fileid);
+                                                        Statement ps = con.createStatement();
+                                                        ResultSet rs = ps.executeQuery("select * from notifications where notification='Liked' AND username='" + username + "' AND idfiles=" + Integer.parseInt(fileid));
+                                                        if (rs.next()) {
+                                                    %>
+                                                    <form action="unlikefile">
+                                                        <button class="btn btn-yellow btn-block" value="<s:property value="idfiles"/>" name="idfiles">
+                                                            <span class="fa fa-minus-circle"></span>&nbsp; Unlike
+                                                        </button>
                                                     </form>
+                                                    <%
+                                                    } else {
+                                                    %>
+                                                    <form action="likefile">
+                                                        <button class="btn btn-yellow btn-block" value="<s:property value="idfiles"/>" name="idfiles">
+                                                            <span class="fa fa-plus-circle"></span>&nbsp; Like
+                                                        </button>
+                                                    </form>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </div>
                                                 <div class="col-xs-8 col-sm-3 emphasis">
                                                     <h2>
-                                                        <strong>245</strong></h2>
+                                                        <strong><s:property value="countRecommended"/></strong></h2>
                                                     <p>
                                                         <small>Recommendation</small>
                                                     </p>
-                                                     <form action="recommendfile">
-                                                    <button class="btn btn-blue btn-block" value="<s:property value="idfiles"/>" name="idfiles">
-                                                        <span class="fa fa-user"></span>&nbsp; Recommended
-                                                    </button>
-                                                     </form>
+                                                    <%
+                                                        String username1 = (String) session.getAttribute("username");
+                                                        String fileid1 = (String) request.getAttribute("idfiles");
+                                                        System.out.println(username);
+                                                        System.out.println(fileid);
+                                                        Statement ps1 = con.createStatement();
+                                                        ResultSet rs1 = ps1.executeQuery("select * from notifications where notification='Recommended' AND username='" + username1 + "' AND idfiles=" + Integer.parseInt(fileid1));
+                                                        if (!rs1.next()) {
+                                                    %>                                                    
+                                                    <form action="recommendfile">
+                                                        <button class="btn btn-blue btn-block" value="<s:property value="idfiles"/>" name="idfiles">
+                                                            <span class="fa fa-user"></span>&nbsp; Recommended
+                                                        </button>
+                                                    </form>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </div>
                                                 <div class="col-xs-8 col-sm-3 emphasis">
                                                     <h2>
-                                                        <strong>245</strong></h2>
+                                                        <strong><s:property value="countDownloaded"/></strong></h2>
                                                     <p>
-                                                        <small>Downloaded</small>
+                                                        <small>Downloads</small>
                                                     </p>
                                                     <form action="downloadfile">
-                                                    <button class="btn btn-blue btn-dark" value="<s:property value="idfiles"/>" name="idfiles">
-                                                        <span class="fa fa-magnet"></span>&nbsp; Download
-                                                    </button>
+                                                        <button class="btn btn-blue btn-dark" value="<s:property value="idfiles"/>" name="idfiles">
+                                                            <span class="fa fa-magnet"></span>&nbsp; Download
+                                                        </button>
                                                     </form>
                                                 </div>
                                                 <div class="col-xs-8 col-sm-3 emphasis">
@@ -119,62 +156,62 @@
                                                 <span><s:property value="filedes"/></span>
                                             </div>
                                             <div class="row divider" style="margin-top: 2%; padding: 2%;">
-                                              
-                                               <h4 ><strong>Comments</strong></h4>
-                                                    
-                                                        
-                                                        <div class="portlet-body">
-                                                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 270px;"><div class="chat-scroller" style="overflow: hidden; width: 100%; height: 270px;">
-                                                                    <ul class="chats bv">
-                                                                        <li class="in">
-                                                                            <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                            <div class="message">
-                                                                                <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                                    dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                                    ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                        </li>
-                                                                        <li class="out">
-                                                                            <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                            <div class="message">
-                                                                                <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
-                                                                                    dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                                    ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                        </li>
-                                                                        <li class="in">
-                                                                            <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                            <div class="message">
-                                                                                <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                                    dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                                    ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                        </li>
-                                                                        <li class="out">
-                                                                            <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                            <div class="message">
-                                                                                <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
-                                                                                    dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                                    ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                        </li>
-                                                                        <li class="in">
-                                                                            <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                            <div class="message">
-                                                                                <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                                    dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                                    ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                        </li>
-                                                                        <li class="in"><img class="avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg"><div class="message"><span class="chat-arrow"></span><a class="chat-name" href="#">Admin &nbsp;</a><span class="chat-datetime">at July 6, 201420:11</span><span class="chat-body">bv</span></div></li></ul>
-                                                                </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 183px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 86.9928400954654px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
-                                                            <div class="chat-form">
-                                                                <div class="input-group">
-                                                                    <input id="input-chat" type="text" placeholder="Type a message here..." class="form-control"><span id="btn-chat" class="input-group-btn">
-                                                                        <button type="button" class="btn btn-green">
-                                                                            <i class="fa fa-check"></i>
-                                                                        </button>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
+
+                                                <h4 ><strong>Comments</strong></h4>
+
+
+                                                <div class="portlet-body">
+                                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 270px;"><div class="chat-scroller" style="overflow: hidden; width: 100%; height: 270px;">
+                                                            <ul class="chats bv">
+                                                                <li class="in">
+                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                    <div class="message">
+                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
+                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                </li>
+                                                                <li class="out">
+                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                    <div class="message">
+                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
+                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                </li>
+                                                                <li class="in">
+                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                    <div class="message">
+                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
+                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                </li>
+                                                                <li class="out">
+                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                    <div class="message">
+                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
+                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                </li>
+                                                                <li class="in">
+                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                    <div class="message">
+                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
+                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                </li>
+                                                                <li class="in"><img class="avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg"><div class="message"><span class="chat-arrow"></span><a class="chat-name" href="#">Admin &nbsp;</a><span class="chat-datetime">at July 6, 201420:11</span><span class="chat-body">bv</span></div></li></ul>
+                                                        </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 183px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 86.9928400954654px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                                                    <div class="chat-form">
+                                                        <div class="input-group">
+                                                            <input id="input-chat" type="text" placeholder="Type a message here..." class="form-control"><span id="btn-chat" class="input-group-btn">
+                                                                <button type="button" class="btn btn-green">
+                                                                    <i class="fa fa-check"></i>
+                                                                </button>
+                                                            </span>
                                                         </div>
-                                                    
-                                                
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                         </div>
 

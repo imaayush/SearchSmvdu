@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
@@ -75,19 +77,23 @@ public class FileuploadAction extends ActionSupport {
         this.fileContentType = fileContentType;
     }
     
+    
+    
     @Override
     public String execute() throws Exception {
         try {
             HttpSession session = ServletActionContext.getRequest().getSession();
             String username = (String) session.getAttribute("username");
             Connection con = Connections.conn();
-            PreparedStatement stat = con.prepareStatement("insert into files(username, filename, filetags, filedescription, file) values(?,?,?,?,?)");
+            PreparedStatement stat = con.prepareStatement("insert into files(username, filename, filetags, filedescription, file, datetime) values(?,?,?,?,?,?)");
             stat.setString(1, username);
             stat.setString(2, fname);
             stat.setString(3, ftag);
             stat.setString(4, fdesc);
             FileInputStream fis = new FileInputStream(file);
-            stat.setBinaryStream(5, fis, (int) file.length());
+            stat.setBinaryStream(5, fis, (int) file.length());            
+            Timestamp time = new Timestamp(System.currentTimeMillis());
+            stat.setTimestamp(6, time);
             int rows = stat.executeUpdate();
             if (rows > 0) {
                 return "success";

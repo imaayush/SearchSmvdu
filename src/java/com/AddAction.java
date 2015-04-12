@@ -19,10 +19,10 @@ import org.apache.struts2.ServletActionContext;
  * @author knight
  */
 public class AddAction extends ActionSupport {
-     Connection con = Connections.conn();
+
+    Connection con = Connections.conn();
     ArrayList<People> people = new ArrayList<People>();
 
-   
     public ArrayList<People> getPeople() {
         return people;
     }
@@ -30,31 +30,32 @@ public class AddAction extends ActionSupport {
     public void setPeople(ArrayList<People> people) {
         this.people = people;
     }
+
     public AddAction() {
     }
-    
+
     public String execute() throws Exception {
-         HttpSession session = ServletActionContext.getRequest().getSession(false);        
-               
+        HttpSession session = ServletActionContext.getRequest().getSession(false);
+
         String username = (String) session.getAttribute("username");
         Statement ps = con.createStatement();
-        
-        ResultSet rs = ps.executeQuery("select name ,UserName,image,id from user where username!='"+username+"'");
-        
+
+        ResultSet rs = ps.executeQuery("select name,UserName,image,id from user where username!='" + username + "'");
+
         while (rs.next()) {
-            
+
             People p = new People();
-            
+
             p.setName(rs.getString(1));
             p.setUserName(rs.getString(2));
             p.setPhoto(rs.getString(3));
-             p.setId(rs.getString(4));
+            p.setId(rs.getString(4));
             people.add(p);
         }
-        
+
         con.close();
-        
+
         return "success";
     }
-    
+
 }

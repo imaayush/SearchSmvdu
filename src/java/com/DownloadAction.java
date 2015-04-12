@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -22,9 +23,13 @@ import org.apache.struts2.ServletActionContext;
  * @author knight
  */
 public class DownloadAction extends ActionSupport {
-private byte b[];
- Blob blob;
-int f=0;
+
+    private byte b[];
+    String fileid;
+    String notification;
+    Blob blob;
+    int f = 0;
+
     public byte[] getB() {
         return b;
     }
@@ -33,6 +38,13 @@ int f=0;
         this.b = b;
     }
 
+    public String getNotification() {
+        return notification;
+    }
+
+    public void setNotification(String notification) {
+        this.notification = notification;
+    }
 
     public DownloadAction() {
     }
@@ -41,7 +53,17 @@ int f=0;
         Connection con = Connections.conn();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 
-        String fileid = request.getParameter("idfiles");
+        fileid = request.getParameter("idfiles");
+
+        setNotification("Downloaded");
+        String time = "12:00 PM";
+        HttpSession session = ServletActionContext.getRequest().getSession(false);
+        String username = (String) session.getAttribute("username");
+        String query1 = "insert into notifications(notification, idfiles,username,time) values('" + notification + "','" + fileid + "','" + username + "','" + time + "')";
+
+        Statement st1 = con.createStatement();
+        st1.executeUpdate(query1);
+
         String query = "select file from files where idfiles=" + fileid;
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);

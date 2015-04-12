@@ -54,7 +54,7 @@
         </action>  
 
         <action name="Uploadphoto" class="com.UploadAction" >  
-            <result name="success" type="tiles">/myprofile</result>  
+            <result name="success" type="tiles">/admin</result>  
             <result name="fail">/admin.jsp</result>  
         </action> 
 
@@ -87,11 +87,23 @@
             <result name="success" type="redirect">/Addcircle</result>
             <result name="fail">/admin.jsp</result>
         </action>
+        <action name="Removefromcircle" class="com.RemovefromcircleAction">
+            <result name="success" type="redirect">/Addcircle</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
         <action name="Addtocircle1" class="com.AddtocircleAction">
             <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
             <result name="fail">/admin.jsp</result>
         </action>
+        <action name="Removefromcircle1" class="com.RemovefromcircleAction">
+            <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
         <action name="addtolike" class="com.AddtocircleAction" method ="like">
+            <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
+        <action name="addtounlike" class="com.RemovefromcircleAction" method ="unlike">
             <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
             <result name="fail">/admin.jsp</result>
         </action>
@@ -107,7 +119,7 @@
         
         <action name="search" class="com.SearchAction">
             <result name="success" type="tiles">/searchview</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail" type="tiles">/upload</result>
         </action>
         
         <action name="searchtags" class="com.SearchtagsAction">
@@ -115,6 +127,10 @@
             <result name="fail">/admin.jsp</result>
         </action>
         <action name="likefile" class="com.LikeRe">
+            <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
+            <result name="fail">/admin.jsp</result>
+        </action>
+        <action name="unlikefile" class="com.UnlikeRe">
             <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
             <result name="fail">/admin.jsp</result>
         </action>

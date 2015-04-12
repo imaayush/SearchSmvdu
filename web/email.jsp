@@ -8,7 +8,7 @@
                 Email Box</div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
-            <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;</i>&nbsp;&nbsp;</li>
+            <li><i class="fa fa-home"></i>&nbsp;<a href="home">Home</a>&nbsp;&nbsp;</i>&nbsp;&nbsp;</li>
 
 
         </ol>

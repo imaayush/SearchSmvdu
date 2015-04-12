@@ -130,7 +130,7 @@ public class loginAction extends ActionSupport implements SessionAware {
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username1 = (String) session.getAttribute("username");
         Connection con = Connections.conn();
-        String query = "select DISTINCT  notification ,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles where circle.circlename='" + username1 + "'";
+        String query = "select notification ,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles where circle.circlename='" + username1 + "'";
         try {
 
             Statement ps = con.createStatement();
