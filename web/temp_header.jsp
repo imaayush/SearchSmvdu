@@ -103,7 +103,7 @@
                                     <li><a href="Logout"><i class="fa fa-key"></i>Log Out</a></li>
                                 </ul>
                             </li>
-                            <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
+                           
                         </ul>
                     </div>
                 </nav>

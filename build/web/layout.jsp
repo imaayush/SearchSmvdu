@@ -16,7 +16,7 @@
 
         <t:insertAttribute name="header"/>
         <t:insertAttribute name="menu"/>
-        <t:insertAttribute name="chat"/>
+       
         <t:insertAttribute name="SearchResult"/>               
 
     </body>
