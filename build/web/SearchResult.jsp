@@ -45,7 +45,7 @@
                                                             <tr class="tbl-item"><!--<img/>-->
                                                                 <td class="img" style="width:160px;"><img src="images/movie.jpg" alt="" title="" style="max-width:160px; max-height:160px;"/></td>
                                                                 <!--<data></data>-->
-                                                                <td class="td-block"><p class="date"><s:property value="datetime"/></p>
+                                                                <td class="td-block"><p class="date"><s:property value="time"/></p>
 
                                                                     <p class="title"><a href="<s:url  action="fileview">
                                                                                <s:param name="fileid" value="%{idfiles}" /> </s:url>" >     
@@ -54,7 +54,7 @@
 
                                                                     <p class="desc"><s:property value="filedes"/></p>
 
-                                                                    <p class="like">5 Likes</p></td>
+                                                                    <p class="like"><s:property value="countLiked"/> Likes</p></td>
                                                             </tr>
 
 
@@ -82,8 +82,8 @@
                                                         <li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
                                                         <li><span data-path=".like" data-order="asc" data-type="number" data-default="true">Likes asc</span></li>
                                                         <li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
-                                                        <li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
-                                                        <li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
+                                                        <li><span data-path=".date" data-order="asc" data-type="text">Date asc</span></li>
+                                                        <li><span data-path=".date" data-order="desc" data-type="text">Date desc</span></li>
                                                     </ul>
                                                 </div>
                                                 <div data-type="{start} - {end} of {all}" data-control-type="pagination-info" data-control-name="paging" data-control-action="paging" class="jplist-label btn btn-default"></div>

@@ -9,7 +9,7 @@
 
                 <div class="clearfix"></div>
                 <div class="clearfix"></div>
-                <li><a href="home"><i class="fa fa-tachometer fa-fw">
+                <li class="active"><a href="home"><i class="fa fa-tachometer fa-fw">
                             <div class="icon-bg bg-orange"></div>
                         </i><span class="menu-title">Home</span></a></li>
 

@@ -6,16 +6,30 @@
 package com;
 
 import java.io.File;
-import java.sql.Timestamp;
 
 /**
  *
  * @author knight
  */
 public class Files {
-    String filename ,filetags, filedes,idfiles;
-    Timestamp datetime;
+    String filename ,filetags, filedes,idfiles, time, countLiked;    
     File file;
+
+    public String getCountLiked() {
+        return countLiked;
+    }
+
+    public void setCountLiked(String countLiked) {
+        this.countLiked = countLiked;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getIdfiles() {
         return idfiles;
@@ -55,13 +69,5 @@ public class Files {
 
     public void setFile(File file) {
         this.file = file;
-    }
-
-    public Timestamp getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Timestamp datetime) {
-        this.datetime = datetime;
-    }  
+    } 
 }

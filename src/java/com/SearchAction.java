@@ -50,7 +50,10 @@ public class SearchAction extends ActionSupport {
             f.setFiletags(rs.getString(2));
             f.setFiledes(rs.getString(3));
             f.setIdfiles(rs.getString(4));
-            f.setDatetime(rs.getTimestamp(5));
+            String s = rs.getString(5);
+            String s1[] = s.split("\\.");            
+            f.setTime(s1[0]);
+            f.setCountLiked(CountLDRFile.countLike(Integer.parseInt(rs.getString(4))));
             file2.add(f);
         }
         con.close();

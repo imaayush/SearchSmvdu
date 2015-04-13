@@ -1,6 +1,7 @@
 
-<jsp:include page="/header.jsp"></jsp:include>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<jsp:include page="/temp_header.jsp"></jsp:include>
+
 <!--END TOPBAR-->
 <s:if test="hasActionMessages()">
     <div class="alert alert-danger" role="alert" style="width:30%; margin-left: 34% ;margin-top: 1%; " >

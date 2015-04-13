@@ -11,8 +11,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,13 +58,16 @@ public class DownloadAction extends ActionSupport {
         fileid = request.getParameter("idfiles");
 
         setNotification("Downloaded");
-        String time = "12:00 PM";
+        Timestamp time = new Timestamp(System.currentTimeMillis());
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username = (String) session.getAttribute("username");
-        String query1 = "insert into notifications(notification, idfiles,username,time) values('" + notification + "','" + fileid + "','" + username + "','" + time + "')";
-
-        Statement st1 = con.createStatement();
-        st1.executeUpdate(query1);
+        String query1 = "insert into notifications(notification, idfiles,username,notificationdatetime) values(?,?,?,?)";
+        PreparedStatement ps = con.prepareStatement(query1);
+        ps.setString(1, notification);
+        ps.setString(2, fileid);
+        ps.setString(3, username);
+        ps.setTimestamp(4, time);
+        ps.executeUpdate();
 
         String query = "select file from files where idfiles=" + fileid;
         Statement st = con.createStatement();

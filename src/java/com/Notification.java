@@ -10,7 +10,7 @@ package com;
  * @author knight
  */
 public class Notification {
-    String fileusername , fileid ,filedis,filename ,username,notifications,time,filetags;
+    String fileusername , fileid ,filedis,filename ,username,notifications,filetags,datetime;
 
     public String getNotifications() {
         return notifications;
@@ -60,14 +60,12 @@ public class Notification {
         this.username = username;
     }
 
-   
-
-    public String getTime() {
-        return time;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
     public String getFiletags() {

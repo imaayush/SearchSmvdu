@@ -146,14 +146,15 @@ public class viewAction extends ActionSupport {
         con.close();
         con = Connections.conn();
         ps = con.createStatement();
-        rs = ps.executeQuery("select active,activeid ,time from log where username='" + User + "'");
+        rs = ps.executeQuery("select active,activeid,time from log where username='" + User + "'");
         while (rs.next()) {
 
             Loginfo p = new Loginfo();
 
             p.setActive(rs.getString(1));
-            p.setActiveid(rs.getString(2));
-            p.setTime(rs.getString(3));
+            p.setActiveid(rs.getString(2));            
+            String s[] = rs.getString(3).split("\\.")[0].split("\\:");
+            p.setTime(s[0] + ":" +s[1]);
 
             loginfo.add(p);
         }

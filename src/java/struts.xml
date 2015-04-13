@@ -45,9 +45,9 @@
         <action name="UploadFrom" >
             <result name="success" type="tiles">/upload</result> 
         </action>
-         <action name="Myprofile" class="com.viewAction" method="execute">
+        <action name="Myprofile" class="com.viewAction" method="execute">
             <result name="success" type="tiles">/myprofile</result> 
-             <result name="fail" type="tiles">/Login.jsp</result> 
+            <result name="fail" type="tiles">/Login.jsp</result> 
         </action>
         <action name="Logout" class="com.loginAction" method="logout">  
             <result name="success">/Login.jsp</result>  
@@ -134,7 +134,7 @@
             <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
             <result name="fail">/admin.jsp</result>
         </action>
-       <action name="recommendfile" class="com.LikeRe" method="recommended">
+        <action name="recommendfile" class="com.LikeRe" method="recommended">
             <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
             <result name="fail">/admin.jsp</result>
         </action>
