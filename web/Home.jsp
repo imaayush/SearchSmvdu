@@ -59,8 +59,8 @@
                                                                         </a>     </p>
                                                                     <p class="desc">Uploaded By &nbsp;&nbsp;<s:property value="fileusername"/> </p>
                                                                     <p class="desc"><s:property value="filedis"/></p>
-
-                                                                  
+                                                         <div class="portlet-body">
+                                                    
                                                             </tr>
 
 
