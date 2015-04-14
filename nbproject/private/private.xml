@@ -2,20 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/web/temp_header.jsp</file>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/src/java/com/loginAction.java</file>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/src/java/struts.xml</file>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/web/View.jsp</file>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/web/fileview.jsp</file>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/src/java/com/LikeRe.java</file>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/web/Myprofile.jsp</file>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/web/WEB-INF/tiles.xml</file>
-            <file>file:/C:/Users/DKG/Documents/NetBeansProjects/SearchSmvdu/web/Home.jsp</file>
+            <file>file:/C:/Users/knight/Documents/NetBeansProjects/SearchSmvdu/web/Home.jsp</file>
+            <file>file:/C:/Users/knight/Documents/NetBeansProjects/SearchSmvdu/web/fileview.jsp</file>
         </group>
->>>>>>> 138f36e3dc54770a8dd79782bf3df377d9e2cd7a
     </open-files>
 </project-private>
