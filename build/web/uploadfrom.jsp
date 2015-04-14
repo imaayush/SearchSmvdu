@@ -60,6 +60,8 @@
                                                     <option>Sport</option>
                                                     <option>Game</option>
                                                     <option>Tv Show</option>
+                                                    <option>Project</option>
+                                                    <option>Paper</option>
                                                 </select>
                                             </div>
 

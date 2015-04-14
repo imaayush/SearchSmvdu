@@ -31,6 +31,15 @@ public class viewAction extends ActionSupport {
     private String image;
     private String circle;
     private String likes;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getCircle() {
         return circle;
@@ -120,7 +129,7 @@ public class viewAction extends ActionSupport {
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String User = (String) session.getAttribute("username");
         Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image from user where UserName='" + User + "'");
+        ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image, dateuser from user where UserName='" + User + "'");
         String x = LikeCircle.likecount(User);
         setLikes(x);
 
@@ -131,6 +140,7 @@ public class viewAction extends ActionSupport {
             setEmail(rs.getString(2));
             setGender(rs.getString(3));
             setImage(rs.getString(4));
+            setDate(rs.getString(5));
         }
         ps = con.createStatement();
         rs = ps.executeQuery("select filename,filetags,filedescription,idfiles from files where username='" + User + "'");

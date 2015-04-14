@@ -51,7 +51,7 @@
                                                     <p>
                                                         <strong>Status:</strong> Active</p>
                                                     <p>
-                                                        <strong class="mrs">Member&nbsp;&nbsp;Since:</strong><span class="label label-green mrs">Jun 03, 2014</p>
+                                                        <strong class="mrs">Member&nbsp;&nbsp;Since:</strong><span class="label label-green mrs"><s:property value="date"/></span></p>
                                                         <p><button type="button" class="btn  btn-blue" data-toggle="modal" data-target="#myModal">
                                                 Upload Photo</button><jsp:include page="/uploadphoto.jsp"></jsp:include></p>
                                                 </div>

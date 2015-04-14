@@ -31,6 +31,16 @@ public class ViewProfileAction extends ActionSupport {
     private String UserName;
     private String circle;
     private String likes;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
     ArrayList<Loginfo> loginfo = new ArrayList<Loginfo>();
 
     public ArrayList<Loginfo> getLoginfo() {
@@ -103,7 +113,7 @@ public class ViewProfileAction extends ActionSupport {
         String User = request.getParameter("UserName");
         setUserName(User);
         Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image from user where UserName='" + User + "'");
+        ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image, dateuser from user where UserName='" + User + "'");
 
         String x = LikeCircle.likecount(User);
         setLikes(x);
@@ -114,6 +124,7 @@ public class ViewProfileAction extends ActionSupport {
             setEmail(rs.getString(2));
             setGender(rs.getString(3));
             setImage(rs.getString(4));
+            setDate(rs.getString(5));            
         }
         con.close();
         con = Connections.conn();
@@ -125,7 +136,8 @@ public class ViewProfileAction extends ActionSupport {
 
             p.setActive(rs.getString(1));
             p.setActiveid(rs.getString(2));
-            p.setTime(rs.getString(3));
+            String s[] = rs.getString(3).split("\\.")[0].split("\\:");
+            p.setTime(s[0] + ":" +s[1]);
             
             loginfo.add(p);            
         }        

@@ -24,7 +24,7 @@
 
                 </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Video</s:param></s:url>">
-                        <i class="fa fa-gift fa-fw">
+                        <i class="fa fa-video-camera fa-fw">
                             <div class="icon-bg bg-grey"></div>
                         </i><span class="menu-title">videos</span></a>
 
@@ -36,13 +36,13 @@
 
                 </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Music</s:param></s:url>">
-                       <i class="fa fa-send-o fa-fw">
+                       <i class="fa fa-music fa-fw">
                             <div class="icon-bg bg-green"></div>
                         </i><span class="menu-title">Musics</span></a>
 
                 </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Sport</s:param></s:url>">
-                       <i class="fa fa-edit fa-fw">
+                       <i class="fa fa-spotify fa-fw">
                             <div class="icon-bg bg-violet"></div>
                         </i><span class="menu-title">Sports</span></a>
 
@@ -54,16 +54,25 @@
 
                 </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Game</s:param></s:url>">
-                        <i class="fa fa-database fa-fw">
+                        <i class="fa fa-gamepad fa-fw">
                             <div class="icon-bg bg-red"></div>
                         </i><span class="menu-title">Games</span></a>
 
                 </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Tv Show</s:param></s:url>">
-                       <i class="fa fa-file-o fa-fw">
+                       <i class="fa fa-file-video-o fa-fw">
                             <div class="icon-bg bg-yellow"></div>
                         </i><span class="menu-title">Tv Shows</span></a>
-
+                </li>
+                <li><a href="<s:url action="searchtags"><s:param name="tagname">Project</s:param></s:url>">
+                       <i class="fa fa-university fa-fw">
+                            <div class="icon-bg bg-yellow"></div>
+                        </i><span class="menu-title">Projects</span></a>
+                </li>
+                <li><a href="<s:url action="searchtags"><s:param name="tagname">Paper</s:param></s:url>">
+                       <i class="fa fa-flag fa-fw">
+                            <div class="icon-bg bg-yellow"></div>
+                        </i><span class="menu-title">Papers</span></a>
                 </li>
             </ul>
         </div>
