@@ -37,16 +37,16 @@ public class AddtocircleAction extends ActionSupport {
             HttpSession session = ServletActionContext.getRequest().getSession(false);
             String username1 = (String) session.getAttribute("username");
             Connection con = Connections.conn();
-           
-            LogNote.log1("Add to Circle", username2 );
+
+            LogNote.log1("Add to Circle", username2);
             PreparedStatement stat = con.prepareStatement("insert into circle(circlename, username) values(?,?)");
             stat.setString(1, username1);
             stat.setString(2, username2);
 
             stat.executeUpdate();
-          
-                return "success";
-            
+
+            return "success";
+
             //return "success";
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -54,23 +54,24 @@ public class AddtocircleAction extends ActionSupport {
         }
 
     }
-    public String like(){
+
+    public String like() {
         try {
             HttpSession session = ServletActionContext.getRequest().getSession(false);
             String username1 = (String) session.getAttribute("username");
             Connection con = Connections.conn();
             String query = "insert into likeuser(likes, username) values('" + username1 + "','" + username2 + "')";
-           LogNote.log1("Liked",username2 );
+            LogNote.log1("Liked", username2);
             Statement st = con.createStatement();
-            st.executeUpdate(query);           
+            st.executeUpdate(query);
 
-                return "success";
-            
+            return "success";
+
             //return "success";
         } catch (Exception e) {
             System.out.println(e.toString());
             return "fail";
         }
-    
+
     }
 }

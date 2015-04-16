@@ -20,6 +20,7 @@ import org.apache.struts2.ServletActionContext;
  * @author knight
  */
 public class SearchtagsAction extends ActionSupport {
+
     String searchtext;
 
     ArrayList<Files> file2 = new ArrayList<Files>();
@@ -31,7 +32,7 @@ public class SearchtagsAction extends ActionSupport {
     public void setFile2(ArrayList<Files> file2) {
         this.file2 = file2;
     }
-    
+
     public String getSearchtext() {
         return searchtext;
     }
@@ -39,10 +40,10 @@ public class SearchtagsAction extends ActionSupport {
     public void setSearchtext(String searchtext) {
         this.searchtext = searchtext;
     }
-    
+
     public SearchtagsAction() {
     }
-    
+
     public String execute() throws Exception {
         Connection con = Connections.conn();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
@@ -51,20 +52,20 @@ public class SearchtagsAction extends ActionSupport {
         setSearchtext(tagname);
         Statement ps = con.createStatement();
         ResultSet rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles, datetime from files where filetags='" + tagname + "'");
-
+        
         while (rs.next()) {
             Files f = new Files();
             f.setFilename(rs.getString(1));
             f.setFiletags(rs.getString(2));
             f.setFiledes(rs.getString(3));
             f.setIdfiles(rs.getString(4));
-            f.setDatetime(rs.getTimestamp(5));
+            String s = rs.getString(5);
+            String s1[] = s.split("\\.");
+            f.setTime(s1[0]);
+            f.setCountLiked(CountLDRFile.countLike(Integer.parseInt(rs.getString(4))));
             file2.add(f);
         }
         con.close();
         return "success";
     }
 }
-    
-    
-

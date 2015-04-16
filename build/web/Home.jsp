@@ -45,7 +45,7 @@
                                                             <tr class="tbl-item"><!--<img/>-->
 
                                                                 <!--<data></data>-->
-                                                                <td class="td-block"><p class="date">time</p>
+                                                                <td class="td-block"><p class="date"><s:property value="datetime"/></p>
 
                                                                     <p class="title"> <a href="<s:url  action="ViewProfile">
                                                                                              <s:param name="UserName" value="%{username}" /> </s:url>">                                                                            

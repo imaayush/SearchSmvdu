@@ -96,14 +96,16 @@
                                 <ul class="dropdown-menu dropdown-user pull-right">
                                     <li><a href="Myprofile"><i class="fa fa-user"></i>My Profile</a></li>
                                     <li><a href="Addcircle"><i class="fa fa-circle-o"></i>Add Circle</a></li>
-                                    <li><a href="Mailbox"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                    <li><a href=""><i class="fa fa-tasks"></i>Forum<span class="badge badge-success">7</span></a></li>
+                                    <li><a href="Mailbox"><i class="fa fa-envelope"></i>My Inbox</a></li>
+                                    <li><a href=""><i class="fa fa-tasks"></i>Forum</a></li>
                                     <li class="divider"></li>
 
                                     <li><a href="Logout"><i class="fa fa-key"></i>Log Out</a></li>
                                 </ul>
+
                             </li>
                            
+
                         </ul>
                     </div>
                 </nav>
@@ -114,14 +116,17 @@
             %>
             <div id="header-topbar-option-demo" class="page-header-topbar"  >
                 <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
-                    <div class="navbar-header">
-                        <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
+                    <div class="navbar-header">                        
+                        <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a>
+                    </div>
                     <div class="topbar-main">
+<<<<<<< HEAD
 
                         <form id="topbar-search" action="search" method="" class="hidden-sm hidden-xs" style="width:35%;">
                             <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input id="tags"  onkeyup="showData(this.value);" type="text" placeholder="Search here..." class="form-control text-blue" name="searchtext"/></div>
                         </form>
+=======
+>>>>>>> 0a3e2c0a69bd473b41080afbdf9546f019ede9c8
                         <div style="float:right; margin-top:0.7%; margin-right: 3%">
                             <button onclick="window.location.href = 'LoginFrom'" class="btn btn-white">Upload</button>
 
@@ -130,8 +135,6 @@
                         </div>
                     </div>
                 </nav>
-
-
             </div>
             <%
                 }

@@ -44,6 +44,8 @@
                     </div>
                 </nav>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+
+
 <!--END TOPBAR-->
 <s:if test="hasActionMessages()">
     <div class="alert alert-danger" role="alert" style="width:30%; margin-left: 34% ;margin-top: 1%; " >

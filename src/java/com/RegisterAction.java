@@ -8,9 +8,13 @@ package com;
 import JavaSrc.Connections;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -94,7 +98,7 @@ public class RegisterAction extends ActionSupport {
                 String query1 = "select * from user where email='" + email + "'";
                 st = con.createStatement();
                 rs = st.executeQuery(query1);
-                if(rs.next()){
+                if (rs.next()) {
                     addActionMessage("Email not avaible...!!!");
                 }
             }
@@ -109,18 +113,24 @@ public class RegisterAction extends ActionSupport {
         String query = "select email from user where username='" + username + "'";
         Statement st;
         try {
+            
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
                 return "fail";
 
             } else {
-
-                query = "insert into user(Name, Password, Email, Username, Gender, image) values('" + fname + " " + lname + "', '" + password + "', '" + email + "', '" + username + "', '" + gender + "', 'images/profile.jpg')";
-
+                query = "insert into user(Name, Password, Email, Username, Gender, image, dateuser) values(?,?,?,?,?,?,?)";
                 try {
-                    st = con.createStatement();
-                    st.executeUpdate(query);
+                    PreparedStatement ps = con.prepareStatement(query);
+                    ps.setString(1, fname + " " + lname);
+                    ps.setString(2, password);
+                    ps.setString(3, email);
+                    ps.setString(4, username);
+                    ps.setString(5, gender);
+                    ps.setString(6, "images/profile.jpg");
+                    ps.setDate(7, new java.sql.Date((new Date(System.currentTimeMillis())).getTime()));
+                    ps.executeUpdate();
                 } catch (SQLException ex) {
                     Logger.getLogger(RegisterAction.class.getName()).log(Level.SEVERE, null, ex);
                 }
