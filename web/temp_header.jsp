@@ -120,13 +120,12 @@
                         <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a>
                     </div>
                     <div class="topbar-main">
-<<<<<<< HEAD
+
 
                         <form id="topbar-search" action="search" method="" class="hidden-sm hidden-xs" style="width:35%;">
                             <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input id="tags"  onkeyup="showData(this.value);" type="text" placeholder="Search here..." class="form-control text-blue" name="searchtext"/></div>
                         </form>
-=======
->>>>>>> 0a3e2c0a69bd473b41080afbdf9546f019ede9c8
+
                         <div style="float:right; margin-top:0.7%; margin-right: 3%">
                             <button onclick="window.location.href = 'LoginFrom'" class="btn btn-white">Upload</button>
 

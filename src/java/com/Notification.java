@@ -10,7 +10,16 @@ package com;
  * @author knight
  */
 public class Notification {
-    String fileusername , fileid ,filedis,filename ,username,notifications,filetags,datetime;
+    String fileusername , fileid ,filedis,filename ,username,notifications,filetags,datetime,image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
 
     public String getNotifications() {
         return notifications;

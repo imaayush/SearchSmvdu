@@ -130,7 +130,7 @@ public class loginAction extends ActionSupport implements SessionAware {
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username1 = (String) session.getAttribute("username");
         Connection con = Connections.conn();
-        String query = "select notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles where circle.circlename='" + username1 + "'";
+        String query = "select notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime,image from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles inner join user  on circle.username=user.username where circle.circlename='" + username1 + "'";
         try {
 
             Statement ps = con.createStatement();
@@ -149,6 +149,7 @@ public class loginAction extends ActionSupport implements SessionAware {
                 String s = rs.getString(8);
                 String s1[] = s.split("\\.");
                 n.setDatetime(s1[0]);
+                n.setImage(rs.getString(9));
                 note.add(n);
             }
         } catch (SQLException ex) {

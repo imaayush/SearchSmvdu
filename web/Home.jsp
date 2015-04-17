@@ -39,32 +39,64 @@
                                             <div class="jplist-ios-button"><i class="fa fa-sort"></i>jPList Actions</div>
 
                                             <div class="box text-shadow">
-                                                <table class="demo-tbl"><!--<item>1</item>-->
-                                                    <s:iterator  value="note">  
-                                                        <fieldset>
-                                                            <tr class="tbl-item"><!--<img/>-->
+                                                <table class="demo-tbl">
+                                                    <tr class="tbl-item">
+                                                        <td class="td-block">
+                                                            <s:iterator  value="note">  
+                                                                <fieldset>
 
-                                                                <!--<data></data>-->
-                                                                <td class="td-block"><p class="date"><s:property value="datetime"/></p>
+                                                                    <div class="portlet-body">
+                                                                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; "><div class="chat-scroller" style="overflow: hidden; width: 100%; ">
+                                                                                <ul class="chats bv">
+                                                                                    <li class="in">
+                                                                                        <img src="<s:property value="image"/>" class="avatar img-responsive">
+                                                                                        <div class="message">
+                                                                                            <span class="chat-arrow"></span><a  class="title" href="<s:url  action="ViewProfile">
+                                                                                                                                    <s:param name="UserName" value="%{username}" /> </s:url>">                                                                            
+                                                                                                                                <s:property value="username"/>
+                                                                                            </a>&nbsp;<span class="chat-datetime">at&nbsp;&nbsp;&nbsp;<s:property value="datetime"/>&nbsp;&nbsp; </span><span class="chat-body"><s:property value="notifications"/> a <s:property value="filetags"/>
+                                                                                            </span>
+                                                                                            <hr class="hr">
+                                                                                            <ul class="media-list">
+                                                                                                <li class="media"><a href="#" class="pull-left"><img data-src="images/movie.jpg" alt="avatar" class="media-object" src="images/movie.jpg" style="width: 64px; height: 64px;"></a>
 
-                                                                    <p class="title"> <a href="<s:url  action="ViewProfile">
-                                                                                             <s:param name="UserName" value="%{username}" /> </s:url>">                                                                            
-                                                                                         <s:property value="username"/>
-                                                                        </a>
-                                                                        &nbsp;<s:property value="notifications"/> &nbsp;a
-                                                                        &nbsp; <s:property value="filetags"/>     </p>
-                                                                    <p class="title"> <a href="<s:url  action="fileview">
-                                                                                             <s:param name="fileid" value="%{fileid}" /> </s:url>" >     
-                                                                                         <s:property value="filename"/>
-                                                                        </a>     </p>
-                                                                    <p class="desc">Uploaded By &nbsp;&nbsp;<s:property value="fileusername"/> </p>
-                                                                    <p class="desc"><s:property value="filedis"/></p>
-                                                                  
-                                                            </tr>
+                                                                                                    <div class="media-body"><h4 class="media-heading"><a href="<s:url  action="fileview">
+                                                                                                                     <s:param name="fileid" value="%{fileid}" /> </s:url>" >     
+                                                                                                                 <s:property value="filename"/>       </a>
+                                                                                                         &nbsp;<span class="chat-datetime"> uploaded by &nbsp;&nbsp;<s:property value="fileusername"/> </span>
+                                                                                                        </h4>
+
+                                                                                                           <p><span class="chat-body" style="color:black"> <s:property value="filedis"/></span></p>
+ 
+                                                                                                       
+
+                                                                                                           
+                                                                                                               
+
+                                                                                                                   
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        
+
+                                                                                                    </div>
+                                                                                                </li>
+                                     
+                                                                                            </ul>
+                                                                                            
+                                                                                        </div>
+                                                                                    </li>
+
+                                                                                </ul>
+                                                                            </div></div>
+
+                                                                    </div>
 
 
-                                                        </fieldset>
-                                                    </s:iterator> 
+
+                                                                </fieldset>
+                                                            </s:iterator> </td>
+                                                    </tr>
                                                 </table>
                                             </div>
                                             <div class="box jplist-no-results text-shadow align-center"><p>No results found</p></div>
