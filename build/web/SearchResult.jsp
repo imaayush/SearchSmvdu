@@ -51,20 +51,14 @@
                                                                                             <s:param name="fileid" value="%{idfiles}" /> </s:url>" >     
                                                                                         <s:property value="filename"/>
                                                                         </a></p>
-
-
-
-                                                                    <p class="desc">
-                                                 
+                                                                    <p class="desc">                                                 
                                                                         <s:set name="myenv" value="filedes.replaceAll(searchtext,'\" '+searchtext+' \"')"/>
                                                                         <s:property value="myenv"/></p>
-                                                                    
-
-                                                                    <p class="like"><s:property value="countLiked"/> Likes</p></td>
-
+                                                                    <p><s:property value="viewed"/> Views</p>
+                                                                    <p class="like"><s:property value="countLiked"/> Likes</p>
+                                                                    <p><s:property value="countDownloaded"/> Downloads</p>
+                                                                </td>
                                                             </tr>
-
-
                                                         </fieldset>
                                                     </s:iterator> 
                                                 </table>

@@ -53,9 +53,9 @@
                                                     <p>
 
                                                         <strong class="mrs">Member&nbsp;&nbsp;Since:</strong><span class="label label-green mrs"><s:property value="date"/></span></p>
-                                                        <p><button type="button" class="btn  btn-blue" data-toggle="modal" data-target="#myModal">
-                                                Upload Photo</button><jsp:include page="/uploadphoto.jsp"></jsp:include></p>
-                                                </div>
+                                                    <p><button type="button" class="btn  btn-blue" data-toggle="modal" data-target="#myModal">
+                                                            Upload Photo</button><jsp:include page="/uploadphoto.jsp"></jsp:include></p>
+                                                    </div>
 
 
                                                 </div>
@@ -102,6 +102,7 @@
                                                 <ul class="nav nav-tabs">
                                                     <li class="active"><a href="#tab-timeline" data-toggle="tab">Timeline</a></li>
                                                     <li><a href="#tab-edit" data-toggle="tab">Edit Profile</a></li>
+                                                    <li><a href="#tab-password" data-toggle="tab">Change Password</a></li>
                                                     <li><a href="#tab-circle" data-toggle="tab">Circle</a></li>
                                                     <li><a href="#tab-file" data-toggle="tab">File Uploaded</a></li>
 
@@ -109,37 +110,13 @@
                                                 <div id="generalTabContent" class="tab-content">
                                                     <jsp:include page="/timeline.jsp"></jsp:include>
                                                         <div id="tab-edit" class="tab-pane fade in">
-                                                            <form action="Editprofile" method="post" class="form-horizontal"><h3>Account Setting</h3>
-
-                                                                <div class="form-group"><label class="col-sm-3 control-label">Password</label>
-
-                                                                    <div class="col-sm-9 controls">
-                                                                        <div class="row">
-                                                                            <div class="col-xs-9">
-                                                                                <input type="password" name="password" placeholder="password" class="form-control"/>                                                                
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group"><label class="col-sm-3 control-label">Confirm Password</label>
-
-                                                                    <div class="col-sm-9 controls">
-                                                                        <div class="row">
-                                                                            <div class="col-xs-9">
-                                                                                <input type="password" name="repassword" placeholder="password" class="form-control"/>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <hr>
+                                                            <form action="Editprofile" method="post" class="form-horizontal">
                                                                 <h3>Profile Setting</h3>
-
                                                                 <div class="form-group"><label class="col-sm-3 control-label">First Name</label>
 
                                                                     <div class="col-sm-9 controls">
                                                                         <div class="row">
-                                                                            <div class="col-xs-9"><input type="text" name="fname" placeholder="first name" class="form-control"></div>
+                                                                            <div class="col-xs-9"><input type="text" name="fname" placeholder="first name" class="form-control" /></div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -147,7 +124,7 @@
 
                                                                     <div class="col-sm-9 controls">
                                                                         <div class="row">
-                                                                            <div class="col-xs-9"><input type="text" name="lname" placeholder="last name" class="form-control"></div>
+                                                                            <div class="col-xs-9"><input type="text" name="lname" placeholder="last name" class="form-control" /></div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -191,17 +168,41 @@
 
                                                                     <div class="col-sm-9 controls">
                                                                         <div class="row">
-                                                                            <div class="col-xs-9"><input type="text" name="mobile" placeholder="mobile phone" class="form-control"></div>
+                                                                            <div class="col-xs-9"><input type="tel" name="mobile" placeholder="mobile phone" class="form-control"></div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
-
                                                                 <hr>
                                                                 <button type="submit" class="btn btn-green btn-block">Finish</button>
                                                             </form>
                                                         </div>
+                                                        <div id="tab-password" class="tab-pane fade in">
+                                                            <form action="Changepassword" name="passchangeForm" method="post" class="form-horizontal" onsubmit="return checkPassword();">
+                                                                <h3>Account Setting</h3>
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Password</label>
+
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9">
+                                                                                <input type="password" name="password" placeholder="password" class="form-control" required/>                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Confirm Password</label>
+
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9">
+                                                                                <input type="password"  name="repassword" placeholder="password" class="form-control" required/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                                <button type="submit" class="btn btn-green btn-block">Change Password</button>
+                                                            </form>
+                                                        </div>                                                        
                                                         <div id="tab-circle" class="tab-pane fade in">
                                                             <div class="row mbl">
 
@@ -217,29 +218,23 @@
                                                                     <div class="list-group-item" style="height:50px;"> 
 
                                                                         <div style="width:10%; float:left;height:40px; margin-top:-0.5%;"><img src="<s:property value="photo"/>" alt="" title="" style="width:100%; max-width:40px; max-height:40px;"/></div>
-                                                                        <!--<data></data>--><form action="" >
-                                                                        <div style="width:88%; float:left; height:40px;"><p class="date"></p>
+                                                                        <!--<data></data>-->
+                                                                        <form action="Removefromcircle2" >
+                                                                            <div style="width:88%; float:left; height:40px;"><p class="date"></p>
 
-                                                                            <p class="title">
-                                                                                <a href="<s:url  action="ViewProfile">
-                                                                                       <s:param name="UserName" value="%{UserName}" /> </s:url>">                                                                            
-                                                                                   <s:property value="name"/>
-                                                                                </a>
-                                                                            
-                                                                                   <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2" style="float:right;">Remove from  Circle</button>
-                                                                            </p>
+                                                                                <p class="title">
+                                                                                    <a href="<s:url  action="ViewProfile">
+                                                                                           <s:param name="UserName" value="%{UserName}" /> </s:url>">                                                                            
+                                                                                       <s:property value="name"/>
+                                                                                    </a>
 
-                                                                           
-
-                                                                        </div>
-                                                                            </form>
-
+                                                                                    <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2" style="float:right;">Remove from  Circle</button>
+                                                                                </p>
+                                                                            </div>
+                                                                        </form>
                                                                     </div>
-
                                                                 </fieldset>
                                                             </s:iterator> 
-
-
                                                         </div>
                                                     </div>
                                                     <div id="tab-file" class="tab-pane fade in">
@@ -287,6 +282,15 @@
 <!--END PAGE WRAPPER-->
 </div>
 </div>
+<script>
+    function checkPassword() {
+    if ((passchangeForm.password.value !== passchangeForm.repassword.value)) {
+        alert("Password mismatch");
+        return false;
+    }
+    return true;
+}
+</script>
 <script src="script/jquery-1.10.2.min.js"></script>
 <script src="script/jquery-migrate-1.2.1.min.js"></script>
 <script src="script/jquery-ui.js"></script>

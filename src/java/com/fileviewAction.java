@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
@@ -94,8 +95,8 @@ public class fileviewAction extends ActionSupport {
         Connection con = Connections.conn();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         String fileid = request.getParameter("fileid");
-        Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription,idfiles from files where idfiles ='" + fileid + "'");
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery("select filename,filetags,filedescription,idfiles,viewed from files where idfiles ='" + fileid + "'");
 
         while (rs.next()) {
 
@@ -103,7 +104,10 @@ public class fileviewAction extends ActionSupport {
             setFiletags(rs.getString(2));
             setFiledes(rs.getString(3));
             setIdfiles(rs.getString(4));
-
+            int count = rs.getInt(5);
+            ++count;
+            PreparedStatement ps = con.prepareStatement("update files set viewed=" + count + " where idfiles=" + Integer.parseInt(fileid));
+            ps.executeUpdate();
         }
         
         setCountLiked(CountLDRFile.countLike(Integer.parseInt(fileid)));

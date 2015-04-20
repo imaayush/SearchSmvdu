@@ -11,18 +11,16 @@
                     <div class="form-group">
                         <div class="input-icon right">
 
-                            <input id="inputPassword" type="text" placeholder="Recipients " class="form-control" name="receiveremail"></div>
+                            <input id="inputPassword" type="email" placeholder="Recipients email" class="form-control" name="receiveremail" required></div>
                     </div>
                     <div class="form-group">
                         <div class="input-icon right">
 
-                            <input id="inputPassword" type="text" placeholder="Subject" class="form-control" name="sub"></div>
+                            <input id="inputPassword" type="text" placeholder="Subject" class="form-control" name="sub" required></div>
                     </div>
                     <div class="form-group">
                         <div class="input-icon right">
-                            <textarea rows="8" cols="50" class="form-control" name="body">
-
-                            </textarea>
+                            <textarea rows="8" cols="50" class="form-control" name="body" required></textarea>
                         </div>
                     </div>
 
