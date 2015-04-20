@@ -8,9 +8,11 @@ package com;
 import JavaSrc.Connections;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
@@ -33,7 +35,16 @@ public class SendemailAction extends ActionSupport {
     private String receiverstatus;
     private String important;
     private String categories;
+    private String receiverUser;
     Connection con = Connections.conn();
+
+    public String getReceiverUser() {
+        return receiverUser;
+    }
+
+    public void setReceiverUser(String receiverUser) {
+        this.receiverUser = receiverUser;
+    }
 
     public String getSenderemail() {
         return senderemail;
@@ -101,27 +112,43 @@ public class SendemailAction extends ActionSupport {
 
     public String execute() throws Exception {
         HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String User = (String) session.getAttribute("username");
-        String query = "select email from user where username='" + User + "'";
-
-        Statement st;
+        String User = (String) session.getAttribute("username");        
+        PreparedStatement ps;
+        
         try {
-            st = con.createStatement();
-            ResultSet rs = st.executeQuery(query);
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select email from user where username='" + User + "'");
             while (rs.next()) {
-
-                setSenderemail(rs.getString("Email"));
+                setSenderemail(rs.getString(1));
             }
+            Statement st1 = con.createStatement();
+            ResultSet rs1 = st1.executeQuery("select username from user where Email='" + receiveremail + "'");
+            while (rs1.next()) {
+                setReceiverUser(rs1.getString(1));
+            }
+            
             setImportant("No");
             setCategories("Primary");
             setReceiverstatus("Unread");
             setSenderstatus("Send");
-            String time ="10:00 Pm";
-            query = "insert into message(senderemail, receiveremail, sub, body, senderstatus, important, categories, receiver ,sendername,time) values('" + senderemail + "','" + receiveremail + "', '" + sub + "', '" + body + "', '" + senderstatus + "', '" + important + "','" + categories + "','" + receiverstatus + "','"+User+"','"+time+"')";
+            Timestamp time = new Timestamp(System.currentTimeMillis());
+            System.out.println(time);
+            String query = "insert into message(senderemail, receiveremail, sub, body, senderstatus, important, categories, receiver ,sendername,receivername,time) values(?,?,?,?,?,?,?,?,?,?,?)";
 
             try {
-                st = con.createStatement();
-                st.executeUpdate(query);
+                ps = con.prepareStatement(query);
+                ps.setString(1, senderemail);
+                ps.setString(2, receiveremail);
+                ps.setString(3, sub);
+                ps.setString(4, body);
+                ps.setString(5, senderstatus);
+                ps.setString(6, important);
+                ps.setString(7, categories);
+                ps.setString(8, receiverstatus);
+                ps.setString(9, User);
+                ps.setString(10, receiverUser);
+                ps.setTimestamp(11, time);
+                ps.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(RegisterAction.class.getName()).log(Level.SEVERE, null, ex);
             }

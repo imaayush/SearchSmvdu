@@ -12,8 +12,24 @@ import java.io.File;
  * @author knight
  */
 public class Files {
-    String filename ,filetags, filedes,idfiles, time, countLiked;    
+    String filename ,filetags, filedes,idfiles, time, countLiked, countDownloaded, viewed;    
     File file;
+
+    public String getCountDownloaded() {
+        return countDownloaded;
+    }
+
+    public String getViewed() {
+        return viewed;
+    }
+
+    public void setViewed(String viewed) {
+        this.viewed = viewed;
+    }
+
+    public void setCountDownloaded(String countDownloaded) {
+        this.countDownloaded = countDownloaded;
+    }
 
     public String getCountLiked() {
         return countLiked;

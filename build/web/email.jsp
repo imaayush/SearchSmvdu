@@ -1,7 +1,12 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="JavaSrc.Connections"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.Connection"%>
 <div id="page-wrapper">
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
     <%@ taglib uri="/struts-tags" prefix="s" %>  
-    
+
     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
             <div class="page-title">
@@ -36,69 +41,76 @@
                         <div class="col-sm-3 col-md-2">
 
                         </div>
-                        <div class="col-sm-9 col-md-10">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default"><input type="checkbox" style="margin: 0; vertical-align: middle;" class="checkall"/></button>
-                                <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
-                                <ul role="menu" class="dropdown-menu">
-                                    <li><a href="#">All</a></li>
-                                    <li><a href="#">None</a></li>
-                                    <li><a href="#">Read</a></li>
-                                    <li><a href="#">Unread</a></li>
-                                    <li><a href="#">Starred</a></li>
-                                    <li><a href="#">Unstarred</a></li>
-                                </ul>
+                        <form action="Mailbox">
+                            <div class="col-sm-9 col-md-10">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default"><input type="checkbox" style="margin: 0; vertical-align: middle;" class="checkall"/></button>
+                                    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
+                                    <ul role="menu" class="dropdown-menu">
+                                        <li><a href="#">All</a></li>
+                                        <li><a href="#">None</a></li>
+                                        <li><a href="#">Read</a></li>
+                                        <li><a href="#">Unread</a></li>
+                                        <li><a href="#">Starred</a></li>
+                                        <li><a href="#">Unstarred</a></li>
+                                    </ul>
+                                </div>
+                                <button type="button" data-toggle="tooltip" title="Refresh" class="btn btn-default mls mrs"><span class="fa fa-refresh"></span></button>
                             </div>
-                            <button type="button" data-toggle="tooltip" title="Refresh" class="btn btn-default mls mrs"><span class="fa fa-refresh"></span></button>
-                            
-                         
-                        </div>
+                        </form>
                     </div>
                     <div class="mtl mbl"></div>
                     <div class="row">
                         <div class="col-sm-3 col-md-2"><a href="#myModal" role="button" class="btn btn-danger btn-sm btn-block" data-toggle="modal" >COMPOSE</a>
-                            <jsp:include page="/compose.jsp"></jsp:include>
+                            <jsp:include page="/compose.jsp"/>
                             <div class="mtm mbm"></div>
                             <div class="panel">
                                 <div class="panel-body pan">
                                     <ul style="background: #fff" class="nav nav-pills nav-stacked">
-                                        <li class="active"><a href="#"><span class="badge pull-right"><s:property value="number"/></span><i class="fa fa-inbox fa-fw mrs"></i>Inbox</a></li>
-                                        <li><a href="#"><i class="fa fa-star-o fa-fw mrs"></i>Starred</a></li>
-                                        <li><a href="#"><i class="fa fa-info-circle fa-fw mrs"></i>Important</a></li>
-                                        <li><a href="#"><i class="fa fa-plane fa-fw mrs"></i>Sent Mail</a></li>
-                                        
+                                        <%
+                                            Connection con = Connections.conn();
+                                            int number = 0;
+                                            String email = (String) session.getAttribute("email");
+                                            Statement st = con.createStatement();
+                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "'");
+                                            while (rs.next()) {
+                                                number++;
+                                            }
+                                        %>
+                                        <li class="active"><a href="Mailbox"><span class="badge pull-right"><%=number%></span><i class="fa fa-inbox fa-fw mrs"></i>Inbox</a></li>
+                                        <!--<li><a href="#"><i class="fa fa-star-o fa-fw mrs"></i>Starred</a></li>-->
+                                        <li><a href="Importantmail"><i class="fa fa-info-circle fa-fw mrs"></i>Important</a></li>
+                                        <li><a href="Sentmail"><i class="fa fa-plane fa-fw mrs"></i>Sent Mail</a></li>                                        
                                     </ul>
                                 </div>
                             </div>
                             <hr/>
-                           
                         </div>
                         <div class="col-sm-9 col-md-10">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a href="#home" data-toggle="tab"><span class="fa fa-inbox"></span>&nbsp;
-                                        Primary</a></li>
-                                
-                            </ul>
                             <div class="tab-content">
                                 <div id="home" class="tab-pane fade in active">
                                     <div class="list-group mail-box">
                                         <s:iterator  value="mailinfo">  
-                                            <fieldset>  
-                                          
-                                        <a href="#" class="list-group-item">
-                                            <input type="checkbox"/>
-                                            <span class="fa fa-star-o mrm mlm"></span>
-                                            <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="sendername"/></span>
-                                            <span><s:property value="sub"/></span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted"><s:property value="body"/>
-                                            </span><span class="time-badge"><s:property value="time"/></span>
-                                          
-                                        </a>
-                                                </fieldset>
-                                          </s:iterator> 
-
+                                            <fieldset>
+                                                <%
+                                                String body;
+                                                body = (String)request.getAttribute("body");
+                                                if(body.length()>75){
+                                                    body = body.substring(0, 75);
+                                                }
+                                                %>
+                                                <a href="<s:url action="viewemail"><s:param name="msgid" value="%{idmessage}"></s:param></s:url>" class="list-group-item">
+                                                            <input type="checkbox"/>
+                                                            <span class="fa fa-star-o mrm mlm"></span>
+                                                            <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="sendername"/></span>
+                                                    <span><s:property value="sub"/></span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted"><%=body%>
+                                                    </span><span class="time-badge"><s:property value="time"/></span>
+                                                </a>
+                                            </fieldset>
+                                        </s:iterator> 
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">

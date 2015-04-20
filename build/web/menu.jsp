@@ -13,7 +13,7 @@
                             <div class="icon-bg bg-orange"></div>
                         </i><span class="menu-title">Home</span></a></li>
 
-                <li><a href="#"><i class="fa fa-desktop fa-fw">
+                <li><a href="Popular"><i class="fa fa-desktop fa-fw">
                             <div class="icon-bg bg-pink"></div>
                         </i><span class="menu-title">Popular on SMVDU</span></a>
 
