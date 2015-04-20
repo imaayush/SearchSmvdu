@@ -155,87 +155,114 @@
                                                 <h4 ><strong>Description</strong></h4>
                                                 <span><s:property value="filedes"/></span>
                                             </div>
-                                            <div class="row divider" style="margin-top: 2%; padding: 2%;">
-
-                                                <h4 ><strong>Comments</strong></h4>
-
-
-                                                <div class="portlet-body">
-                                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 270px;"><div class="chat-scroller" style="overflow: hidden; width: 100%; height: 270px;">
-                                                            <ul class="chats bv">
-                                                                <li class="in">
-                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                    <div class="message">
-                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                </li>
-                                                                <li class="out">
-                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                    <div class="message">
-                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
-                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                </li>
-                                                                <li class="in">
-                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                    <div class="message">
-                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                </li>
-                                                                <li class="out">
-                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                    <div class="message">
-                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
-                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                </li>
-                                                                <li class="in">
-                                                                    <img src="images/avatar/48.jpg" class="avatar img-responsive">
-                                                                    <div class="message">
-                                                                        <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
-                                                                            dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                                                            ut laoreet dolore magna aliquam erat volutpat.</span></div>
-                                                                </li>
-                                                                <li class="in"><img class="avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg"><div class="message"><span class="chat-arrow"></span><a class="chat-name" href="#">Admin &nbsp;</a><span class="chat-datetime">at July 6, 201420:11</span><span class="chat-body">bv</span></div></li></ul>
-                                                        </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 183px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 86.9928400954654px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
-                                                    <div class="chat-form">
-                                                        <div class="input-group">
-                                                            <input id="input-chat" type="text" placeholder="Type a message here..." class="form-control"><span id="btn-chat" class="input-group-btn">
-                                                                <button type="button" class="btn btn-green">
-                                                                    <i class="fa fa-check"></i>
-                                                                </button>
-                                                            </span>
+                                            <div class="row  divider" style="margin-top: 2%; padding-left: 2%;min-height:200px;">
+                                                <h4 ><strong>File Summery</strong></h4>
+                                                <br>
+                                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:98%">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading" role="tab" id="headingOne">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <strong><s:property value="torrentname"/>&nbsp;&nbsp;(Size:&nbsp;<s:property value="totalsize"/>)</strong>
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                                            <ul class="list-group">
+                                                                
+                                                                <s:iterator  value="torrentinfo">  
+                                                                    <fieldset>
+                                                                        <li class="list-group-item"><s:property value="tname" /> &nbsp;&nbsp;<span style="float: right"> <s:property value="tsize" /><span></li>
+                                                                    </fieldset>
+                                                                </s:iterator>
+                                                            </ul>
                                                         </div>
                                                     </div>
+
+                                                    <br>
+                                                    <span><strong>Primary Tracker:&nbsp;&nbsp;</strong><a href"<s:property value="tracker"/>"> <s:property value="tracker"/></a></span>
                                                 </div>
+                                                <div class="row divider" style="margin-top: 2%; padding: 2%;">
+
+                                                    <h4 ><strong>Comments</strong></h4>
 
 
+                                                    <div class="portlet-body">
+                                                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 270px;"><div class="chat-scroller" style="overflow: hidden; width: 100%; height: 270px;">
+                                                                <ul class="chats bv">
+                                                                    <li class="in">
+                                                                        <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                        <div class="message">
+                                                                            <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
+                                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                    </li>
+                                                                    <li class="out">
+                                                                        <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                        <div class="message">
+                                                                            <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
+                                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                    </li>
+                                                                    <li class="in">
+                                                                        <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                        <div class="message">
+                                                                            <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
+                                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                    </li>
+                                                                    <li class="out">
+                                                                        <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                        <div class="message">
+                                                                            <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 18:06</span><span class="chat-body">Lorem ipsum
+                                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                    </li>
+                                                                    <li class="in">
+                                                                        <img src="images/avatar/48.jpg" class="avatar img-responsive">
+                                                                        <div class="message">
+                                                                            <span class="chat-arrow"></span><a href="#" class="chat-name">Admin</a>&nbsp;<span class="chat-datetime">at July 06, 2014 17:06</span><span class="chat-body">Lorem ipsum
+                                                                                dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
+                                                                                ut laoreet dolore magna aliquam erat volutpat.</span></div>
+                                                                    </li>
+                                                                    <li class="in"><img class="avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg"><div class="message"><span class="chat-arrow"></span><a class="chat-name" href="#">Admin &nbsp;</a><span class="chat-datetime">at July 6, 201420:11</span><span class="chat-body">bv</span></div></li></ul>
+                                                            </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 183px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 86.9928400954654px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                                                        <div class="chat-form">
+                                                            <div class="input-group">
+                                                                <input id="input-chat" type="text" placeholder="Type a message here..." class="form-control"><span id="btn-chat" class="input-group-btn">
+                                                                    <button type="button" class="btn btn-green">
+                                                                        <i class="fa fa-check"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
                                             </div>
+
+
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
+        <!--END CONTENT-->
+        <!--BEGIN FOOTER-->
+        <div id="footer">
+            <div class="copyright">
+                <a href="#">2015 © </a></div>
+        </div>
+        <!--END FOOTER-->
     </div>
-    <!--END CONTENT-->
-    <!--BEGIN FOOTER-->
-    <div id="footer">
-        <div class="copyright">
-            <a href="#">2015 © </a></div>
-    </div>
-    <!--END FOOTER-->
-</div>
-<!--END PAGE WRAPPER-->
+    <!--END PAGE WRAPPER-->
 </div>
 </div>
 <script src="script/jquery-1.10.2.min.js"></script>

@@ -8,6 +8,7 @@ package com;
 import JavaSrc.Connections;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import static freemarker.template.utility.StringUtil.split;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -76,14 +77,20 @@ public class DownloadAction extends ActionSupport {
             blob = rs.getBlob("file");
             f = 1;
         }
+        
         b = new byte[(int) blob.length()];
         b = blob.getBytes(1, (int) blob.length());
+        
+       
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/x-bittorrent");
         OutputStream out = response.getOutputStream();
         out.write(b);
         out.flush();
         out.close();
+       
+        
+        
         if (f == 1) {
             this.setB(b);
             return "success";
