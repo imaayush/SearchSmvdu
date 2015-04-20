@@ -55,18 +55,20 @@
 
         <action name="Uploadphoto" class="com.UploadAction" >  
             <result name="success" type="tiles">/admin</result>  
-            <result name="fail">/admin.jsp</result>  
+            <result name="fail">/error.jsp</result>  
         </action> 
-
-        
+                
         <action name="Editprofile" class="com.EditAction" >  
-            <result name="success" type="tiles">/myprofile</result>  
-            <result name="fail">/admin.jsp</result>  
+            <result name="success" type="redirect">/Myprofile</result>  
+            <result name="fail">/error.jsp</result>  
         </action> 
-        
+        <action name="Changepassword" class="com.EditAction" method="changepassword">  
+            <result name="success" type="redirect">/Myprofile</result>  
+            <result name="fail">/error.jsp</result>  
+        </action> 
         <action name="Mailbox" class="com.MailAction">
             <result name="success" type="tiles">/mailbox</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
 
         <action name="Uploadfile" class="com.FileuploadAction">
@@ -75,46 +77,65 @@
         </action>
         
         <action name="Sendemail" class="com.SendemailAction">
+            <result name="success" type="redirect">/Mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+       
+        <action name="Sentmail" class="com.MailAction" method="sentmail">
             <result name="success" type="tiles">/mailbox</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+       
+       <action name="Importantmail" class="com.MailAction" method="importantmail">
+            <result name="success" type="tiles">/mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        
+        <action name="viewemail" class="com.ViewMailAction">
+            <result name="success" type="tiles">/viewemail</result>
+            <result name="fail">/error.jsp</result>
         </action>
        
         <action name="ViewProfile" class="com.ViewProfileAction">
             <result name="success" type="tiles">/ViewProfile</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="Addtocircle" class="com.AddtocircleAction">
             <result name="success" type="redirect">/Addcircle</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="Removefromcircle" class="com.RemovefromcircleAction">
             <result name="success" type="redirect">/Addcircle</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="Addtocircle1" class="com.AddtocircleAction">
             <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="Removefromcircle1" class="com.RemovefromcircleAction">
             <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Removefromcircle2" class="com.RemovefromcircleAction">
+            <result name="success" type="redirect">/Myprofile</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="addtolike" class="com.AddtocircleAction" method ="like">
             <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="addtounlike" class="com.RemovefromcircleAction" method ="unlike">
             <result name="success" type="redirect">/ViewProfile?UserName=${username2}</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="fileview" class="com.fileviewAction">
             <result name="success" type="tiles">/Fileview</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         
         <action name="downloadfile" class="com.DownloadAction">
             <result name="success" type="redirect">/fileview</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         
         <action name="search" class="com.SearchAction">
@@ -124,23 +145,29 @@
         
         <action name="searchtags" class="com.SearchtagsAction">
             <result name="success" type="tiles">/searchview</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
+        
+        <action name="Popular" class="com.SearchtagsAction" method="popular">
+            <result name="success" type="tiles">/searchview</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        
         <action name="likefile" class="com.LikeRe">
             <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="unlikefile" class="com.UnlikeRe">
             <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="recommendfile" class="com.LikeRe" method="recommended">
             <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         <action name="home" class="com.loginAction" method="selectcircle">
             <result name="success" type="tiles">/home</result>
-            <result name="fail">/admin.jsp</result>
+            <result name="fail">/error.jsp</result>
         </action>
         
     </package>

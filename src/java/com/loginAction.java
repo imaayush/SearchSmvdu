@@ -28,7 +28,15 @@ public class loginAction extends ActionSupport implements SessionAware {
     private String username;
     private String password;
     private SessionMap<String, Object> sessionMap;
-    String searchtext,Autostr;
+    String searchtext, Autostr, notificationtime;
+
+    public String getNotificationtime() {
+        return notificationtime;
+    }
+
+    public void setNotificationtime(String notificationtime) {
+        this.notificationtime = notificationtime;
+    }
 
     public String getAutostr() {
         return Autostr;
@@ -37,7 +45,7 @@ public class loginAction extends ActionSupport implements SessionAware {
     public void setAutostr(String Autostr) {
         this.Autostr = Autostr;
     }
-    
+
     Connection con = Connections.conn();
     ArrayList<Notification> note = new ArrayList<Notification>();
 
@@ -130,7 +138,7 @@ public class loginAction extends ActionSupport implements SessionAware {
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username1 = (String) session.getAttribute("username");
         Connection con = Connections.conn();
-        String query = "select DISTINCT  notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime,image from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles inner join user  on circle.username=user.username where circle.circlename='" + username1 + "'";
+        String query = "select  notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime,image from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles inner join user  on circle.username=user.username where circle.circlename='" + username1 + "'";
         try {
 
             Statement ps = con.createStatement();
@@ -152,17 +160,25 @@ public class loginAction extends ActionSupport implements SessionAware {
                 n.setImage(rs.getString(9));
                 note.add(n);
             }
+            query = "select time from notification_status where username ='" + username1 + "'";
+            ps = con.createStatement();
+
+            rs = ps.executeQuery(query);
+            while (rs.next()) {
+                setNotificationtime(rs.getString(1));
+            }
         } catch (SQLException ex) {
         }
+
         return "success";
     }
 
     public String autocomplete1() {
         try {
-            
+
             Connection con = Connections.conn();
 
-            String query = "select filename from files where filename like "+searchtext ;
+            String query = "select filename from files where filename like " + searchtext;
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
 

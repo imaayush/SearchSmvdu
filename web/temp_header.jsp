@@ -38,17 +38,17 @@
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             String Autostr = "";
-             while(rs.next()) {
-                Autostr = Autostr+"," + rs.getString(1);
+            while (rs.next()) {
+                Autostr = Autostr + "," + rs.getString(1);
             }
         %>
         <script>
             $(function () {
                 var s = "<%=Autostr%>";
                 var availableTags = s.split(",");
-               
+
                 $("#tags").autocomplete({
-                     autoFocus: true,
+                    autoFocus: true,
                     source: availableTags
                 });
             });
@@ -92,6 +92,34 @@
                                     image_path = rs.getString(1);
                                 }
                             %>
+                           <li class="dropdown" ><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
+                                <ul class="dropdown-menu dropdown-user pull-right" style="width:320px;">
+                                    <div style="height:0px; margin-left:4%;"><strong>Notification</strong></div>
+                                    <hr class="hr">
+                                    <s:iterator  value="note">  
+                                        <a  href="<s:url  action="fileview" > 
+                                                           <s:param name="fileid" value="%{fileid}" /> </s:url>"> 
+                                        <fieldset >
+                                            <li style="height:50px;"><div style="width:40px;float:left;padding-left:2%;">  <img src="<s:property value="image"/>" class="avatar img-responsive"></div>
+                                                <div style="width: 235px; float: left; padding-left: 2%;">     
+                                                                                                                               
+                                                       <s:property value="username"/>
+                                                       <s:property value="notifications"/> a <s:property value="filetags"/>
+
+
+                                                </div>
+                                                <div style="width:30px;float:left;padding-right:2%;"><img data-src="images/movie.jpg" alt="avatar" class="media-object" src="images/movie.jpg" style="width: 40px; height: 40px;">
+                                                </div>
+                                            </li>
+
+                                            <li class="divider"></li>
+
+                                        </fieldset>
+                                                                                                           </a>
+
+                                    </s:iterator>
+                                </ul>
+                            </li>
                             <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="<%=image_path%>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><s:property value="#session.username"/></span>&nbsp;<span class="caret"></span></a>
                                 <ul class="dropdown-menu dropdown-user pull-right">
                                     <li><a href="Myprofile"><i class="fa fa-user"></i>My Profile</a></li>
@@ -104,7 +132,7 @@
                                 </ul>
 
                             </li>
-                           
+
 
                         </ul>
                     </div>
