@@ -12,7 +12,7 @@
                     <s:if test="%{#active1=='Liked' || #active1=='Unliked'}">
                         <article class="timeline-entry" >
                             <div class="timeline-entry-inner " >
-                                <time datetime="2014-01-10T03:45" class="timeline-time" style="color: #f03800;"><span><s:property value="time"/></span></time>
+                                <time datetime="2014-01-10T03:45" class="timeline-time" style="color: #999;"><span><s:property value="time"/></span></time>
                                 <div class="timeline-icon bg-violet"><i class="fa fa-exclamation"></i></div>
                                 <div class="timeline-label"><h4 class="timeline-title"><s:property value="active"/></h4>
                                     <s:if test="%{#active1=='Liked'}">
@@ -28,7 +28,7 @@
                     <s:else>
                         <article class="timeline-entry left-aligned">
                             <div class="timeline-entry-inner">
-                                <time datetime="2014-01-10T03:45" class="timeline-time" style="color: #f03800;"><span><s:property value="time"/></span></time>
+                                <time datetime="2014-01-10T03:45" class="timeline-time" style="color: #999;"><span><s:property value="time"/></span></time>
                                 <div class="timeline-icon bg-green"><i class="fa fa-group"></i></div>
                                 <div class="timeline-label bg-green"><h4 class="timeline-title"><s:property value="active"/></h4>
                                     <s:if test="%{#active1=='Add to Circle'}">

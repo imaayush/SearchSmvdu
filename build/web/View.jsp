@@ -44,7 +44,58 @@
                                             <div style="margin-bottom: 15px" class="row" >
                                                 <div class="col-xs-12 col-sm-2 text-center">
                                                     <figure><img src="<s:property value="image"/>" alt="" style="display: inline-block" class="img-responsive img-circle">
-                                                        <figcaption class="ratings"><p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p></figcaption>
+                                                        <figcaption class="ratings">
+                                                            <%
+                                                                double circle = Double.parseDouble((String) request.getAttribute("circle"));
+                                                                double likes = Double.parseDouble((String) request.getAttribute("likes"));
+                                                                double val = likes * 5 / circle;
+                                                                if (val < 0.5 || circle==0) {
+                                                            %>
+                                                            <p><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 1) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star-half-full"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 1.5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 2) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-half-full"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 2.5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 3) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-half-full"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 3.5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 4) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-half-full"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 4.5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-half-full"></span></a></p>
+                                                                    <%
+                                                                    } else {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a></p>
+                                                                    <%
+                                                                    } 
+                                                                    %>
+                                                        </figcaption>
                                                     </figure>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-8">

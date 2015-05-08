@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -130,6 +131,11 @@ public class RegisterAction extends ActionSupport {
                     ps.setString(5, gender);
                     ps.setString(6, "images/profile.jpg");
                     ps.setDate(7, new java.sql.Date((new Date(System.currentTimeMillis())).getTime()));
+                    ps.executeUpdate();
+                    query="insert into notification_status(username, notificationtime) values(?,?)";
+                    ps=con.prepareStatement(query);
+                    ps.setString(1, username);
+                    ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
                     ps.executeUpdate();
                 } catch (SQLException ex) {
                     Logger.getLogger(RegisterAction.class.getName()).log(Level.SEVERE, null, ex);

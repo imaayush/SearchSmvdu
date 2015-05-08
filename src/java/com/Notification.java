@@ -5,12 +5,15 @@
  */
 package com;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author knight
  */
 public class Notification {
-    String fileusername , fileid ,filedis,filename ,username,notifications,filetags,datetime,image;
+    String fileusername , fileid ,filedis,filename ,username,notifications,filetags,datetime,image;    
+
 
     public String getImage() {
         return image;

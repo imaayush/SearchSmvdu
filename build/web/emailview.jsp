@@ -72,7 +72,7 @@
                                             int number = 0;
                                             String email = (String) session.getAttribute("email");
                                             Statement st = con.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "'");
+                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "' And receiver='Unread'");
                                             while (rs.next()) {
                                                 number++;
                                             }

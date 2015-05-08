@@ -24,7 +24,7 @@
             <result >Login.jsp</result> 
         </action>
 
-        <action name="UploadFrom" >
+        <action name="UploadFrom">
             <result name="success" type="tiles">/upload</result> 
         </action>
         
@@ -40,11 +40,8 @@
         
         <action name="Logout" class="com.loginAction" method="logout">  
             <result name="success">/Login.jsp</result>  
-        </action>  
+        </action> 
         
-        <action name="UploadFrom" >
-            <result name="success" type="tiles">/upload</result> 
-        </action>
         <action name="Myprofile" class="com.viewAction" method="execute">
             <result name="success" type="tiles">/myprofile</result> 
             <result name="fail" type="tiles">/Login.jsp</result> 
@@ -71,9 +68,14 @@
             <result name="fail">/error.jsp</result>
         </action>
 
-        <action name="Uploadfile" class="com.FileuploadAction">
-            <result name="success" type="tiles">/admin</result>
+        <action name="Uploadfile" class="com.FileuploadAction">             
+            <result name="success" type="redirect">/home</result>
             <result name="fail">/upload</result>
+        </action>
+        
+        <action name="Removefile" class="com.FileuploadAction" method ="removefile">
+            <result name="success" type="redirect">/Myprofile?UserName=${username}</result>
+            <result name="fail">/error.jsp</result>
         </action>
         
         <action name="Sendemail" class="com.SendemailAction">
@@ -132,7 +134,10 @@
             <result name="success" type="tiles">/Fileview</result>
             <result name="fail">/error.jsp</result>
         </action>
-        
+        <action name="fileviewRe" class="com.fileviewActionRe">
+            <result name="success" type="tiles">/Fileview</result>
+            <result name="fail">/error.jsp</result>
+        </action>
         <action name="downloadfile" class="com.DownloadAction">
             <result name="success" type="redirect">/fileview</result>
             <result name="fail">/error.jsp</result>
@@ -152,24 +157,50 @@
             <result name="success" type="tiles">/searchview</result>
             <result name="fail">/error.jsp</result>
         </action>
+        <action name="Recently" class="com.SearchtagsAction" method="recent">
+            <result name="success" type="tiles">/searchview</result>
+            <result name="fail">/error.jsp</result>
+        </action>
         
         <action name="likefile" class="com.LikeRe">
-            <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
+            <result name="success" type="redirect">/fileviewRe?fileid=${idfiles}</result>
             <result name="fail">/error.jsp</result>
         </action>
         <action name="unlikefile" class="com.UnlikeRe">
-            <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
+            <result name="success" type="redirect">/fileviewRe?fileid=${idfiles}</result>
             <result name="fail">/error.jsp</result>
         </action>
         <action name="recommendfile" class="com.LikeRe" method="recommended">
-            <result name="success" type="redirect">/fileview?fileid=${idfiles}</result>
+            <result name="success" type="redirect">/fileviewRe?fileid=${idfiles}</result>
             <result name="fail">/error.jsp</result>
         </action>
         <action name="home" class="com.loginAction" method="selectcircle">
             <result name="success" type="tiles">/home</result>
             <result name="fail">/error.jsp</result>
         </action>
-        
-    </package>
-     
+        <action name="Setnewtimestamp" class="com.SetnewtimestampAction">
+            <result name="success" type="redirect">/home</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="comment" class="com.CommentAction">
+            <result name="success" type="redirect">/fileviewRe?fileid=${idfiles}#comments</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Addforumquestion" class="com.AddForumQuestionAction">
+            <result name="success" type="redirect">/Forum</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Forum" class="com.ForumAction">
+            <result name="success" type="tiles">/viewforumquestion</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Questioncomments" class="com.QuestionCommentAction">
+            <result name="success" type="tiles">/viewquestioncomments</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Addanswertoquestion" class="com.AddAnswerAction">
+            <result name="success" type="redirect">/Questioncomments?idforumquestion=${idforumquestion}</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+    </package>     
 </struts>
