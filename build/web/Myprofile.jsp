@@ -45,7 +45,7 @@
                                                                 double circle = Double.parseDouble((String) request.getAttribute("circle"));
                                                                 double likes = Double.parseDouble((String) request.getAttribute("likes"));
                                                                 double val = likes * 5 / circle;
-                                                                if (val < 0.5 || circle==0) {
+                                                                if (val < 0.5 || circle == 0) {
                                                             %>
                                                             <p><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
                                                                     <%
@@ -89,7 +89,7 @@
                                                                     %>
                                                             <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a></p>
                                                                     <%
-                                                                    } 
+                                                                        }
                                                                     %>
                                                         </figcaption>
                                                     </figure>
@@ -112,20 +112,28 @@
                                                 </div>
                                                 <div class="row text-center divider">
                                                     <div class="col-xs-12 col-sm-4 emphasis">
-                                                        <h2>
-                                                            <strong><s:property value="circle"/></strong></h2>
-                                                    <p>
-                                                        <small>Circle</small>
-                                                    </p>
-
+                                                        <center>
+                                                            <div style="height:100px; width:100px; border-radius: 100%; background-color: #EFF3F4;">
+                                                                <h2>
+                                                                    <strong><s:property value="circle"/></strong>
+                                                            </h2><br/>
+                                                            <h5>
+                                                                <strong style="color:green;"><span class="fa fa-circle-o"></span>&nbsp&nbspCircle</strong>
+                                                            </h5>
+                                                        </div>
+                                                    </center>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-4 emphasis">
-                                                    <h2>
-                                                        <strong><s:property value="likes"/></strong></h2>
-                                                    <p>
-                                                        <small>Likes</small>
-                                                    </p>
-
+                                                    <center>
+                                                        <div style="height:100px; width:100px; border-radius: 100%; background-color:  #EFF3F4;">
+                                                            <h2>
+                                                                <strong><s:property value="likes"/></strong>
+                                                            </h2><br/>
+                                                            <h5>
+                                                                <strong style="color: #3e77ab;"><span class="fa fa-thumbs-o-up"></span>&nbsp&nbspLikes</strong>
+                                                            </h5>
+                                                        </div>
+                                                    </center>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
@@ -138,12 +146,15 @@
                                                             <span class="fa fa-gear"></span>&nbsp; Options
                                                         </button>
                                                         <ul role="menu" class="dropdown-menu pull-right text-left">
-                                                            <li><a href="#"><span class="fa fa-envelope"></span>&nbsp; Send an email</a></li>
-                                                            <li><a href="#"><span class="fa fa-list"></span>&nbsp; Add or remove from a list</a></li>
-                                                            <li class="divider"></li>
+                                                            <li><a href="Mailbox"><span class="fa fa-envelope"></span>&nbsp; Send an email</a></li>
+                                                            <li><a href="#"><span class="fa fa-list"></span>&nbsp; Deactivated or Activated</a></li>
+                                                                <%
+                                                                    if (((String) session.getAttribute("username")).equals("admin")) {
+                                                                %>
                                                             <li><a href="#"><span class="fa fa-warning"></span>&nbsp; Report this user for spam</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="#" role="button" class="btn disabled">Unfollow</a></li>
+                                                                <%
+                                                                    }
+                                                                %>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -276,7 +287,7 @@
                                                                                            <s:param name="UserName" value="%{UserName}" /> </s:url>">                                                                            
                                                                                        <s:property value="name"/>
                                                                                     </a>
-                                                                                    <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2" style="float:right;">Remove from  Circle</button>
+                                                                                    <button class="btn btn-green" value="<s:property value="UserName"/>" name="username2" style="float:right;"><span class="fa fa-circle-o"></span>&nbsp;&nbsp;Friends</button>
                                                                                 </p>
                                                                             </div>
                                                                         </form>

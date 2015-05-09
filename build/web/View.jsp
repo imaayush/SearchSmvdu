@@ -49,7 +49,7 @@
                                                                 double circle = Double.parseDouble((String) request.getAttribute("circle"));
                                                                 double likes = Double.parseDouble((String) request.getAttribute("likes"));
                                                                 double val = likes * 5 / circle;
-                                                                if (val < 0.5 || circle==0) {
+                                                                if (val < 0.5 || circle == 0) {
                                                             %>
                                                             <p><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
                                                                     <%
@@ -93,7 +93,7 @@
                                                                     %>
                                                             <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a></p>
                                                                     <%
-                                                                    } 
+                                                                        }
                                                                     %>
                                                         </figcaption>
                                                     </figure>
@@ -110,7 +110,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="row text-center divider">
+                                            <div class="row text-center divider">                                                
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
                                                         <strong><s:property value="circle"/></strong></h2>
@@ -118,27 +118,31 @@
                                                         <small>Circle</small>
                                                     </p>
 
-                                                    <%! String userincircle;%> 
-                                                    <%
+                                                    <%!
+                                                        String userincircle;
                                                         Connection con = Connections.conn();
-                                                        String circlename = (String) session.getAttribute("username");
-                                                        userincircle = (String) request.getAttribute("UserName");
-                                                        System.out.println(circlename);
-                                                        System.out.println(userincircle);
-                                                        Statement ps = con.createStatement();
-                                                        ResultSet rs = ps.executeQuery("select * from circle where circlename='" + circlename + "' AND username='" + userincircle + "'");
-                                                        if (rs.next()) {
+                                                    %> 
+                                                    <% if (!((String) session.getAttribute("username")).equals("admin")) {
+
+                                                            String circlename = (String) session.getAttribute("username");
+                                                            userincircle = (String) request.getAttribute("UserName");
+                                                            System.out.println(circlename);
+                                                            System.out.println(userincircle);
+                                                            Statement ps = con.createStatement();
+                                                            ResultSet rs = ps.executeQuery("select * from circle where circlename='" + circlename + "' AND username='" + userincircle + "'");
+                                                            if (rs.next()) {
                                                     %>                                                    
                                                     <form action="Removefromcircle1" method="post" >
-                                                        <button class="btn btn-yellow btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-minus-circle"></span>&nbsp;Remove from Circle</button></p>
+                                                        <button class="btn btn-green btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-circle-o"></span>&nbsp;&nbsp;Friends</button></p>
                                                     </form>
                                                     <%
                                                     } else {
                                                     %>
                                                     <form action="Addtocircle1" method="post" >
-                                                        <button class="btn btn-yellow btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-plus-circle"></span>&nbsp;Add to Circle</button></p>
+                                                        <button class="btn btn-yellow btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-plus-circle"></span>&nbsp;Add to Circles</button></p>
                                                     </form>
                                                     <%
+                                                            }
                                                         }
                                                     %> 
 
@@ -152,13 +156,14 @@
 
                                                     <%! String liketo;%> 
                                                     <%
-                                                        String likefrom = (String) session.getAttribute("username");
-                                                        liketo = (String) request.getAttribute("UserName");
-                                                        System.out.println(likefrom);
-                                                        System.out.println(liketo);
-                                                        Statement ps1 = con.createStatement();
-                                                        ResultSet rs1 = ps1.executeQuery("select * from likeuser where likes='" + likefrom + "'AND username='" + liketo + "'");
-                                                        if (rs1.next()) {
+                                                        if (!((String) session.getAttribute("username")).equals("admin")) {
+                                                            String likefrom = (String) session.getAttribute("username");
+                                                            liketo = (String) request.getAttribute("UserName");
+                                                            System.out.println(likefrom);
+                                                            System.out.println(liketo);
+                                                            Statement ps1 = con.createStatement();
+                                                            ResultSet rs1 = ps1.executeQuery("select * from likeuser where likes='" + likefrom + "'AND username='" + liketo + "'");
+                                                            if (rs1.next()) {
                                                     %>                                                    
                                                     <form action="addtounlike" method="post" >
                                                         <button class="btn btn btn-blue btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-user"></span>&nbsp;Unlike</button></p>
@@ -170,6 +175,7 @@
                                                         <button class="btn btn btn-blue btn-block" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-user"></span>&nbsp;Like</button></p>
                                                     </form>
                                                     <%
+                                                            }
                                                         }
                                                     %>
 
@@ -185,12 +191,8 @@
                                                             <span class="fa fa-gear"></span>&nbsp; Options
                                                         </button>
                                                         <ul role="menu" class="dropdown-menu pull-right text-left">
-                                                            <li><a href="#"><span class="fa fa-envelope"></span>&nbsp; Send an email</a></li>
-                                                            <li><a href="#"><span class="fa fa-list"></span>&nbsp; Add or remove from a list</a></li>
-                                                            <li class="divider"></li>
+                                                            <li><a href="Mailbox"><span class="fa fa-envelope"></span>&nbsp; Send an email</a></li>
                                                             <li><a href="#"><span class="fa fa-warning"></span>&nbsp; Report this user for spam</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="#" role="button" class="btn disabled">Unfollow</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>

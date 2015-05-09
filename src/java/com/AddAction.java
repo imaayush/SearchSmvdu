@@ -40,7 +40,7 @@ public class AddAction extends ActionSupport {
         String username = (String) session.getAttribute("username");
         Statement ps = con.createStatement();
 
-        ResultSet rs = ps.executeQuery("select name,UserName,image,id from user where username!='" + username + "'");
+        ResultSet rs = ps.executeQuery("select name,UserName,image,id from user where username!='" + username + "' AND username!='admin'");
 
         while (rs.next()) {
 

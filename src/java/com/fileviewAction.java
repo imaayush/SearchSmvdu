@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -29,7 +30,7 @@ public class fileviewAction extends ActionSupport {
 
     public fileviewAction() {
     }
-    String filename, filetags, filedes, idfiles, countLiked, viewed, countRecommended, countDownloaded, torrentname, tracker,totalsize;
+    String filename, filetags, filedes, idfiles, countLiked, viewed, countRecommended, countDownloaded, torrentname, tracker, totalsize;
     File file;
     Blob blob;
     int f = 0;
@@ -51,7 +52,7 @@ public class fileviewAction extends ActionSupport {
     public void setViewed(String viewed) {
         this.viewed = viewed;
     }
-    
+
     public String getTotalsize() {
         return totalsize;
     }
@@ -60,7 +61,6 @@ public class fileviewAction extends ActionSupport {
         this.totalsize = totalsize;
     }
 
-    
     public ArrayList<TorrentInfo> getTorrentinfo() {
         return torrentinfo;
     }
@@ -171,11 +171,13 @@ public class fileviewAction extends ActionSupport {
         Connection con = Connections.conn();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         String fileid = request.getParameter("fileid");
+        HttpSession session = ServletActionContext.getRequest().getSession(false);
+        String username = (String) session.getAttribute("username");
+        System.out.println(username);
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery("select filename,filetags,filedescription,idfiles,viewed from files where idfiles ='" + fileid + "'");
 
         while (rs.next()) {
-
             setFilename(rs.getString(1));
             setFiletags(rs.getString(2));
             setFiledes(rs.getString(3));
@@ -183,26 +185,29 @@ public class fileviewAction extends ActionSupport {
             setViewed(rs.getString(5));
             int count = rs.getInt(5);
             ++count;
-            PreparedStatement ps = con.prepareStatement("update files set viewed=" + count + " where idfiles=" + Integer.parseInt(fileid));
-            ps.executeUpdate();
+            if (username==null || !username.equals("admin")) {
+                PreparedStatement ps = con.prepareStatement("update files set viewed=" + count + " where idfiles=" + Integer.parseInt(fileid));
+                ps.executeUpdate();
+            }
         }
 
         setCountLiked(CountLDRFile.countLike(Integer.parseInt(fileid)));
         setCountRecommended(CountLDRFile.countRecommend(Integer.parseInt(fileid)));
         setCountDownloaded(CountLDRFile.countDownload(Integer.parseInt(fileid)));
 
-        st = con.createStatement();
-        rs = st.executeQuery("select username, comment, timedate, image from comments natural join user where idfiles ='" + fileid + "' order by timedate DESC");
-        
-        while (rs.next()) {
-            CommentInfo c = new CommentInfo();
-            c.setUsername(rs.getString(1));
-            c.setComment(rs.getString(2));
-            c.setTimedate(rs.getString(3).split("\\.")[0]);
-            c.setImage(rs.getString(4));
-            commentinfo.add(c);
-        }        
-        
+        if (username!=null) {
+            st = con.createStatement();
+            rs = st.executeQuery("select username, comment, timedate, image from comments natural join user where idfiles ='" + fileid + "' order by timedate DESC");
+
+            while (rs.next()) {
+                CommentInfo c = new CommentInfo();
+                c.setUsername(rs.getString(1));
+                c.setComment(rs.getString(2));
+                c.setTimedate(rs.getString(3).split("\\.")[0]);
+                c.setImage(rs.getString(4));
+                commentinfo.add(c);
+            }
+        }
         String query = "select file from files where idfiles=" + fileid;
         st = con.createStatement();
         rs = st.executeQuery(query);
@@ -224,10 +229,11 @@ public class fileviewAction extends ActionSupport {
         String[] p = info1.split("8:announce36:|8:announce5:", 2);
         info1 = p[1];
         p = info1.split("announce|18:", 2);
-        if(p[0].equals("http:")){
+        if (p[0].equals("http:")) {
             setTracker("none");
-        }else{
-        setTracker(p[0]);}
+        } else {
+            setTracker(p[0]);
+        }
         info1 = p[1];
         p = info1.split("filesld6:");
         info1 = p[1];
@@ -241,7 +247,7 @@ public class fileviewAction extends ActionSupport {
         setTorrentname(temp1.substring(0, (temp1.length() - 2)));
         info1 = temp;
         p = info1.split("d6:");
-        double totalsize1=0;
+        double totalsize1 = 0;
         for (int j = 0; j < p.length; j++) {
             String size, temp2;
             TorrentInfo t = new TorrentInfo();
@@ -250,15 +256,15 @@ public class fileviewAction extends ActionSupport {
             temp2 = x[1];
             size = x[0];
             size = size.split("e4:|lengthi")[1];
-            
+
             double size1 = Double.parseDouble(size) / 1024;
-            totalsize1=totalsize1+size1;
+            totalsize1 = totalsize1 + size1;
             if (size1 > 1024) {
-                size = ceil(size1/1024) + " MB";
+                size = ceil(size1 / 1024) + " MB";
             } else {
                 size = ceil(size1) + " KB";
             }
-          
+
             x = temp2.split(":", 2);
             temp2 = x[1];
             x = temp2.split(":", 2);
@@ -268,7 +274,7 @@ public class fileviewAction extends ActionSupport {
             t.setTsize(size);
             torrentinfo.add(t);
         }
-           setTotalsize(ceil(totalsize1/1024 )+" MB");
+        setTotalsize(ceil(totalsize1 / 1024) + " MB");
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         i = 0;
         MessageDigest sha1 = MessageDigest.getInstance("SHA-1");

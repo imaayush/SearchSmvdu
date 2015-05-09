@@ -74,6 +74,12 @@
                                                         <li><span data-number="all"> view all</span></li>
                                                     </ul>
                                                 </div>
+                                                <%
+                                                    if (((String) session.getAttribute("username")) != null) {
+                                                        String recent = (String) request.getAttribute("searchtext");
+                                                        String popular = (String) request.getAttribute("searchtext");
+                                                        if (!(recent.equals("Recently Added") || popular.equals("Popular on SMVDU"))) {
+                                                %>
                                                 <div data-control-type="drop-down" data-control-name="sort" data-control-action="sort" data-control-animate-to-top="true" data-datetime-format="{month}/{day}/{year}" class="jplist-drop-down form-control">
                                                     <ul class="dropdown-menu">
                                                         <li><span data-path="default">Sort by</span></li>
@@ -87,6 +93,10 @@
                                                         <li><span data-path=".date" data-order="desc" data-type="text">Date desc</span></li>
                                                     </ul>
                                                 </div>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
                                                 <div data-type="{start} - {end} of {all}" data-control-type="pagination-info" data-control-name="paging" data-control-action="paging" class="jplist-label btn btn-default"></div>
                                                 <div data-control-type="pagination" data-control-name="paging" data-control-action="paging" data-control-animate-to-top="true" class="jplist-pagination"></div>
                                             </div>

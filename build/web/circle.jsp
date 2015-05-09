@@ -86,13 +86,13 @@
                                                                             if (rs.next()) {
                                                                         %>
                                                                     <form action="Removefromcircle" method="post" >
-                                                                        <button class="btn btn-red" value="<s:property value="UserName"/>" name="username2">Remove from Circle</button></p>
+                                                                        <button class="btn btn-green" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-circle-o"></span>&nbsp;&nbsp;Friends</button></p>
                                                                     </form>
                                                                     <%
                                                                     } else {
                                                                     %>
                                                                     <form action="Addtocircle" method="post" >
-                                                                        <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2">Add to Circle</button></p>
+                                                                        <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2">Add to Circles</button></p>
                                                                     </form>
                                                                     <%
                                                                         }

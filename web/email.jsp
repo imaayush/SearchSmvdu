@@ -43,7 +43,7 @@
                         </div>
                         <form action="Mailbox">
                             <div class="col-sm-9 col-md-10">
-                                <div class="btn-group">
+                                <!--<div class="btn-group">
                                     <button type="button" class="btn btn-default"><input type="checkbox" style="margin: 0; vertical-align: middle;" class="checkall"/></button>
                                     <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
                                     <ul role="menu" class="dropdown-menu">
@@ -54,8 +54,10 @@
                                         <li><a href="#">Starred</a></li>
                                         <li><a href="#">Unstarred</a></li>
                                     </ul>
-                                </div>
                                 <button type="button" data-toggle="tooltip" title="Refresh" class="btn btn-default mls mrs"><span class="fa fa-refresh"></span></button>
+                                </div>-->   
+                                <button data-toggle="tooltip" title="Refresh" class="btn btn-default mls mrs"><span class="fa fa-refresh"></span></button>
+                                <a href="Allread" data-toggle="tooltip" class="btn btn-default mls mrs">All Read</a>
                             </div>
                         </form>
                     </div>
@@ -81,6 +83,7 @@
                                         <li class="active"><a href="Mailbox"><span class="badge pull-right"><%=number%></span><i class="fa fa-inbox fa-fw mrs"></i>Inbox</a></li>
                                         <!--<li><a href="#"><i class="fa fa-star-o fa-fw mrs"></i>Starred</a></li>-->
                                         <li><a href="Importantmail"><i class="fa fa-info-circle fa-fw mrs"></i>Important</a></li>
+                                        <li><a href="Starredmail"><i class="fa fa-star fa-fw mrs"></i>Starred</a></li>
                                         <li><a href="Sentmail"><i class="fa fa-plane fa-fw mrs"></i>Sent Mail</a></li>                                        
                                     </ul>
                                 </div>
@@ -88,45 +91,70 @@
                             <hr/>
                         </div>
                         <div class="col-sm-9 col-md-10">
-                            <div class="tab-content">
-                                <div id="home" class="tab-pane fade in active">
-
-                                    <s:iterator  value="mailinfo">  
-                                        <fieldset>
+                            <s:iterator  value="mailinfo">  
+                                <fieldset>
+                                    <%
+                                        String status = (String) request.getAttribute("status");
+                                        String mail = (String) request.getAttribute("mail");
+                                        System.out.println(mail);
+                                        if (status.equals("Unread") && mail.equals(email)) {
+                                    %>
+                                    <div style="background-color: #FDFFFF; border-top: window 1px groove; height: 25px;">
+                                        <%
+                                        } else {
+                                        %>
+                                        <div style="background-color: #EFF3F0; border-top: window 1px groove; height: 25px;">
                                             <%
-                                                String status = (String) request.getAttribute("status");
-                                                String mail= (String) request.getAttribute("mail");
-                                                System.out.println(mail);
-                                                if (status.equals("Unread") && mail.equals(email)) {
+                                                }
                                             %>
-                                            <div>
-                                                <%
-                                                } else {
-                                                %>
-                                                <div class="list-group mail-box">
-                                                    <%
-                                                        }
-                                                    %>
-                                                    <%
-                                                        String body;
-                                                        body = (String) request.getAttribute("body");
+                                            <%
+                                                String body;
+                                                body = (String) request.getAttribute("body");
 
-                                                        if (body.length()
-                                                                > 30) {
-                                                            body = body.substring(0, 30);
-                                                        }
-                                                    %>
-                                                    <a href="<s:url action="viewemail"><s:param name="msgid" value="%{idmessage}"></s:param></s:url>" class="list-group-item">
-                                                                <input type="checkbox"/>                                                                
-                                                                <span class="fa fa-star-o mrm mlm"></span>
-                                                                <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="sendername"/></span>
-                                                        <span><s:property value="sub"/></span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted"><%=body%>
-                                                        </span><span style="float:right; font-style: italic;"><s:property value="time"/></span>
-                                                    </a>
-                                                </div>
-                                        </fieldset>
-                                    </s:iterator> 
-                                </div>
+                                                if (body.length()
+                                                        > 30) {
+                                                    body = body.substring(0, 30);
+                                                }
+                                            %>
+
+                                            <input type="checkbox"/>
+                                            <%
+                                                String starred = (String)request.getAttribute("starred");
+                                                if(starred.equals("No")){
+                                            %>
+                                            <a href="<s:url action="Updatestarredmail"><s:param name="idmessage"><s:property value="idmessage"/></s:param></s:url>"><span class="fa fa-star-o mlm"></span></a>
+                                            <%
+                                                }else{
+                                            %>
+                                            <a href="<s:url action="Updatestarredmail"><s:param name="idmessage"><s:property value="idmessage"/></s:param></s:url>"><span class="fa fa-star mlm" style="color: goldenrod;"></span></a>
+                                            <%
+                                                }
+                                            %>
+                                            <%
+                                                String important = (String)request.getAttribute("important");
+                                                if(important.equals("No")){
+                                            %>
+                                            <a href="<s:url action="Updateimportantmail"><s:param name="idmessage"><s:property value="idmessage"/></s:param></s:url>"><span class="fa fa-bookmark-o mrm mlm"></span></a>
+                                            <%
+                                                }else{
+                                            %>
+                                            <a href="<s:url action="Updateimportantmail"><s:param name="idmessage"><s:property value="idmessage"/></s:param></s:url>"><span class="fa fa-bookmark mrm mlm" style="color: goldenrod;"></span></a>
+                                            <%
+                                                }
+                                            %>
+                                            <a href="<s:url action="viewemail"><s:param name="msgid" value="%{idmessage}"></s:param></s:url>">
+
+                                                        <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="sendername"/></span>
+                                                <span><s:property value="sub"/></span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted"><%=body%>
+                                                </span><span style="float:right; font-style: italic;"><s:property value="time"/></span>
+
+                                            </a>
+                                        </div>
+
+                                </fieldset>
+                            </s:iterator> 
+                            <div style="background-color: #EFF3F0; border-top: window 1px groove;">
+
                             </div>
                         </div>
                         <div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">

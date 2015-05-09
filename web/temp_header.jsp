@@ -77,7 +77,13 @@
                             <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input id="tags"  type="text" placeholder="Search here..." class="form-control text-white" name="searchtext"/></div>
                         </form>
                         <div class="news-update-box hidden-xs">
+                            <%
+                                if (!((String) session.getAttribute("username")).equals("admin")) {
+                            %>
                             <button onclick="window.location.href = 'UploadFrom'" class="btn btn-white" >Upload</button>
+                            <%
+                                }
+                            %>
                         </div>
                         <ul class="nav navbar navbar-top-links navbar-right mbn">
                             <%!
@@ -115,8 +121,9 @@
                                 }
                             %>
                             <li class="dropdown"><a data-hover="dropdown" href="Setnewtimestamp" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow"><%=count%></span></a>
-                                <ul class="dropdown-menu dropdown-user pull-right" style="width:320px;">
+                                <ul class="dropdown-menu dropdown-user pull-right" style="width:340px;">
                                     <div style="margin-left:4%;margin-top: 2%;"><strong>Notification</strong></div> 
+                                    <div style="overflow: auto; max-height:500px;">
                                     <%
                                         if (count == 0) {
                                     %>
@@ -128,22 +135,22 @@
                                         String q2 = "select  notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime,image from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles inner join user  on circle.username=user.username where circle.circlename='" + username + "' order by notificationdatetime desc";
                                         st = con.createStatement();
                                         rs = st.executeQuery(q2);
-                                        while (rs.next()) {                                            
+                                        while (rs.next()) {
                                             notificationtime = rs.getTimestamp(8);
                                             if (notificationtime.after(notificationstatustime)) {
                                     %>
                                     <li class="divider"></li>
                                     <a href="<s:url  action="fileview"><s:param name="fileid"><%=rs.getString(4)%></s:param></s:url>"> 
-                                            <fieldset>
-                                                <li style="height:50px;">
-                                                    <div style="width:40px;float:left;padding-left:2%;">  
-                                                        <img src="<%=rs.getString(9)%>" class="avatar img-responsive"/>
+                                                <fieldset>
+                                                    <li style="height:50px;">
+                                                        <div style="width:40px;float:left;padding-left:2%;">  
+                                                            <img src="<%=rs.getString(9)%>" class="avatar img-responsive"/>
                                                 </div>
                                                 <div style="width: 235px; float: left; padding-left: 2%;">
                                                     <%=rs.getString(2)%>
                                                     <%=rs.getString(1)%> a <%=rs.getString(6)%>
                                                 </div>
-                                                    <div style="width:30px;float:left;padding-right:2%;"><img data-src="images/movie.jpg" alt="avatar" class="media-object" src="images/<%=rs.getString(6)%>.jpg" style="width: 40px; height: 40px;">
+                                                <div style="width:30px;float:left;padding-right:2%;"><img data-src="images/movie.jpg" alt="avatar" class="media-object" src="images/<%=rs.getString(6)%>.jpg" style="width: 40px; height: 40px;">
                                                 </div>
                                             </li>
                                         </fieldset>
@@ -152,6 +159,7 @@
                                             }
                                         }
                                     %>
+                                    </div>
                                 </ul>
                             </li>
                             <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="<%=image_path%>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><s:property value="#session.username"/></span>&nbsp;<span class="caret"></span></a>
@@ -174,12 +182,10 @@
             %>
             <div id="header-topbar-option-demo" class="page-header-topbar"  >
                 <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
-                    <div class="navbar-header">                        
-                        <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a>
-                    </div>
-                    <div class="topbar-main">
-
-
+                    <div class="navbar-header">
+                        <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
+                    <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>                        
                         <form id="topbar-search" action="search" method="" class="hidden-sm hidden-xs" style="width:35%;">
                             <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input id="tags"  onkeyup="showData(this.value);" type="text" placeholder="Search here..." class="form-control text-blue" name="searchtext"/></div>
                         </form>

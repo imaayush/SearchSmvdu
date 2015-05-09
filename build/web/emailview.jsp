@@ -42,8 +42,8 @@
 
                         </div>
                         <form action="Mailbox">
-                            <div class="col-sm-9 col-md-10">
-                                <div class="btn-group">
+                            <div class="col-sm-9 col-md-10">     
+                                <!--<div class="btn-group">
                                     <button type="button" class="btn btn-default"><input type="checkbox" style="margin: 0; vertical-align: middle;" class="checkall"/></button>
                                     <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
                                     <ul role="menu" class="dropdown-menu">
@@ -54,8 +54,9 @@
                                         <li><a href="#">Starred</a></li>
                                         <li><a href="#">Unstarred</a></li>
                                     </ul>
-                                </div>
                                 <button type="button" data-toggle="tooltip" title="Refresh" class="btn btn-default mls mrs"><span class="fa fa-refresh"></span></button>
+                                </div>-->
+                                <button data-toggle="tooltip" title="Refresh" class="btn btn-default mrs"><span class="fa fa-refresh"></span></button>
                             </div>
                         </form>
                     </div>

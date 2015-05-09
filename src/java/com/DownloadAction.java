@@ -61,6 +61,9 @@ public class DownloadAction extends ActionSupport {
         Timestamp time = new Timestamp(System.currentTimeMillis());
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username = (String) session.getAttribute("username");
+        if(username==null){
+            username="Guest";
+        }
         String query1 = "insert into notifications(notification, idfiles,username,notificationdatetime) values(?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(query1);
         ps.setString(1, notification);

@@ -4,6 +4,8 @@
 <%@page import="java.sql.Connection"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <s:bean id="file" name="com.fileviewAction"/>
+<%! String user;%>
+<%user = (String) session.getAttribute("username");%>
 <div id="page-wrapper">
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
@@ -49,8 +51,8 @@
                                                                 double recommends = Double.parseDouble((String) request.getAttribute("countRecommended"));
                                                                 double downloads = Double.parseDouble((String) request.getAttribute("countDownloaded"));
                                                                 double views = Double.parseDouble((String) request.getAttribute("viewed"));
-                                                                double val = (3 * likes + 2 * recommends + 5 * downloads) * 5/ (10 * views);
-                                                                if (val < 0.5 || views==0) {
+                                                                double val = (3 * likes + 2 * recommends + 5 * downloads) * 5 / (10 * views);
+                                                                if (val < 0.5 || views == 0) {
                                                             %>
                                                             <p><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
                                                                     <%
@@ -130,13 +132,15 @@
                                                     </p>
                                                     <%
                                                         Connection con = Connections.conn();
-                                                        String username = (String) session.getAttribute("username");
-                                                        String fileid = (String) request.getAttribute("idfiles");
-                                                        System.out.println(username);
-                                                        System.out.println(fileid);
-                                                        Statement ps = con.createStatement();
-                                                        ResultSet rs = ps.executeQuery("select * from notifications where notification='Liked' AND username='" + username + "' AND idfiles=" + Integer.parseInt(fileid));
-                                                        if (rs.next()) {
+                                                        if (user != null) {
+                                                            String username = (String) session.getAttribute("username");
+                                                            String fileid = (String) request.getAttribute("idfiles");
+                                                            System.out.println(username);
+                                                            System.out.println(fileid);
+                                                            if (!((String) session.getAttribute("username")).equals("admin")) {
+                                                                Statement ps = con.createStatement();
+                                                                ResultSet rs = ps.executeQuery("select * from notifications where notification='Liked' AND username='" + username + "' AND idfiles=" + Integer.parseInt(fileid));
+                                                                if (rs.next()) {
                                                     %>
                                                     <form action="unlikefile">
                                                         <button class="btn btn-yellow btn-block" value="<s:property value="idfiles"/>" name="idfiles">
@@ -152,6 +156,16 @@
                                                         </button>
                                                     </form>
                                                     <%
+                                                            }
+                                                        }
+                                                    } else {
+                                                    %>
+                                                    <form action="LoginFrom">
+                                                        <button class="btn btn-yellow btn-block">
+                                                            <span class="fa fa-plus-circle"></span>&nbsp; Like
+                                                        </button>
+                                                    </form>
+                                                    <%
                                                         }
                                                     %>
                                                 </div>
@@ -161,17 +175,26 @@
                                                     <p>
                                                         <small>Recommendation</small>
                                                     </p>
-                                                    <%
-                                                        String username1 = (String) session.getAttribute("username");
-                                                        String fileid1 = (String) request.getAttribute("idfiles");
-                                                        System.out.println(username);
-                                                        System.out.println(fileid);
-                                                        Statement ps1 = con.createStatement();
-                                                        ResultSet rs1 = ps1.executeQuery("select * from notifications where notification='Recommended' AND username='" + username1 + "' AND idfiles=" + Integer.parseInt(fileid1));
-                                                        if (!rs1.next()) {
+                                                    <%                                                        if (user != null) {
+                                                            String username1 = (String) session.getAttribute("username");
+                                                            String fileid1 = (String) request.getAttribute("idfiles");
+                                                            if (!((String) session.getAttribute("username")).equals("admin")) {
+                                                                Statement ps1 = con.createStatement();
+                                                                ResultSet rs1 = ps1.executeQuery("select * from notifications where notification='Recommended' AND username='" + username1 + "' AND idfiles=" + Integer.parseInt(fileid1));
+                                                                if (!rs1.next()) {
                                                     %>                                                    
                                                     <form action="recommendfile">
                                                         <button class="btn btn-blue btn-block" value="<s:property value="idfiles"/>" name="idfiles">
+                                                            <span class="fa fa-user"></span>&nbsp; Recommended
+                                                        </button>
+                                                    </form>
+                                                    <%
+                                                                }
+                                                            }
+                                                        } else {
+                                                    %>
+                                                    <form action="LoginFrom">
+                                                        <button class="btn btn-blue btn-block">
                                                             <span class="fa fa-user"></span>&nbsp; Recommended
                                                         </button>
                                                     </form>
@@ -185,18 +208,27 @@
                                                     <p>
                                                         <small>Downloads</small>
                                                     </p>
+                                                    <%
+                                                        if (user == null || !(user).equals("admin")) {
+                                                    %>
+
                                                     <form action="downloadfile">
                                                         <button class="btn btn-blue btn-dark" value="<s:property value="idfiles"/>" name="idfiles">
                                                             <span class="fa fa-magnet"></span>&nbsp; Download
                                                         </button>
                                                     </form>
+                                                    <%
+                                                        }
+                                                    %>    
                                                 </div>
+
                                                 <div class="col-xs-8 col-sm-3 emphasis">
                                                     <h2>
                                                         <strong>43</strong></h2>
                                                     <p>
                                                         <small>Snippets</small>
                                                     </p>
+                                                    <%if (user != null) {%>
                                                     <div class="btn-group dropup">
                                                         <button type="button" data-toggle="dropdown" class="btn btn-orange dropdown-toggle">
                                                             <span class="fa fa-gear"></span>&nbsp; Options
@@ -210,6 +242,7 @@
                                                             <li><a href="#" role="button" class="btn disabled">Unfollow</a></li>
                                                         </ul>
                                                     </div>
+                                                    <%}%>
                                                 </div>
                                             </div>
                                             <div id ="description" class="row  divider" style="margin-top: 2%; padding-left: 2%;min-height:300px;">
@@ -243,6 +276,10 @@
                                                                                 <br>
                                                                                 <span><strong>Primary Tracker:&nbsp;&nbsp;</strong><a href"<s:property value="tracker"/>"> <s:property value="tracker"/></a></span>
                                                                                 </div>
+
+                                                                                <%
+                                                                                    if (user != null) {
+                                                                                %>
                                                                                 <div id="comments" class="row divider" style="margin-top: 2%; padding: 2%;">
                                                                                     <h4 ><strong>Comments</strong></h4>
                                                                                     <form action="comment">
@@ -264,9 +301,8 @@
                                                                                                                     <img src="<s:property value="image"/>" class="avatar img-responsive">
                                                                                                                     <div class="message">
                                                                                                                         <span class="chat-arrow"></span>
-                                                                                                                        <%
-                                                                                                                            String usernameCurrent = (String) request.getAttribute("username");
-                                                                                                                            if (username.equals(usernameCurrent)) {
+                                                                                                                        <%                                                                                                                            String usernameCurrent = (String) request.getAttribute("username");
+                                                                                                                            if (user.equals(usernameCurrent)) {
                                                                                                                         %>
                                                                                                                         <a href="<s:url  action="Myprofile">
                                                                                                                                <s:param name="UserName" value="%{username}"/> </s:url>" class="chat-name"><s:property value="username"/></a>&nbsp;
@@ -289,8 +325,11 @@
                                                                                                 </div>                                                                                                                                   
                                                                                             </div>                                                                                        
                                                                                         </div>
-                                                                                    </form>
+                                                                                    </form>                                                                                                    
                                                                                 </div>
+                                                                                <%
+                                                                                    }
+                                                                                %>
                                                                                 </div>
                                                                                 </div>
                                                                                 </div>
