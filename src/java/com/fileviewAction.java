@@ -234,7 +234,7 @@ public class fileviewAction extends ActionSupport {
             temp2 = x[1];
             x = temp2.split(":", 2);
             temp2 = x[0];
-            temp2 = temp2.substring(0, (temp2.length() - 3));
+            temp2 = temp2.substring(0, (temp2.length() - 1));
             t.setTname(temp2);
             t.setTsize(size);
             torrentinfo.add(t);
