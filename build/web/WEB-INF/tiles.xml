@@ -64,5 +64,17 @@
         <put-attribute name="menu" value="/menu.jsp" />
 
         <put-attribute name="SearchResult" value="/emailview.jsp" />
+    </definition>
+    <definition name="/viewforumquestion" template="/layout.jsp">
+        <put-attribute name="header" value="/temp_header.jsp" />
+        <put-attribute name="menu" value="/menu.jsp" />
+
+        <put-attribute name="SearchResult" value="/ForumQuestion.jsp" />
+    </definition>
+    <definition name="/viewquestioncomments" template="/layout.jsp">
+        <put-attribute name="header" value="/temp_header.jsp" />
+        <put-attribute name="menu" value="/menu.jsp" />
+
+        <put-attribute name="SearchResult" value="/QuestionComments.jsp" />
     </definition> 
 </tiles-definitions>

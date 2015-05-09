@@ -50,7 +50,7 @@ public class SearchAction extends ActionSupport {
     public String execute() throws Exception {
        Connection con = Connections.conn();
         Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles,datetime,viewed from files where filename like '%"+searchtext+"' or filetags like '%"+ searchtext+"' or filedescription like '%"+ searchtext+"%' ORDER BY viewed DESC" );
+        ResultSet rs = ps.executeQuery("select filename,filetags,filedescription ,idfiles,datetime,viewed from files where filename like '%"+searchtext+"' or filetags like '%"+ searchtext+"' or filedescription like '%"+ searchtext+"%' ORDER BY datetime DESC" );
 
         while (rs.next()) {
             Files f = new Files();

@@ -5,10 +5,10 @@
     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
             <div class="page-title">
-                Popular on SMVDU</div>
+                <s:property value="searchtext"/></div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
-            <li><i class="fa fa-home"></i>&nbsp;<a href="index.jsp">Home</a></li>
+            <li><i class="fa fa-home"></i>&nbsp;<a href="home">Home</a></li>
 
         </ol>
         <div class="clearfix">
@@ -43,7 +43,7 @@
                                                     <s:iterator  value="file2">  
                                                         <fieldset>
                                                             <tr class="tbl-item"><!--<img/>-->
-                                                                <td class="img" style="width:160px;"><img src="images/movie.jpg" alt="" title="" style="max-width:160px; max-height:160px;"/></td>
+                                                                <td class="img" style="width:160px;"><img src="images/<s:property value="filetags"/>.jpg" alt="" title="" style="max-width:160px; max-height:160px;"/></td>
                                                                 <!--<data></data>-->
                                                                 <td class="td-block"><p class="date"><s:property value="time"/></p>
 

@@ -1,3 +1,4 @@
+
 <form action="Sendemail" method="post" >
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -11,7 +12,7 @@
                     <div class="form-group">
                         <div class="input-icon right">
 
-                            <input id="inputPassword" type="email" placeholder="Recipients email" class="form-control" name="receiveremail" required></div>
+                            <input id="email" type="email" placeholder="Recipients email" class="form-control" name="receiveremail" required></div>
                     </div>
                     <div class="form-group">
                         <div class="input-icon right">

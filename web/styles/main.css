@@ -145,7 +145,7 @@ hr {
   border: 0;
 }
 #topbar .navbar-header {
-  width: 150px;
+  width: 189px;
   height: 100%;
   background: #1E1E1E;
   text-align: center;
@@ -3098,7 +3098,7 @@ ul.nav.nav-tabs li.active a {
   margin-bottom: 0;
 }
 .mail-box .list-group-item:nth-child(odd) {
-  background-color: #f8f8f8;
+  background-color: #EFF3F4;
 }
 .mail-box .list-group-item {
   border: 0;

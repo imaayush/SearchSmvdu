@@ -58,32 +58,23 @@
                                                                                             </span>
                                                                                             <hr class="hr">
                                                                                             <ul class="media-list">
-                                                                                                <li class="media"><a href="#" class="pull-left"><img data-src="images/movie.jpg" alt="avatar" class="media-object" src="images/movie.jpg" style="width: 64px; height: 64px;"></a>
+                                                                                                <li class="media"><a href="#" class="pull-left"><img data-src="images/movie.jpg" alt="avatar" class="media-object" src="images/<s:property value="filetags"/>.jpg" style="width: 64px; height: 64px;"></a>
 
                                                                                                     <div class="media-body"><h4 class="media-heading"><a href="<s:url  action="fileview">
-                                                                                                                     <s:param name="fileid" value="%{fileid}" /> </s:url>" >     
-                                                                                                                 <s:property value="filename"/>       </a>
-                                                                                                         &nbsp;<span class="chat-datetime"> uploaded by &nbsp;&nbsp;<s:property value="fileusername"/> </span>
+                                                                                                                                                             <s:param name="fileid" value="%{fileid}" /> </s:url>" >     
+                                                                                                                                                         <s:property value="filename"/>       </a>
+                                                                                                            &nbsp;<span class="chat-datetime"> uploaded by &nbsp;&nbsp;<s:property value="fileusername"/> </span>
                                                                                                         </h4>
 
-                                                                                                           <p><span class="chat-body" style="color:black"> <s:property value="filedis"/></span></p>
- 
-                                                                                                       
-
-                                                                                                           
-                                                                                                               
-
-                                                                                                                   
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        
-
+                                                                                                        <p><span class="chat-body" style="color:black"> <s:property value="filedis"/></span></p>
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                    </div>
                                                                                                     </div>
                                                                                                 </li>
-                                     
+
                                                                                             </ul>
-                                                                                            
+
                                                                                         </div>
                                                                                     </li>
 

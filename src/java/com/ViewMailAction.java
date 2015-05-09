@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -122,6 +123,8 @@ public class ViewMailAction extends ActionSupport {
 
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         String msgid = request.getParameter("msgid"); 
+        HttpSession session = ServletActionContext.getRequest().getSession(false);
+        String username = (String) session.getAttribute("username");
         //System.out.println(msgid);
         setMsgid(msgid);
         Statement ps = con.createStatement();
@@ -136,7 +139,10 @@ public class ViewMailAction extends ActionSupport {
             setSendername(rs.getString(6));
             setTime(rs.getString(7).split("\\.")[0]);
             setSenderemail(rs.getString(8));
-            setReceiveremail(rs.getString(9));            
+            setReceiveremail(rs.getString(9));
+            
+            ps=con.createStatement();
+            ps.executeUpdate("update message set receiver='Read' where idmessage=" + Integer.parseInt(msgid) + " And receivername='" + username + "'");
         }
         con.close();
         return "success";

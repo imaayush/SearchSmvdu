@@ -12,7 +12,15 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author DKG
  */
 public class Mailinfo extends ActionSupport {
-   private String sendername,sub,body, time ,status ,important,categories,idmessage;
+   private String sendername,sub,body, time ,status ,important,categories,idmessage, mail;
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String email) {
+        this.mail = email;
+    }
 
     public String getCategories() {
         return categories;
