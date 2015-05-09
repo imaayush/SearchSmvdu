@@ -40,7 +40,58 @@
                                             <div style="margin-bottom: 15px" class="row" >
                                                 <div class="col-xs-12 col-sm-2 text-center">
                                                     <figure><img src="<s:property value="image"/>" alt="" style="display: inline-block" class="img-responsive img-circle">
-                                                        <figcaption class="ratings"><p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p></figcaption>
+                                                        <figcaption class="ratings">
+                                                            <%
+                                                                double circle = Double.parseDouble((String) request.getAttribute("circle"));
+                                                                double likes = Double.parseDouble((String) request.getAttribute("likes"));
+                                                                double val = likes * 5 / circle;
+                                                                if (val < 0.5 || circle==0) {
+                                                            %>
+                                                            <p><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 1) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star-half-full"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 1.5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 2) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-half-full"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 2.5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 3) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-half-full"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 3.5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 4) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-half-full"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 4.5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-o"></span></a></p>
+                                                                    <%
+                                                                    } else if (val < 5) {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star-half-full"></span></a></p>
+                                                                    <%
+                                                                    } else {
+                                                                    %>
+                                                            <p><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a><a href="#"><span class="fa fa-star"></span></a></p>
+                                                                    <%
+                                                                    } 
+                                                                    %>
+                                                        </figcaption>
                                                     </figure>
                                                 </div>
                                                 <div class="col-xs-12 col-sm-8">
@@ -216,18 +267,15 @@
                                                             <s:iterator  value="people">  
                                                                 <fieldset>
                                                                     <div class="list-group-item" style="height:50px;"> 
-
                                                                         <div style="width:10%; float:left;height:40px; margin-top:-0.5%;"><img src="<s:property value="photo"/>" alt="" title="" style="width:100%; max-width:40px; max-height:40px;"/></div>
                                                                         <!--<data></data>-->
                                                                         <form action="Removefromcircle2" >
                                                                             <div style="width:88%; float:left; height:40px;"><p class="date"></p>
-
                                                                                 <p class="title">
                                                                                     <a href="<s:url  action="ViewProfile">
                                                                                            <s:param name="UserName" value="%{UserName}" /> </s:url>">                                                                            
                                                                                        <s:property value="name"/>
                                                                                     </a>
-
                                                                                     <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2" style="float:right;">Remove from  Circle</button>
                                                                                 </p>
                                                                             </div>
@@ -247,10 +295,22 @@
                                                         <div class="list-group">
                                                             <s:iterator  value="file1">  
                                                                 <fieldset>
-                                                                    <a href="<s:url  action="fileview">
-                                                                           <s:param name="fileid" value="%{idfiles}" /> </s:url>" class="list-group-item">     
-                                                                        <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="filename"/></span><span><s:property value="filedes"/></span>
-                                                                    </a>
+                                                                    <div class="list-group-item" style="height:50px;"> 
+                                                                        <div style="width:12%; float:left; margin-top:-0.5%;"><img src="images/<s:property value="filetags"/>.jpg" alt="" title="" style="width:100%; max-width:40px; max-height:40px;"/></div>
+                                                                        <!--<data></data>-->
+                                                                        <form action="Removefile" >
+                                                                            <div style="width:88%; float:left; height:40px;"><p class="date"></p>
+                                                                                <p class="title">
+                                                                                    <a href="<s:url  action="fileview">
+                                                                                           <s:param name="fileid" value="%{idfiles}" /> </s:url>">     
+                                                                                       <s:property value="filename"/>&nbsp;&nbsp;(<s:property value="filetags"/>)
+                                                                                    </a>
+                                                                                    <button class="btn btn-blue" value="<s:property value="idfiles"/>" name="idfiles" style="float:right;">Remove file</button>
+                                                                                </p>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
                                                                 </fieldset>
                                                             </s:iterator> 
                                                         </div>
@@ -258,8 +318,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -284,12 +342,12 @@
 </div>
 <script>
     function checkPassword() {
-    if ((passchangeForm.password.value !== passchangeForm.repassword.value)) {
-        alert("Password mismatch");
-        return false;
+        if ((passchangeForm.password.value !== passchangeForm.repassword.value)) {
+            alert("Password mismatch");
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 </script>
 <script src="script/jquery-1.10.2.min.js"></script>
 <script src="script/jquery-migrate-1.2.1.min.js"></script>

@@ -40,7 +40,7 @@ public class MailAction extends ActionSupport {
         HttpSession session = ServletActionContext.getRequest().getSession(false);        
         String email = (String) session.getAttribute("email");
         Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select  sub, body, important, categories, receiver, sendername, time, idmessage from message where receiveremail='" + email + "'");
+        ResultSet rs = ps.executeQuery("select  sub, body, important, categories, receiver, sendername, time, idmessage, receiveremail from message where receiveremail='" + email + "' ORDER BY time DESC");
         while (rs.next()) {            
             Mailinfo mail = new Mailinfo();
             mail.setSub(rs.getString(1));
@@ -51,6 +51,7 @@ public class MailAction extends ActionSupport {
             mail.setSendername(rs.getString(6));
             mail.setTime(rs.getString(7).split("\\.")[0]);
             mail.setIdmessage(rs.getString(8));
+            mail.setMail(rs.getString(9));
             mailinfo.add(mail);
         }
         con.close();
@@ -61,7 +62,7 @@ public class MailAction extends ActionSupport {
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String User = (String) session.getAttribute("username");
         Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select  sub, body, important, categories, receiver, receivername, time,idmessage from message where sendername='" + User + "'");
+        ResultSet rs = ps.executeQuery("select  sub, body, important, categories, receiver, receivername, time,idmessage,receiveremail from message where sendername='" + User + "' ORDER BY time DESC");
         while (rs.next()) {
             Mailinfo mail = new Mailinfo();
             mail.setSub(rs.getString(1));
@@ -72,6 +73,7 @@ public class MailAction extends ActionSupport {
             mail.setSendername(rs.getString(6));
             mail.setTime(rs.getString(7).split("\\.")[0]);
             mail.setIdmessage(rs.getString(8));
+            mail.setMail(rs.getString(9));
             mailinfo.add(mail);
         }        
         con.close();

@@ -66,23 +66,23 @@
                                     <div class="form-group">
                                         <div class="input-icon right">
                                             <i class="fa fa-envelope"></i>
-                                            <input id="inputEmail" type="text" placeholder="Email address" class="form-control" name ="email"></div>
+                                            <input id="inputEmail" type="email" placeholder="Email address" class="form-control" name ="email" required></div>
                                     </div>
                                     <div class="form-group">
                                         <div class="input-icon right">
                                             <i class="fa fa-lock"></i>
-                                            <input id="inputPassword" type="password" placeholder="Password" class="form-control" name="password"></div>
+                                            <input id="inputPassword" type="password" placeholder="Password" class="form-control" name="password" required></div>
                                     </div>
 
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input id="inputFirstName" type="text" placeholder="First Name" class="form-control" name="fname"></div>
+                                                <input id="inputFirstName" type="text" placeholder="First Name" class="form-control" name="fname" required></div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input id="inputLastName" type="text" placeholder="Last Name" class="form-control" name="lname"></div>
+                                                <input id="inputLastName" type="text" placeholder="Last Name" class="form-control" name="lname" required></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -90,19 +90,18 @@
                                             <option>Gender</option>
                                             <option>Male</option>
                                             <option>Female</option>
-                                            <option>Other</option>
-                                        </select></div>
-                                    <div class="form-group">
-                                        <div class="checkbox">
-                                            <label>
-                                                <div class="icheckbox_minimal-grey" style="position: relative;"><input tabindex="5" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp; I want to receive news and special
-                                                offers</label></div>
-                                    </div>
+                                        </select>
+                                    </div>                                    
                                     <div class="form-group mbn">
                                         <div class="checkbox">
                                             <label>
-                                                <div class="icheckbox_minimal-grey" style="position: relative;"><input tabindex="5" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp; I agree with the Terms and Conditions</label></div>
-                                    </div>
+                                                <div class="icheckbox_minimal-grey" style="position: relative;"><input tabindex="5" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);" required><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp; I want to upload and download files</label></div>
+                                    </div><br/>
+                                    <div class="form-group mbn">
+                                        <div class="checkbox">
+                                            <label>
+                                                <div class="icheckbox_minimal-grey" style="position: relative;"><input tabindex="5" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);" required><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp; I agree with the Terms and Conditions</label></div>
+                                    </div>                                    
                                 </div>
                                 <div class="form-actions text-right pal">
                                     <button type="submit" class="btn btn-primary">
@@ -111,7 +110,8 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
+    </body>
+</html>

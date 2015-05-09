@@ -28,15 +28,7 @@ public class loginAction extends ActionSupport implements SessionAware {
     private String username;
     private String password;
     private SessionMap<String, Object> sessionMap;
-    String searchtext, Autostr, notificationtime;
-
-    public String getNotificationtime() {
-        return notificationtime;
-    }
-
-    public void setNotificationtime(String notificationtime) {
-        this.notificationtime = notificationtime;
-    }
+    String searchtext, Autostr;
 
     public String getAutostr() {
         return Autostr;
@@ -134,17 +126,14 @@ public class loginAction extends ActionSupport implements SessionAware {
         return "fail";
     }
 
-    public String selectcircle() {
+    public String selectcircle() throws SQLException {
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username1 = (String) session.getAttribute("username");
         Connection con = Connections.conn();
-        String query = "select  notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime,image from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles inner join user  on circle.username=user.username where circle.circlename='" + username1 + "'";
         try {
-
+            String query = "select  notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime,image from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles inner join user  on circle.username=user.username where circle.circlename='" + username1 + "' order by notificationdatetime desc";
             Statement ps = con.createStatement();
-
             ResultSet rs = ps.executeQuery(query);
-
             while (rs.next()) {
                 Notification n = new Notification();
                 n.setNotifications(rs.getString(1));
@@ -157,16 +146,10 @@ public class loginAction extends ActionSupport implements SessionAware {
                 String s = rs.getString(8);
                 String s1[] = s.split("\\.");
                 n.setDatetime(s1[0]);
-                n.setImage(rs.getString(9));
+                n.setImage(rs.getString(9));                
                 note.add(n);
             }
-            query = "select time from notification_status where username ='" + username1 + "'";
-            ps = con.createStatement();
-
-            rs = ps.executeQuery(query);
-            while (rs.next()) {
-                setNotificationtime(rs.getString(1));
-            }
+            
         } catch (SQLException ex) {
         }
 

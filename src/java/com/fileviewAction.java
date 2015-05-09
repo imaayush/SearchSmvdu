@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-import static org.apache.commons.lang.time.DateUtils.round;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -30,12 +29,29 @@ public class fileviewAction extends ActionSupport {
 
     public fileviewAction() {
     }
-    String filename, filetags, filedes, idfiles, countLiked, countRecommended, countDownloaded, torrentname, tracker,totalsize;
+    String filename, filetags, filedes, idfiles, countLiked, viewed, countRecommended, countDownloaded, torrentname, tracker,totalsize;
     File file;
     Blob blob;
     int f = 0;
     ArrayList<TorrentInfo> torrentinfo = new ArrayList<TorrentInfo>();
+    ArrayList<CommentInfo> commentinfo = new ArrayList<CommentInfo>();
 
+    public ArrayList<CommentInfo> getCommentinfo() {
+        return commentinfo;
+    }
+
+    public void setCommentinfo(ArrayList<CommentInfo> commentinfo) {
+        this.commentinfo = commentinfo;
+    }
+
+    public String getViewed() {
+        return viewed;
+    }
+
+    public void setViewed(String viewed) {
+        this.viewed = viewed;
+    }
+    
     public String getTotalsize() {
         return totalsize;
     }
@@ -164,6 +180,7 @@ public class fileviewAction extends ActionSupport {
             setFiletags(rs.getString(2));
             setFiledes(rs.getString(3));
             setIdfiles(rs.getString(4));
+            setViewed(rs.getString(5));
             int count = rs.getInt(5);
             ++count;
             PreparedStatement ps = con.prepareStatement("update files set viewed=" + count + " where idfiles=" + Integer.parseInt(fileid));
@@ -174,6 +191,18 @@ public class fileviewAction extends ActionSupport {
         setCountRecommended(CountLDRFile.countRecommend(Integer.parseInt(fileid)));
         setCountDownloaded(CountLDRFile.countDownload(Integer.parseInt(fileid)));
 
+        st = con.createStatement();
+        rs = st.executeQuery("select username, comment, timedate, image from comments natural join user where idfiles ='" + fileid + "' order by timedate DESC");
+        
+        while (rs.next()) {
+            CommentInfo c = new CommentInfo();
+            c.setUsername(rs.getString(1));
+            c.setComment(rs.getString(2));
+            c.setTimedate(rs.getString(3).split("\\.")[0]);
+            c.setImage(rs.getString(4));
+            commentinfo.add(c);
+        }        
+        
         String query = "select file from files where idfiles=" + fileid;
         st = con.createStatement();
         rs = st.executeQuery(query);
@@ -245,12 +274,11 @@ public class fileviewAction extends ActionSupport {
         MessageDigest sha1 = MessageDigest.getInstance("SHA-1");
         for (int data; (data = (int) b[i]) > -1; output.write(data)) {
             i++;
-        };
+        }
 
         sha1.update(output.toByteArray(), 0, output.size() - 1);
         System.out.println(info1);
         con.close();
         return "success";
     }
-
 }

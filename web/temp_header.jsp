@@ -1,3 +1,4 @@
+<%@page import="java.sql.Timestamp"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="JavaSrc.Connections"%>
@@ -34,7 +35,7 @@
         <%
             Connection con = Connections.conn();
 
-            String query = "select filename from files";
+            String query = "select distinct filename from files";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             String Autostr = "";
@@ -76,9 +77,18 @@
                             <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input id="tags"  type="text" placeholder="Search here..." class="form-control text-white" name="searchtext"/></div>
                         </form>
                         <div class="news-update-box hidden-xs">
+                            <%
+                                if (!((String) session.getAttribute("username")).equals("admin")) {
+                            %>
                             <button onclick="window.location.href = 'UploadFrom'" class="btn btn-white" >Upload</button>
+                            <%
+                                }
+                            %>
                         </div>
                         <ul class="nav navbar navbar-top-links navbar-right mbn">
+                            <%!
+                                String fileid;
+                            %>
                             <%
                                 con = Connections.conn();
                                 String username;
@@ -91,33 +101,63 @@
                                 if (rs.next()) {
                                     image_path = rs.getString(1);
                                 }
+
+                                Timestamp notificationstatustime = new Timestamp(System.currentTimeMillis());
+                                String q = "select notificationtime from notification_status where username='" + username + "'";
+                                st = con.createStatement();
+                                rs = st.executeQuery(q);
+                                while (rs.next()) {
+                                    notificationstatustime = rs.getTimestamp(1);
+                                }
+
+                                int count = 0;
+                                String q1 = "select  notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime,image from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles inner join user  on circle.username=user.username where circle.circlename='" + username + "'";
+                                st = con.createStatement();
+                                rs = st.executeQuery(q1);
+                                while (rs.next()) {
+                                    if (rs.getTimestamp(8).after(notificationstatustime)) {
+                                        count++;
+                                    }
+                                }
                             %>
-                            <li class="dropdown" ><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
+                            <li class="dropdown"><a data-hover="dropdown" href="Setnewtimestamp" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow"><%=count%></span></a>
                                 <ul class="dropdown-menu dropdown-user pull-right" style="width:320px;">
-                                    <div style="height:0px; margin-left:4%;"><strong>Notification</strong></div>
-                                    <hr class="hr">
-                                    <s:iterator  value="note">  
-                                        <a  href="<s:url  action="fileview" > 
-                                                <s:param name="fileid" value="%{fileid}" /> </s:url>"> 
-                                                <fieldset >
-                                                    <li style="height:50px;"><div style="width:40px;float:left;padding-left:2%;">  <img src="<s:property value="image"/>" class="avatar img-responsive"></div>
-                                                    <div style="width: 235px; float: left; padding-left: 2%;">     
-
-                                                        <s:property value="username"/>
-                                                        <s:property value="notifications"/> a <s:property value="filetags"/>
-
-
-                                                    </div>
-                                                    <div style="width:30px;float:left;padding-right:2%;"><img data-src="images/movie.jpg" alt="avatar" class="media-object" src="images/movie.jpg" style="width: 40px; height: 40px;">
-                                                    </div>
-                                                </li>
-
-                                                <li class="divider"></li>
-
-                                            </fieldset>
-                                        </a>
-
-                                    </s:iterator>
+                                    <div style="margin-left:4%;margin-top: 2%;"><strong>Notification</strong></div> 
+                                    <%
+                                        if (count == 0) {
+                                    %>
+                                    <li class="divider"></li>
+                                    <p style="padding: 3%;">No new notifications</p>
+                                    <%
+                                        }
+                                        Timestamp notificationtime = new Timestamp(System.currentTimeMillis());
+                                        String q2 = "select  notification,notifications.username,files.username ,notifications.idfiles,filedescription,filetags,filename,notificationdatetime,image from circle inner join notifications on notifications.username=circle.username inner join files on notifications.idfiles=files.idfiles inner join user  on circle.username=user.username where circle.circlename='" + username + "' order by notificationdatetime desc";
+                                        st = con.createStatement();
+                                        rs = st.executeQuery(q2);
+                                        while (rs.next()) {
+                                            notificationtime = rs.getTimestamp(8);
+                                            if (notificationtime.after(notificationstatustime)) {
+                                    %>
+                                    <li class="divider"></li>
+                                    <a href="<s:url  action="fileview"><s:param name="fileid"><%=rs.getString(4)%></s:param></s:url>"> 
+                                                <fieldset>
+                                                    <li style="height:50px;">
+                                                        <div style="width:40px;float:left;padding-left:2%;">  
+                                                            <img src="<%=rs.getString(9)%>" class="avatar img-responsive"/>
+                                                </div>
+                                                <div style="width: 235px; float: left; padding-left: 2%;">
+                                                    <%=rs.getString(2)%>
+                                                    <%=rs.getString(1)%> a <%=rs.getString(6)%>
+                                                </div>
+                                                <div style="width:30px;float:left;padding-right:2%;"><img data-src="images/movie.jpg" alt="avatar" class="media-object" src="images/<%=rs.getString(6)%>.jpg" style="width: 40px; height: 40px;">
+                                                </div>
+                                            </li>
+                                        </fieldset>
+                                    </a>
+                                    <%
+                                            }
+                                        }
+                                    %>
                                 </ul>
                             </li>
                             <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="<%=image_path%>" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs"><s:property value="#session.username"/></span>&nbsp;<span class="caret"></span></a>
@@ -125,15 +165,11 @@
                                     <li><a href="Myprofile"><i class="fa fa-user"></i>My Profile</a></li>
                                     <li><a href="Addcircle"><i class="fa fa-circle-o"></i>Add Circle</a></li>
                                     <li><a href="Mailbox"><i class="fa fa-envelope"></i>My Inbox</a></li>
-                                    <li><a href=""><i class="fa fa-tasks"></i>Forum</a></li>
+                                    <li><a href="Forum"><i class="fa fa-tasks"></i>Forum</a></li>
                                     <li class="divider"></li>
-
                                     <li><a href="Logout"><i class="fa fa-key"></i>Log Out</a></li>
                                 </ul>
-
                             </li>
-
-
                         </ul>
                     </div>
                 </nav>

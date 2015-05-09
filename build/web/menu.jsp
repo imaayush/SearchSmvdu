@@ -6,10 +6,9 @@
          data-position="right" class="navbar-default navbar-static-side">
         <div class="sidebar-collapse menu-scroll">
             <ul id="side-menu" class="nav">
-
                 <div class="clearfix"></div>
                 <div class="clearfix"></div>
-                <li class="active"><a href="home"><i class="fa fa-tachometer fa-fw">
+                <li class="active"><a href="home"><i class="fa fa-home fa-fw">
                             <div class="icon-bg bg-orange"></div>
                         </i><span class="menu-title">Home</span></a></li>
 
@@ -18,7 +17,7 @@
                         </i><span class="menu-title">Popular on SMVDU</span></a>
 
                 </li>
-                <li><a href="#"><i class="fa fa-envelope-o">
+                <li><a href="Recently"><i class="fa fa-envelope-o">
                             <div class="icon-bg bg-primary"></div>
                         </i><span class="menu-title">Recentaly Added</span></a>
 

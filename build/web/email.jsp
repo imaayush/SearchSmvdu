@@ -71,8 +71,9 @@
                                             Connection con = Connections.conn();
                                             int number = 0;
                                             String email = (String) session.getAttribute("email");
+                                            System.out.println(email);
                                             Statement st = con.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "'");
+                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "' And receiver='Unread'");
                                             while (rs.next()) {
                                                 number++;
                                             }
@@ -89,28 +90,43 @@
                         <div class="col-sm-9 col-md-10">
                             <div class="tab-content">
                                 <div id="home" class="tab-pane fade in active">
-                                    <div class="list-group mail-box">
-                                        <s:iterator  value="mailinfo">  
-                                            <fieldset>
-                                                <%
-                                                String body;
-                                                body = (String)request.getAttribute("body");
-                                                if(body.length()>75){
-                                                    body = body.substring(0, 75);
-                                                }
-                                                %>
-                                                <a href="<s:url action="viewemail"><s:param name="msgid" value="%{idmessage}"></s:param></s:url>" class="list-group-item">
-                                                            <input type="checkbox"/>
-                                                            <span class="fa fa-star-o mrm mlm"></span>
-                                                            <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="sendername"/></span>
-                                                    <span><s:property value="sub"/></span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted"><%=body%>
-                                                    </span><span class="time-badge"><s:property value="time"/></span>
-                                                </a>
-                                            </fieldset>
-                                        </s:iterator> 
-                                    </div>
-                                </div>
 
+                                    <s:iterator  value="mailinfo">  
+                                        <fieldset>
+                                            <%
+                                                String status = (String) request.getAttribute("status");
+                                                String mail= (String) request.getAttribute("mail");
+                                                System.out.println(mail);
+                                                if (status.equals("Unread") && mail.equals(email)) {
+                                            %>
+                                            <div>
+                                                <%
+                                                } else {
+                                                %>
+                                                <div class="list-group mail-box">
+                                                    <%
+                                                        }
+                                                    %>
+                                                    <%
+                                                        String body;
+                                                        body = (String) request.getAttribute("body");
+
+                                                        if (body.length()
+                                                                > 30) {
+                                                            body = body.substring(0, 30);
+                                                        }
+                                                    %>
+                                                    <a href="<s:url action="viewemail"><s:param name="msgid" value="%{idmessage}"></s:param></s:url>" class="list-group-item">
+                                                                <input type="checkbox"/>                                                                
+                                                                <span class="fa fa-star-o mrm mlm"></span>
+                                                                <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="sendername"/></span>
+                                                        <span><s:property value="sub"/></span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted"><%=body%>
+                                                        </span><span style="float:right; font-style: italic;"><s:property value="time"/></span>
+                                                    </a>
+                                                </div>
+                                        </fieldset>
+                                    </s:iterator> 
+                                </div>
                             </div>
                         </div>
                         <div class="common-modal modal fade" id="common-Modal1" tabindex="-1" role="dialog" aria-hidden="true">

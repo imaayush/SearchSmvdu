@@ -42,7 +42,7 @@
                             <div class="panel-heading">
                                 Upload file Details</div>
                             <div class="panel-body pan">
-                                <form action="Uploadfile" method="post" enctype="multipart/form-data">
+                                <form action="Uploadfile" method="post" enctype="multipart/form-data" onsubmit="return checkFileType();">
                                     <div class="form-body pal">
                                         <div class="form-group">
                                             <div class="input-icon right">
@@ -76,7 +76,7 @@
                                         <div class="form-group">
                                             <div class="input-icon right" style="margin-left: 0%">
                                                 <label for="inputEmail3" ><br><span><strong>Upload File</strong></span></label>
-                                                <input type="file"  class="form-control" name="file" required/></div>
+                                                <input type="file" id="fileupload" class="form-control" name="file" required/></div>
                                         </div>
 
 
@@ -138,6 +138,14 @@
 <!--END PAGE WRAPPER-->
 </div>
 </div>
+<script>
+    function checkFileType() {
+    //if ((passchangeForm.password.value !== passchangeForm.repassword.value)) {
+        //alert(document.getElementById('fileupload').files[0].type);
+        //return false;    
+    return true;
+}
+</script>
 <script src="script/jquery-1.10.2.min.js"></script>
 <script src="script/jquery-migrate-1.2.1.min.js"></script>
 <script src="script/jquery-ui.js"></script>
