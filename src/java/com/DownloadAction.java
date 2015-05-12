@@ -54,9 +54,7 @@ public class DownloadAction extends ActionSupport {
     public String execute() throws Exception {
         Connection con = Connections.conn();
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-
         fileid = request.getParameter("idfiles");
-
         setNotification("Downloaded");
         Timestamp time = new Timestamp(System.currentTimeMillis());
         HttpSession session = ServletActionContext.getRequest().getSession(false);
@@ -68,7 +66,6 @@ public class DownloadAction extends ActionSupport {
         ps.setString(3, username);
         ps.setTimestamp(4, time);
         ps.executeUpdate();
-
         String query = "select file from files where idfiles=" + fileid;
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(query);
@@ -76,20 +73,14 @@ public class DownloadAction extends ActionSupport {
             blob = rs.getBlob("file");
             f = 1;
         }
-        
         b = new byte[(int) blob.length()];
         b = blob.getBytes(1, (int) blob.length());
-        
-       
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/x-bittorrent");
         OutputStream out = response.getOutputStream();
         out.write(b);
         out.flush();
         out.close();
-       
-        
-        
         if (f == 1) {
             this.setB(b);
             return "success";

@@ -237,8 +237,13 @@ public class fileviewAction extends ActionSupport {
         p = info1.split("12:piece|:");
         String temp1;
         temp1 = p[1];
-
-        setTorrentname(temp1.substring(0, (temp1.length() - 2)));
+        int index2= temp.lastIndexOf("1|2|3|4|5|6|7|8|9|0");
+        
+        if(temp1.substring(temp1.length()-1, temp1.length()).matches("1|2|3|4|5|6|7|8|9|0")){
+        setTorrentname(temp1.substring(0, (temp1.length()-2)));}
+        else{
+            setTorrentname(temp1.substring(0, (temp1.length())));}
+        
         info1 = temp;
         p = info1.split("d6:");
         double totalsize1=0;
@@ -263,7 +268,8 @@ public class fileviewAction extends ActionSupport {
             temp2 = x[1];
             x = temp2.split(":", 2);
             temp2 = x[0];
-            temp2 = temp2.substring(0, (temp2.length() - 1));
+            int index1=temp2.lastIndexOf(".");
+            temp2=temp2.substring(0,index1);
             t.setTname(temp2);
             t.setTsize(size);
             torrentinfo.add(t);
