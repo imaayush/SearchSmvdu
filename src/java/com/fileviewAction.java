@@ -234,43 +234,49 @@ public class fileviewAction extends ActionSupport {
                 i++;
                 builder.append((char) b[i]); // It's ASCII anyway.
 
-            }
-            String info1 = builder.toString();
-            String[] p = info1.split("8:announce36:|8:announce5:", 2);
-            info1 = p[1];
-            p = info1.split("announce|18:", 2);
-            if (p[0].equals("http:")) {
-                setTracker("none");
-            } else {
-                setTracker(p[0]);
-            }
-            info1 = p[1];
-            p = info1.split("filesld6:");
-            info1 = p[1];
-            p = info1.split("eee4:name");
-            String temp = p[0];
-            info1 = p[1];
-            p = info1.split("12:piece|:");
-            String temp1;
-            temp1 = p[1];
 
-            setTorrentname(temp1.substring(0, (temp1.length() - 2)));
-            info1 = temp;
-            p = info1.split("d6:");
-            double totalsize1 = 0;
-            for (int j = 0; j < p.length; j++) {
-                String size, temp2;
-                TorrentInfo t = new TorrentInfo();
-                temp2 = p[j];
-                String[] x = temp2.split("pathl");
-                temp2 = x[1];
-                size = x[0];
-                size = size.split("e4:|lengthi")[1];
+        }
+        String info1 = builder.toString();
+        String[] p = info1.split("8:announce36:|8:announce5:", 2);
+        info1 = p[1];
+        p = info1.split("announce|18:", 2);
+        if(p[0].equals("http:")){
+            setTracker("none");
+        }else{
+        setTracker(p[0]);}
+        info1 = p[1];
+        p = info1.split("filesld6:");
+        info1 = p[1];
+        p = info1.split("eee4:name");
+        String temp = p[0];
+        info1 = p[1];
+        p = info1.split("12:piece|:");
+        String temp1;
+        temp1 = p[1];
+        int index2= temp.lastIndexOf("1|2|3|4|5|6|7|8|9|0");
+        
+        if(temp1.substring(temp1.length()-1, temp1.length()).matches("1|2|3|4|5|6|7|8|9|0")){
+        setTorrentname(temp1.substring(0, (temp1.length()-2)));}
+        else{
+            setTorrentname(temp1.substring(0, (temp1.length())));}
+        
+        info1 = temp;
+        p = info1.split("d6:");
+        double totalsize1=0;
+        for (int j = 0; j < p.length; j++) {
+            String size, temp2;
+            TorrentInfo t = new TorrentInfo();
+            temp2 = p[j];
+            String[] x = temp2.split("pathl");
+            temp2 = x[1];
+            size = x[0];
+            size = size.split("e4:|lengthi")[1];
+            
+            double size1 = Double.parseDouble(size) / 1024;
+            totalsize1=totalsize1+size1;
+            if (size1 > 1024) {
+                size = ceil(size1/1024) + " MB";
 
-                double size1 = Double.parseDouble(size) / 1024;
-                totalsize1 = totalsize1 + size1;
-                if (size1 > 1024) {
-                    size = ceil(size1 / 1024) + " MB";
                 } else {
                     size = ceil(size1) + " KB";
                 }
@@ -291,7 +297,6 @@ public class fileviewAction extends ActionSupport {
             for (int data; (data = (int) b[i]) > -1; output.write(data)) {
                 i++;
             }
-
             sha1.update(output.toByteArray(), 0, output.size() - 1);
             System.out.println(info1);
             con.close();

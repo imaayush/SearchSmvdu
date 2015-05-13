@@ -36,7 +36,10 @@
                 <nav id="topbar" role="navigation" style="background-color: #0C1112;" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="navbar-header">
                         <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a>
-                    </div>                    
+                    </div>  
+                    <div style="float:right; padding: 15px; margin-right: 10px;">
+                        <a href ="#"><strong style="font-size: 14px;"><span class="fa fa-globe"></span>&nbsp;About Us</strong></a>
+                        <div/>
                 </nav>
                 <%@ taglib prefix="s" uri="/struts-tags" %>
 

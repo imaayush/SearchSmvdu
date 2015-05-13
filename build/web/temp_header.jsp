@@ -15,7 +15,10 @@
         <link rel="apple-touch-icon" href="images/icons/favicon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
-        <!--Loading bootstrap css-->        
+        <!--Loading bootstrap css-->
+        <link href="images/img/css/full-slider.css" rel="stylesheet" type="text/css"/>
+        <link href="images/img/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="images/img/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
         <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
         <link type="text/css" rel="stylesheet" href="styles/jquery-ui-1.10.4.custom.min.css">
@@ -29,9 +32,9 @@
         <link type="text/css" rel="stylesheet" href="styles/pace.css">
         <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
         <link type="text/css" rel="stylesheet" href="styles/jplist-custom.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>       
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="script/jquery-1.10.2.js" type="text/javascript"></script>
+        <script src="script/jquery-ui1.js" type="text/javascript"></script>
+        <script src="script/jquery.min.js" type="text/javascript"></script>
         <%
             Connection con = Connections.conn();
             
@@ -67,7 +70,7 @@
                 if (((String) request.getSession().getAttribute("username")) != null) {
             %>
             <div id="header-topbar-option-demo" class="page-header-topbar">
-                <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+                <nav id="topbar" role="navigation" style="margin-bottom: 0; position: fixed;" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="navbar-header">
                         <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                         <a id="logo" href="home" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
@@ -85,7 +88,7 @@
                                 }%>
                             <a href ="UploadFrom"><strong style="font-size: 14px;"><span class="fa fa-cloud-upload"></span>&nbsp;Upload</strong></a>
                             &nbsp;&nbsp;&nbsp;
-                            <a href ="#"><strong style="font-size: 14px;"><span class="fa fa-globe"></span>&nbsp;About</strong></a>
+                            <a href ="#"><strong style="font-size: 14px;"><span class="fa fa-globe"></span>&nbsp;About Us</strong></a>
                             &nbsp;&nbsp;&nbsp;
                             <%!                                
                                 String fileid;
@@ -182,19 +185,19 @@
             } else {
             %>
             <div id="header-topbar-option-demo" class="page-header-topbar"  >
-                <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+                <nav id="topbar" role="navigation" style="margin-bottom: 0; position: fixed;" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="navbar-header">
                         <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                         <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
                     <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>                        
-                        <form id="topbar-search" action="search" method="" class="hidden-sm hidden-xs" style="width:35%;">
+                        <form id="topbar-search" action="search" method="" class="hidden-sm hidden-xs" style="width:38%;">
                             <div class="input-icon right text-white"><a href="#" onclick="document.getElementById('topbar-search').submit();"><i class="fa fa-search"></i></a><input id="tags"  onkeyup="showData(this.value);" type="text" placeholder="Search here..." class="form-control text-white" name="searchtext"/></div>
                         </form>
 
                         <div style="float:right; margin-top:1%; margin-right: 3%">
                             <a href ="LoginFrom"><strong style="font-size: 14px;"><span class="fa fa-cloud-upload"></span>&nbsp;Upload</strong></a>
                             &nbsp;&nbsp;&nbsp;
-                            <a href ="#"><strong style="font-size: 14px;"><span class="fa fa-globe"></span>&nbsp;About</strong></a>
+                            <a href ="#"><strong style="font-size: 14px;"><span class="fa fa-globe"></span>&nbsp;About Us</strong></a>
                             &nbsp;&nbsp;&nbsp;
                             <a href ="LoginFrom"><strong style="font-size: 14px;">Login</strong></a>
                             &nbsp;&nbsp;&nbsp;

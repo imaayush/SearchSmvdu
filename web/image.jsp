@@ -3,16 +3,72 @@
     <div class="page-content">
         <div id="tab-general">
             <div class="row mbl">              
-                <div class="col-lg-12">
-                    <div class="page-content">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="panel">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-12" style="height: 550px;">
+                                    <header id="myCarousel" class="carousel slide">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                                            <li data-target="#myCarousel" data-slide-to="4"></li>                                            
+                                        </ol>
+
+                                        <!-- Wrapper for Slides -->
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                <!-- Set the first background image using inline CSS below. -->
+                                                <div class="fill" style="background-image:url('images/img/1.jpg');"></div>
+                                                <div class="carousel-caption">
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <!-- Set the second background image using inline CSS below. -->
+                                                <div class="fill" style="background-image:url('images/img/2.jpg');"></div>
+                                                <div class="carousel-caption">
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <!-- Set the third background image using inline CSS below. -->
+                                                <div class="fill" style="background-image:url('images/img/3.jpg');"></div>
+                                                <div class="carousel-caption">
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <!-- Set the third background image using inline CSS below. -->
+                                                <div class="fill" style="background-image:url('images/img/4.jpg');"></div>
+                                                <div class="carousel-caption">
+                                                </div>
+                                            </div><div class="item">
+                                                <!-- Set the third background image using inline CSS below. -->
+                                                <div class="fill" style="background-image:url('images/img/5.jpg');"></div>
+                                                <div class="carousel-caption">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Controls -->
+                                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                            <span class="icon-prev"></span>
+                                        </a>
+                                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                            <span class="icon-next"></span>
+                                        </a>
+
+                                    </header>
+
+                                    <!-- jQuery -->
+                                    <script src="images/img/js/jquery.js"></script>
+
+                                    <!-- Bootstrap Core JavaScript -->
+                                    <script src="images/img/js/bootstrap.min.js"></script>
+
+                                    <!-- Script to Activate the Carousel -->
+                                    <script>
+                                        $('.carousel').carousel({
+                                            interval: 3000 //changes the speed
+                                        })
+                                    </script>
                 </div>
                 <!--END FOOTER-->
             </div>

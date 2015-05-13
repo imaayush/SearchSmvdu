@@ -160,7 +160,7 @@
         
         <action name="search" class="com.SearchAction">
             <result name="success" type="tiles">/searchview</result>
-            <result name="fail" type="tiles">/upload</result>
+            <result name="fail" type="tiles">/error.jsp</result>
         </action>
         
         <action name="searchtags" class="com.SearchtagsAction">

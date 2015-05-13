@@ -76,7 +76,7 @@
                                             <div class="row mbl">
                                                 <form action="Searchuser">
                                                     <div class="col-lg-6">
-                                                        <div class="input-group"><input id="search" name="name" type="text" class="form-control"><span class="input-group-btn"><button type="button" class="btn btn-white">Search</button></span></div>
+                                                        <div class="input-group"><input id="search" name="name" type="text" class="form-control"><span class="input-group-btn"><button class="btn btn-white">Search</button></span></div>
                                                     </div>
                                                 </form>
                                             </div>                                         

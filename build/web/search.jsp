@@ -55,7 +55,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="input-icon right">
-                                                <input id="inputName"  type="text" class="form-control" name="searchtext" required/></div>
+                                                <input id="inputName"  type="text" placeholder="Fileid / Email" class="form-control" name="searchtext" required/></div>
                                         </div>
                                         <div class="form-actions text-right pal">
                                             <button type="submit" class="btn btn-primary btn-block">

@@ -52,6 +52,7 @@ public class DownloadAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
+
         try {
             Connection con = Connections.conn();
             HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
@@ -100,7 +101,7 @@ public class DownloadAction extends ActionSupport {
         } catch (Exception e) {
             System.out.println(e.toString());
             return "fail";
+
         }
     }
-
 }

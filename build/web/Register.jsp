@@ -37,6 +37,9 @@
                     <div class="navbar-header">
 
                         <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
+                    <div style="float:right; padding: 15px; margin-right: 10px;">
+                        <a href ="#"><strong style="font-size: 14px;"><span class="fa fa-globe"></span>&nbsp;About Us</strong></a>
+                        <div/>                        
                 </nav>
 
             </div>
@@ -95,13 +98,13 @@
                                     </div>                                    
                                 </div>
                                 <div class="form-actions pal">
-                                        <div class="form-group mbn">
-                                            <div class="col-md-offset-3 col-md-6">                                                
-                                                <button class="btn btn-primary">
-                                                    Submit</button>
-                                            </div>
+                                    <div class="form-group mbn">
+                                        <div class="col-md-offset-3 col-md-6">                                                
+                                            <button class="btn btn-primary">
+                                                Submit</button>
                                         </div>
                                     </div>
+                                </div>
                             </form>
                         </div>
                     </div>

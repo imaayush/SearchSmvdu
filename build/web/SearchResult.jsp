@@ -51,9 +51,19 @@
                                                                                             <s:param name="fileid" value="%{idfiles}" /> </s:url>" >     
                                                                                         <s:property value="filename"/>
                                                                         </a></p>
-                                                                    <p class="desc">                                                 
-                                                                        <s:set name="myenv" value="filedes.replaceAll(searchtext,'\" '+searchtext+' \"')"/>
-                                                                        <s:property value="myenv"/></p>
+                                                                    <p class="desc">         
+                                                                   <%
+                                                                       String a = (String)request.getAttribute("searchtext");
+                                                                       String f =(String)request.getAttribute("filedes");
+                                                                       String[] x=f.split(a);
+                                                                       String result=null;
+                                                                       for(int i =0 ; i<x.length-1;i++){
+                                                                           out.print(x[i]+"<b>"+a+"</b>");
+                                                                       }
+                                                                       out.print(x[x.length-1]);
+                                                                   %>
+                                                                 
+                                                                        
                                                                     <p><s:property value="viewed"/> Views</p>
                                                                     <p class="like"><s:property value="countLiked"/> Likes</p>
                                                                     <p><s:property value="countDownloaded"/> Downloads</p>
