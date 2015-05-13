@@ -33,14 +33,10 @@
             <!--END BACK TO TOP-->
             <!--BEGIN TOPBAR-->
             <div id="header-topbar-option-demo" class="page-header-topbar">
-                <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+                <nav id="topbar" role="navigation" style="background-color: #0C1112" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="navbar-header">
 
                         <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
-                    <div class="topbar-main">
-
-
-                    </div>
                 </nav>
 
             </div>
@@ -51,7 +47,7 @@
             </s:if>
             <!--END TOPBAR-->
             <div id="wrapper">
-                <div class="col-lg-4" style="margin-left: 33%; margin-top: 2%;">
+                <div style="max-width: 450px; margin:auto; margin-top: 5%;">
                     <div class="panel panel-orange">
                         <div class="panel-heading">
                             Registration </div>
@@ -67,11 +63,6 @@
                                         <div class="input-icon right">
                                             <i class="fa fa-envelope"></i>
                                             <input id="inputEmail" type="email" placeholder="Email address" class="form-control" name ="email" required></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-icon right">
-                                            <i class="fa fa-lock"></i>
-                                            <input id="inputPassword" type="password" placeholder="Password" class="form-control" name="password" required></div>
                                     </div>
 
                                     <hr>
@@ -103,10 +94,14 @@
                                                 <div class="icheckbox_minimal-grey" style="position: relative;"><input tabindex="5" type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);" ><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>&nbsp; I agree with the Terms and Conditions</label></div>
                                     </div>                                    
                                 </div>
-                                <div class="form-actions text-right pal">
-                                    <button type="submit" class="btn btn-primary">
-                                        Submit</button>
-                                </div>
+                                <div class="form-actions pal">
+                                        <div class="form-group mbn">
+                                            <div class="col-md-offset-3 col-md-6">                                                
+                                                <button class="btn btn-primary">
+                                                    Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
                             </form>
                         </div>
                     </div>

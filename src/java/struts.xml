@@ -14,10 +14,15 @@
             <result name="success" type="tiles">/home</result> 
             <result name="fail">/Login.jsp</result> 
         </action>
-        
+        <action name="Forgetpassword" class="com.ForgetpasswordAction">
+            <result name="success">/Login.jsp</result> 
+            <result name="fail">/forgetpassword.jsp</result> 
+            <result name="error">/error.jsp</result>
+        </action>
         <action name="Register" class="com.RegisterAction">
             <result name="success">/Login.jsp</result> 
             <result name="fail">/Register.jsp</result> 
+            <result name="error">/error.jsp</result>
         </action>
         
         <action name="LoginFrom">
@@ -32,22 +37,29 @@
             <result name="success" type="tiles">/circle</result>
             <result name="fail" type="tiles">/error.jsp</result>
         </action>
-        
+        <action name="Searchuser" class="com.AddAction" method="searchuser">
+            <result name="success" type="tiles">/circle</result>
+            <result name="fail" type="tiles">/error.jsp</result>
+        </action>
+        <action name="Searchuserfile" class="com.SearchUserFileAction">
+            <result name="successuser" type="tiles">/circle</result>
+            <result name="successfile" type="tiles">/searchview</result>
+            <result name="fail" type="tiles">/error.jsp</result>
+        </action>
+        <action name="Searchbyadmin">
+            <result name="success" type="tiles">/searchbyadmin</result>
+        </action>
         <action name="Myprofile" class="com.viewAction" method="execute">
             <result name="success" type="tiles">/myprofile</result> 
             <result name="fail" type="tiles">/Login.jsp</result> 
         </action>
-        
-        <action name="Logout" class="com.loginAction" method="logout">  
-            <result name="success">/Login.jsp</result>  
-        </action> 
-        
+                
         <action name="Myprofile" class="com.viewAction" method="execute">
             <result name="success" type="tiles">/myprofile</result> 
             <result name="fail" type="tiles">/Login.jsp</result> 
         </action>
-        <action name="Logout" class="com.loginAction" method="logout">  
-            <result name="success">/Login.jsp</result>  
+        <action name="Logout" class="com.LogoutAction">  
+            <result name="success">/index.jsp</result>  
         </action>  
 
         <action name="Uploadphoto" class="com.UploadAction" >  
@@ -82,7 +94,10 @@
             <result name="success" type="redirect">/Mailbox</result>
             <result name="fail">/error.jsp</result>
         </action>
-       
+        <action name="Reportuser" class="com.SendemailAction">
+            <result name="success" type="redirect">/Myprofile</result>
+            <result name="fail">/error.jsp</result>
+        </action>    
         <action name="Sentmail" class="com.MailAction" method="sentmail">
             <result name="success" type="tiles">/mailbox</result>
             <result name="fail">/error.jsp</result>
@@ -210,12 +225,24 @@
             <result name="success" type="tiles">/mailbox</result>
             <result name="fail">/error.jsp</result>
         </action>
+        <action name="Spammail" class="com.MailAction" method="spammail">
+            <result name="success" type="tiles">/mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
         <action name="Updatestarredmail" class="com.MailAction" method="updatestarredmail">
             <result name="success" type="redirect">/Mailbox</result>
             <result name="fail">/error.jsp</result>
         </action>
         <action name="Allread" class="com.MailAction" method="allread">
             <result name="success" type="redirect">/Mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="activatedeactivate" class="com.ActivateDeactivateAction">
+            <result name="success" type="redirect">/Myprofile</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="enabledisable" class="com.EnableDisableAction">
+            <result name="success" type="redirect">/ViewProfile?UserName=${username}</result>
             <result name="fail">/error.jsp</result>
         </action>
     </package>     

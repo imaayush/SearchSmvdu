@@ -100,7 +100,7 @@
                                                     <p>
                                                         <strong>Email:</strong> <s:property value="email"/></p>
                                                     <p>
-                                                        <strong>Status:</strong> Active</p>
+                                                        <strong>Status:</strong> <span class="label label-red mrs"><s:property value="status"/></span></p>
                                                     <p>
 
                                                         <strong class="mrs">Member&nbsp;&nbsp;Since:</strong><span class="label label-green mrs"><s:property value="date"/></span></p>
@@ -137,25 +137,32 @@
                                                 </div>
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
-                                                        <strong>43</strong></h2>
-                                                    <p>
-                                                        <small>Snippets</small>
-                                                    </p>
+                                                        <strong>&nbsp;</strong>
+                                                    </h2>                                                    
                                                     <div class="btn-group dropup">
+                                                        <%
+                                                            if (!((String) session.getAttribute("username")).equals("admin")) {
+                                                        %>
                                                         <button type="button" data-toggle="dropdown" class="btn btn-orange dropdown-toggle">
                                                             <span class="fa fa-gear"></span>&nbsp; Options
                                                         </button>
-                                                        <ul role="menu" class="dropdown-menu pull-right text-left">
-                                                            <li><a href="Mailbox"><span class="fa fa-envelope"></span>&nbsp; Send an email</a></li>
-                                                            <li><a href="#"><span class="fa fa-list"></span>&nbsp; Deactivated or Activated</a></li>
+                                                        <ul role="menu" class="dropdown-menu pull-right text-left">                                                                                                                            
+                                                            <%
+                                                                String status = (String) request.getAttribute("status");
+                                                                if (status.equals("Active")) {
+                                                            %>
+                                                            <li><a href="activatedeactivate"><span class="fa fa-list"></span>&nbsp; Deactivate</a></li>
                                                                 <%
-                                                                    if (((String) session.getAttribute("username")).equals("admin")) {
+                                                                } else {
                                                                 %>
-                                                            <li><a href="#"><span class="fa fa-warning"></span>&nbsp; Report this user for spam</a></li>
+                                                            <li><a href="activatedeactivate"><span class="fa fa-list"></span>&nbsp; Activate</a></li>
                                                                 <%
                                                                     }
                                                                 %>
                                                         </ul>
+                                                        <%
+                                                            }
+                                                        %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,22 +248,30 @@
                                                         <div id="tab-password" class="tab-pane fade in">
                                                             <form action="Changepassword" name="passchangeForm" method="post" class="form-horizontal" onsubmit="return checkPassword();">
                                                                 <h3>Account Setting</h3>
-                                                                <div class="form-group"><label class="col-sm-3 control-label">Password</label>
-
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Old Password</label>
                                                                     <div class="col-sm-9 controls">
                                                                         <div class="row">
                                                                             <div class="col-xs-9">
-                                                                                <input type="password" name="password" placeholder="password" class="form-control" required/>                                                                
+                                                                                <input type="password" name="oldpassword" placeholder="old password" class="form-control" required/>
+                                                                                <input type="text" name="realoldpassword" value="<s:property value="password"/>" hidden="true"/>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group"><label class="col-sm-3 control-label">Confirm Password</label>
-
+                                                                <div class="form-group"><label class="col-sm-3 control-label">New Password</label>
                                                                     <div class="col-sm-9 controls">
                                                                         <div class="row">
                                                                             <div class="col-xs-9">
-                                                                                <input type="password"  name="repassword" placeholder="password" class="form-control" required/>
+                                                                                <input type="password" name="password" placeholder="new password" class="form-control" required/>                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group"><label class="col-sm-3 control-label">Confirm New Password</label>
+                                                                    <div class="col-sm-9 controls">
+                                                                        <div class="row">
+                                                                            <div class="col-xs-9">
+                                                                                <input type="password"  name="repassword" placeholder="confirm new password" class="form-control" required/>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -353,8 +368,11 @@
 </div>
 <script>
     function checkPassword() {
-        if ((passchangeForm.password.value !== passchangeForm.repassword.value)) {
-            alert("Password mismatch");
+        if(passchangeForm.oldpassword.value !== passchangeForm.realoldpassword.value){
+            alert("incorrect Old Password...!!!");
+            return false;
+        }else if (passchangeForm.password.value !== passchangeForm.repassword.value) {
+            alert("Password mismatch...!!!");
             return false;
         }
         return true;

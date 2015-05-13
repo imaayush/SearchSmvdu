@@ -121,7 +121,7 @@ hr {
 #wrapper {
   width: 100%;
   min-height: 100%;
-  background-color: #3C3C3C;
+  background-color: #EFF3F4;
 }
 #page-wrapper {
   min-height: 100%;
@@ -3590,7 +3590,7 @@ body.sidebar-icons #wrapper #page-wrapper {
 .mbl,
 .mvl,
 .mal {
-  margin-bottom: 20px !important;
+  margin-bottom:0px !important;
 }
 .mbxl,
 .mvxl,

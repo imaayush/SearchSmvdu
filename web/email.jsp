@@ -63,7 +63,8 @@
                     </div>
                     <div class="mtl mbl"></div>
                     <div class="row">
-                        <div class="col-sm-3 col-md-2"><a href="#myModal" role="button" class="btn btn-danger btn-sm btn-block" data-toggle="modal" >COMPOSE</a>
+                        <div class="col-sm-3 col-md-2">
+                            <a href="#myModal" role="button" class="btn btn-danger btn-sm btn-block" data-toggle="modal" >COMPOSE</a>
                             <jsp:include page="/compose.jsp"/>
                             <div class="mtm mbm"></div>
                             <div class="panel">
@@ -71,20 +72,35 @@
                                     <ul style="background: #fff" class="nav nav-pills nav-stacked">
                                         <%
                                             Connection con = Connections.conn();
-                                            int number = 0;
+                                            int number = 0, number1 = 0;
                                             String email = (String) session.getAttribute("email");
                                             System.out.println(email);
                                             Statement st = con.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "' And receiver='Unread'");
+                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "'AND categories='Primary' And receiver='Unread'");
                                             while (rs.next()) {
                                                 number++;
+                                            }
+                                            st = con.createStatement();
+                                            rs = st.executeQuery("select * from message where receiveremail='" + email + "'AND categories='Spam' And receiver='Unread'");
+                                            while (rs.next()) {
+                                                number1++;
                                             }
                                         %>
                                         <li class="active"><a href="Mailbox"><span class="badge pull-right"><%=number%></span><i class="fa fa-inbox fa-fw mrs"></i>Inbox</a></li>
                                         <!--<li><a href="#"><i class="fa fa-star-o fa-fw mrs"></i>Starred</a></li>-->
                                         <li><a href="Importantmail"><i class="fa fa-info-circle fa-fw mrs"></i>Important</a></li>
                                         <li><a href="Starredmail"><i class="fa fa-star fa-fw mrs"></i>Starred</a></li>
-                                        <li><a href="Sentmail"><i class="fa fa-plane fa-fw mrs"></i>Sent Mail</a></li>                                        
+                                        <li><a href="Sentmail"><i class="fa fa-plane fa-fw mrs"></i>Sent Mail</a></li>
+                                        <li><a href="Spammail"><i class="fa fa-warning fa-fw mrs"></i>Spam&nbsp;
+                                                <%
+                                                    if (number1 != 0) {
+                                                %>
+                                                (<%=number1%>)
+                                                <%
+                                                    }
+                                                %>
+                                            </a>
+                                        </li> 
                                     </ul>
                                 </div>
                             </div>
@@ -108,40 +124,43 @@
                                                 }
                                             %>
                                             <%
-                                                String body;
+                                                String body, sub;
                                                 body = (String) request.getAttribute("body");
+                                                sub = (String) request.getAttribute("sub");
 
-                                                if (body.length()
-                                                        > 30) {
-                                                    body = body.substring(0, 30);
+                                                if (sub.length() >= 40) {
+                                                    body = "";
+                                                    sub = sub.substring(0, 40);
+                                                } else if ((sub + " - " + body).length() >= 40) {
+                                                    body = body.substring(0, 40 - sub.length());
                                                 }
                                             %>
 
                                             <input type="checkbox"/>
                                             <%
-                                                String starred = (String)request.getAttribute("starred");
-                                                if(starred.equals("No")){
+                                                String starred = (String) request.getAttribute("starred");
+                                                if (starred.equals("No")) {
                                             %>
                                             <a href="<s:url action="Updatestarredmail"><s:param name="idmessage"><s:property value="idmessage"/></s:param></s:url>"><span class="fa fa-star-o mlm"></span></a>
-                                            <%
-                                                }else{
-                                            %>
+                                                <%
+                                                } else {
+                                                %>
                                             <a href="<s:url action="Updatestarredmail"><s:param name="idmessage"><s:property value="idmessage"/></s:param></s:url>"><span class="fa fa-star mlm" style="color: goldenrod;"></span></a>
-                                            <%
-                                                }
-                                            %>
-                                            <%
-                                                String important = (String)request.getAttribute("important");
-                                                if(important.equals("No")){
-                                            %>
+                                                <%
+                                                    }
+                                                %>
+                                                <%
+                                                    String important = (String) request.getAttribute("important");
+                                                    if (important.equals("No")) {
+                                                %>
                                             <a href="<s:url action="Updateimportantmail"><s:param name="idmessage"><s:property value="idmessage"/></s:param></s:url>"><span class="fa fa-bookmark-o mrm mlm"></span></a>
-                                            <%
-                                                }else{
-                                            %>
+                                                <%
+                                                } else {
+                                                %>
                                             <a href="<s:url action="Updateimportantmail"><s:param name="idmessage"><s:property value="idmessage"/></s:param></s:url>"><span class="fa fa-bookmark mrm mlm" style="color: goldenrod;"></span></a>
-                                            <%
-                                                }
-                                            %>
+                                                <%
+                                                    }
+                                                %>
                                             <a href="<s:url action="viewemail"><s:param name="msgid" value="%{idmessage}"></s:param></s:url>">
 
                                                         <span style="min-width: 120px; display: inline-block;" class="name"><s:property value="sendername"/></span>

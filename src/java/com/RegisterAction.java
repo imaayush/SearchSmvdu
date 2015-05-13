@@ -13,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +27,6 @@ public class RegisterAction extends ActionSupport {
     }
 
     private String username;
-    private String password;
     private String email;
     private String gender;
     private String fname;
@@ -43,14 +40,6 @@ public class RegisterAction extends ActionSupport {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -101,6 +90,8 @@ public class RegisterAction extends ActionSupport {
                 rs = st.executeQuery(query1);
                 if (rs.next()) {
                     addActionMessage("Email not avaible...!!!");
+                } else {
+                    addActionMessage("Password has been sent to your email...!!!");
                 }
             }
         } catch (SQLException ex) {
@@ -114,39 +105,51 @@ public class RegisterAction extends ActionSupport {
         String query = "select email from user where username='" + username + "'";
         Statement st;
         try {
-            
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
                 return "fail";
 
             } else {
-                query = "insert into user(Name, Password, Email, Username, Gender, image, dateuser) values(?,?,?,?,?,?,?)";
-                try {
-                    PreparedStatement ps = con.prepareStatement(query);
-                    ps.setString(1, fname + " " + lname);
-                    ps.setString(2, password);
-                    ps.setString(3, email);
-                    ps.setString(4, username);
-                    ps.setString(5, gender);
-                    ps.setString(6, "images/profile.jpg");
-                    ps.setDate(7, new java.sql.Date((new Date(System.currentTimeMillis())).getTime()));
-                    ps.executeUpdate();
-                    query="insert into notification_status(username, notificationtime) values(?,?)";
-                    ps=con.prepareStatement(query);
-                    ps.setString(1, username);
-                    ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-                    ps.executeUpdate();
-                } catch (SQLException ex) {
-                    Logger.getLogger(RegisterAction.class.getName()).log(Level.SEVERE, null, ex);
+                String query1 = "select * from user where email='" + email + "'";
+                st = con.createStatement();
+                rs = st.executeQuery(query1);
+                if (rs.next()) {
+                    return "fail";
+                } else {
+                    query = "insert into user(Name, Password, Email, Username, Gender, image, dateuser) values(?,?,?,?,?,?,?)";
+                    try {
+                        String autoPassword = password.pass();
+                        String stat = SendEmail.sendEmail(email, "Registration Successfully", "Your password is : " + autoPassword);
+                        if (stat.equals("success")) {
+                            PreparedStatement ps = con.prepareStatement(query);
+                            ps.setString(1, fname + " " + lname);
+                            ps.setString(2, autoPassword);
+                            ps.setString(3, email);
+                            ps.setString(4, username);
+                            ps.setString(5, gender);
+                            ps.setString(6, "images/profile.jpg");
+                            ps.setDate(7, new java.sql.Date((new Date(System.currentTimeMillis())).getTime()));
+                            ps.executeUpdate();
+                            query = "insert into notification_status(username, notificationtime) values(?,?)";
+                            ps = con.prepareStatement(query);
+                            ps.setString(1, username);
+                            ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+                            ps.executeUpdate();
+                            return "success";
+                        } else {
+                            return "error";
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(RegisterAction.class.getName()).log(Level.SEVERE, null, ex);
+                        return "fail";
+                    }                    
                 }
-                return "success";
-
             }
         } catch (SQLException ex) {
             System.out.println(ex.toString());
-        }
-        return "fail";
+            return "error";
+        }        
     }
 
 }

@@ -104,7 +104,7 @@
                                                     <p>
                                                         <strong>Email:</strong> <s:property value="email"/></p>
                                                     <p>
-                                                        <strong>Status:</strong> Active</p>
+                                                        <strong>Status:</strong><span class="label label-red mrs"><s:property value="status"/></span></p>
                                                     <p>
                                                         <strong class="mrs">Member&nbsp;&nbsp;Since:</strong><span class="label label-green mrs"><s:property value="date"/></p>
                                                 </div>
@@ -180,24 +180,73 @@
                                                     %>
 
                                                 </div>
+
                                                 <div class="col-xs-12 col-sm-4 emphasis">
                                                     <h2>
-                                                        <strong>43</strong></h2>
+                                                        <strong>&nbsp;</strong></h2>
+                                                    </h2>
+
                                                     <p>
                                                         <small>Snippets</small>
-                                                    </p>
-                                                    <div class="btn-group dropup">
-                                                        <button type="button" data-toggle="dropdown" class="btn btn-orange dropdown-toggle">
-                                                            <span class="fa fa-gear"></span>&nbsp; Options
-                                                        </button>
-                                                        <ul role="menu" class="dropdown-menu pull-right text-left">
-                                                            <li><a href="Mailbox"><span class="fa fa-envelope"></span>&nbsp; Send an email</a></li>
-                                                            <li><a href="#"><span class="fa fa-warning"></span>&nbsp; Report this user for spam</a></li>
-                                                        </ul>
-                                                    </div>
+                                                    </p>                                                                                                                   
+                                                    <%
+                                                        if (((String) session.getAttribute("username")).equals("admin")) {
+                                                            String adminstatus = (String) request.getAttribute("adminstatus");
+                                                            if (adminstatus.equals("Enable")) {
+                                                    %>
+                                                    <a class="btn btn-sm btn-block btn-danger" href="<s:url  action="enabledisable" >
+                                                           <s:param name="UserName"><s:property value="UserName"/></s:param></s:url>"><span class="fa fa-list"></span>&nbsp; Disable</a>
+                                                    <%
+                                                    } else {
+                                                    %>
+                                                    <a class="btn btn-sm btn-block btn-green" href="<s:url  action="enabledisable">
+                                                           <s:param name="UserName"><s:property value="UserName"/></s:param></s:url>"><span class="fa fa-list"></span>&nbsp; Enable</a>
+                                                    <%
+                                                        }
+                                                    } else {
+                                                    %>
+                                                    <a href="#myModal" role="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal"><span class="fa fa-warning"></span>&nbsp; Report this user for spam</a>
+                                                    <form action="Reportuser" method="post" >
+                                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title" id="myModalLabel">New Message</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" >
+
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right">
+                                                                                <input id="email" type="email" value="admin@smvdu.ac.in" placeholder="Recipients email" class="form-control" name="receiveremail" required></div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right">
+
+                                                                                <input id="inputPassword" type="text" placeholder="Subject" class="form-control" name="sub" value="Report user for spam" required></div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right">
+                                                                                <textarea rows="8" cols="50" class="form-control" name="body" required>User Reported to Spam - <s:property value="email"/>
+                                                                                </textarea>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        <button name="sendmail" value="spam" class="btn btn-primary">Send</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </div>
                                             </div>
-
                                             <div class="row divider" style="margin-top: 2%; padding: 2%;">
                                                 <ul class="nav nav-tabs">
                                                     <li role="presentation" class="active"><a href="#">Time Line</a></li>

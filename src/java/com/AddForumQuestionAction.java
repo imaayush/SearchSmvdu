@@ -32,6 +32,7 @@ public class AddForumQuestionAction extends ActionSupport {
     }
     
     public String execute() throws Exception {
+        try{
         Connection conn = Connections.conn();
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username = (String) session.getAttribute("username");
@@ -41,6 +42,10 @@ public class AddForumQuestionAction extends ActionSupport {
         ps.setString(2, username);
         ps.executeUpdate();
         return "success";
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "fail";
+        }
     }
     
 }

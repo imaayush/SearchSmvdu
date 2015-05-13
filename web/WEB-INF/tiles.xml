@@ -70,5 +70,11 @@
         <put-attribute name="menu" value="/menu.jsp" />
 
         <put-attribute name="SearchResult" value="/QuestionComments.jsp" />
+    </definition>
+    <definition name="/searchbyadmin" template="/layout.jsp">
+        <put-attribute name="header" value="/temp_header.jsp" />
+        <put-attribute name="menu" value="/menu.jsp" />
+
+        <put-attribute name="SearchResult" value="/search.jsp" />
     </definition> 
 </tiles-definitions>

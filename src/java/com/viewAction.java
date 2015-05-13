@@ -32,6 +32,24 @@ public class viewAction extends ActionSupport {
     private String circle;
     private String likes;
     private String date;
+    private String status;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getDate() {
         return date;
@@ -134,64 +152,76 @@ public class viewAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        Connection con = Connections.conn();
-        HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String User = (String) session.getAttribute("username");
-        Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image, dateuser from user where UserName='" + User + "'");
-        String x = LikeCircle.likecount(User);
-        setLikes(x);
+        try {
+            Connection con = Connections.conn();
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            String User = (String) session.getAttribute("username");
+            Statement ps = con.createStatement();
+            ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image, dateuser, status, password from user where UserName='" + User + "'");
+            String x = LikeCircle.likecount(User);
+            setLikes(x);
 
-        x = LikeCircle.circlecount(User);
-        setCircle(x);
-        while (rs.next()) {
-            setName(rs.getString(1));
-            setEmail(rs.getString(2));
-            setGender(rs.getString(3));
-            setImage(rs.getString(4));
-            setDate(rs.getString(5));
+            x = LikeCircle.circlecount(User);
+            setCircle(x);
+            while (rs.next()) {
+                setName(rs.getString(1));
+                setEmail(rs.getString(2));
+                setGender(rs.getString(3));
+                setImage(rs.getString(4));
+                setDate(rs.getString(5));
+                setStatus(rs.getString(6));
+                setPassword(rs.getString(7));
+            }
+            ps = con.createStatement();
+            rs = ps.executeQuery("select filename,filetags,filedescription,idfiles from files where username='" + User + "'");
+
+            while (rs.next()) {
+                Files f = new Files();
+                f.setFilename(rs.getString(1));
+                f.setFiletags(rs.getString(2));
+                f.setFiledes(rs.getString(3));
+                f.setIdfiles(rs.getString(4));
+                file1.add(f);
+            }
+            con.close();
+            con = Connections.conn();
+            ps = con.createStatement();
+            rs = ps.executeQuery("select active,activeid,time from log where username='" + User + "'");
+            while (rs.next()) {
+
+                Loginfo p = new Loginfo();
+
+                p.setActive(rs.getString(1));
+                p.setActiveid(rs.getString(2));
+                String s[] = rs.getString(3).split("\\.")[0].split("\\:");
+                p.setTime(s[0] + ":" + s[1]);
+
+                loginfo.add(p);
+            }
+            con.close();
+            con = Connections.conn();
+            ps = con.createStatement();
+            if (User.equals("admin")) {
+                rs = ps.executeQuery("select name, username, image, id from circle natural join user where circlename='" + User + "'");
+            } else {
+                rs = ps.executeQuery("select name, username, image, id from circle natural join user where status='Active' AND circlename='" + User + "'");
+            }
+
+            while (rs.next()) {
+
+                People p = new People();
+
+                p.setName(rs.getString(1));
+                p.setUserName(rs.getString(2));
+                p.setPhoto(rs.getString(3));
+                p.setId(rs.getString(4));
+                people.add(p);
+            }
+            return "success";
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            return "fail";
         }
-        ps = con.createStatement();
-        rs = ps.executeQuery("select filename,filetags,filedescription,idfiles from files where username='" + User + "'");
-
-        while (rs.next()) {
-            Files f = new Files();
-            f.setFilename(rs.getString(1));
-            f.setFiletags(rs.getString(2));
-            f.setFiledes(rs.getString(3));
-            f.setIdfiles(rs.getString(4));
-            file1.add(f);
-        }
-        con.close();
-        con = Connections.conn();
-        ps = con.createStatement();
-        rs = ps.executeQuery("select active,activeid,time from log where username='" + User + "'");
-        while (rs.next()) {
-
-            Loginfo p = new Loginfo();
-
-            p.setActive(rs.getString(1));
-            p.setActiveid(rs.getString(2));            
-            String s[] = rs.getString(3).split("\\.")[0].split("\\:");
-            p.setTime(s[0] + ":" +s[1]);
-
-            loginfo.add(p);
-        }
-       con.close();
-       con = Connections.conn();
-        ps = con.createStatement();
-        rs = ps.executeQuery("select DISTINCT name ,user.UserName,image,id  from circle inner join user on circle.username=user.UserName where circle.circlename='"+User+"'");
-        while (rs.next()) {
-            
-            People p = new People();
-            
-            p.setName(rs.getString(1));
-            p.setUserName(rs.getString(2));
-            p.setPhoto(rs.getString(3));
-             p.setId(rs.getString(4));
-            people.add(p);
-        }
-        return "success";
     }
 
 }

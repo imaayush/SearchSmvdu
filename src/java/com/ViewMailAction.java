@@ -20,7 +20,7 @@ import org.apache.struts2.ServletActionContext;
  * @author DKG
  */
 public class ViewMailAction extends ActionSupport {
-    
+
     private String msgid;
     private String sub;
     private String body;
@@ -31,9 +31,8 @@ public class ViewMailAction extends ActionSupport {
     private String time;
     private String senderemail;
     private String receiveremail;
-    
-    Connection con = Connections.conn ();
-    
+
+    Connection con = Connections.conn();
 
     public String getMsgid() {
         return msgid;
@@ -116,34 +115,38 @@ public class ViewMailAction extends ActionSupport {
     }
 
     public ViewMailAction() {
-    }    
+    }
 
     public String execute() throws Exception {
+        try {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            String msgid = request.getParameter("msgid");
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            String username = (String) session.getAttribute("username");
+            //System.out.println(msgid);
+            setMsgid(msgid);
+            Statement ps = con.createStatement();
+            ResultSet rs = ps.executeQuery("select  sub, body, important, categories, receiver, sendername, time, senderemail, receiveremail from message where idmessage=" + Integer.parseInt(msgid));
+            while (rs.next()) {
+                System.out.println(msgid);
+                setSub(rs.getString(1));
+                setBody(rs.getString(2));
+                setImportant(rs.getString(3));
+                setCategories(rs.getString(4));
+                setStatus(rs.getString(5));
+                setSendername(rs.getString(6));
+                setTime(rs.getString(7).split("\\.")[0]);
+                setSenderemail(rs.getString(8));
+                setReceiveremail(rs.getString(9));
 
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        String msgid = request.getParameter("msgid"); 
-        HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String username = (String) session.getAttribute("username");
-        //System.out.println(msgid);
-        setMsgid(msgid);
-        Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select  sub, body, important, categories, receiver, sendername, time, senderemail, receiveremail from message where idmessage=" + Integer.parseInt(msgid));
-        while (rs.next()) {  
-            System.out.println(msgid);
-            setSub(rs.getString(1));
-            setBody(rs.getString(2));
-            setImportant(rs.getString(3));
-            setCategories(rs.getString(4));
-            setStatus(rs.getString(5));
-            setSendername(rs.getString(6));
-            setTime(rs.getString(7).split("\\.")[0]);
-            setSenderemail(rs.getString(8));
-            setReceiveremail(rs.getString(9));
-            
-            ps=con.createStatement();
-            ps.executeUpdate("update message set receiver='Read' where idmessage=" + Integer.parseInt(msgid) + " And receivername='" + username + "'");
+                ps = con.createStatement();
+                ps.executeUpdate("update message set receiver='Read' where idmessage=" + Integer.parseInt(msgid) + " And receivername='" + username + "'");
+            }
+            con.close();
+            return "success";
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            return "fail";
         }
-        con.close();
-        return "success";
-    }    
+    }
 }

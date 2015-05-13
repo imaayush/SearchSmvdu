@@ -40,6 +40,7 @@ public class AddAnswerAction extends ActionSupport {
     }
     
     public String execute() throws Exception {
+        try{
         HttpSession session = ServletActionContext.getRequest().getSession(false);
         String username = (String) session.getAttribute("username");
         
@@ -51,9 +52,12 @@ public class AddAnswerAction extends ActionSupport {
         stat.executeUpdate();
         
         stat = con.prepareStatement("update forumquestion set answered=answered+1 where idforumquestion='" +idforumquestion +"'");
-        stat.executeUpdate();
-        
+        stat.executeUpdate();        
         return SUCCESS;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "fail";
+        }
     }
     
 }
