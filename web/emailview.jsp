@@ -42,8 +42,8 @@
 
                         </div>
                         <form action="Mailbox">
-                            <div class="col-sm-9 col-md-10">
-                                <div class="btn-group">
+                            <div class="col-sm-9 col-md-10">     
+                                <!--<div class="btn-group">
                                     <button type="button" class="btn btn-default"><input type="checkbox" style="margin: 0; vertical-align: middle;" class="checkall"/></button>
                                     <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>
                                     <ul role="menu" class="dropdown-menu">
@@ -54,8 +54,9 @@
                                         <li><a href="#">Starred</a></li>
                                         <li><a href="#">Unstarred</a></li>
                                     </ul>
-                                </div>
                                 <button type="button" data-toggle="tooltip" title="Refresh" class="btn btn-default mls mrs"><span class="fa fa-refresh"></span></button>
+                                </div>-->
+                                <button data-toggle="tooltip" title="Refresh" class="btn btn-default mrs"><span class="fa fa-refresh"></span></button>
                             </div>
                         </form>
                     </div>
@@ -69,18 +70,35 @@
                                     <ul style="background: #fff" class="nav nav-pills nav-stacked">
                                         <%
                                             Connection con = Connections.conn();
-                                            int number = 0;
+                                            int number = 0, number1 = 0;
                                             String email = (String) session.getAttribute("email");
+                                            System.out.println(email);
                                             Statement st = con.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "' And receiver='Unread'");
+                                            ResultSet rs = st.executeQuery("select * from message where receiveremail='" + email + "'AND categories='Primary' And receiver='Unread'");
                                             while (rs.next()) {
                                                 number++;
+                                            }
+                                            st = con.createStatement();
+                                            rs = st.executeQuery("select * from message where receiveremail='" + email + "'AND categories='Spam' And receiver='Unread'");
+                                            while (rs.next()) {
+                                                number1++;
                                             }
                                         %>
                                         <li class="active"><a href="Mailbox"><span class="badge pull-right"><%=number%></span><i class="fa fa-inbox fa-fw mrs"></i>Inbox</a></li>
                                         <!--<li><a href="#"><i class="fa fa-star-o fa-fw mrs"></i>Starred</a></li>-->
                                         <li><a href="Importantmail"><i class="fa fa-info-circle fa-fw mrs"></i>Important</a></li>
-                                        <li><a href="Sentmail"><i class="fa fa-plane fa-fw mrs"></i>Sent Mail</a></li>                                        
+                                        <li><a href="Starredmail"><i class="fa fa-star fa-fw mrs"></i>Starred</a></li>
+                                        <li><a href="Sentmail"><i class="fa fa-plane fa-fw mrs"></i>Sent Mail</a></li>
+                                        <li><a href="Spammail"><i class="fa fa-warning mrs"></i>Spam&nbsp;
+                                                <%
+                                                    if (number1 != 0) {
+                                                %>
+                                                (<%=number1%>)
+                                                <%
+                                                    }
+                                                %>
+                                            </a>
+                                        </li>                                         
                                     </ul>
                                 </div>
                             </div>

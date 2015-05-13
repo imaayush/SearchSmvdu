@@ -14,44 +14,56 @@
             <result name="success" type="tiles">/home</result> 
             <result name="fail">/Login.jsp</result> 
         </action>
-        
+        <action name="Forgetpassword" class="com.ForgetpasswordAction">
+            <result name="success">/Login.jsp</result> 
+            <result name="fail">/forgetpassword.jsp</result> 
+            <result name="error">/error.jsp</result>
+        </action>
         <action name="Register" class="com.RegisterAction">
             <result name="success">/Login.jsp</result> 
             <result name="fail">/Register.jsp</result> 
+            <result name="error">/error.jsp</result>
         </action>
         
         <action name="LoginFrom">
-            <result >Login.jsp</result> 
+            <result>Login.jsp</result> 
         </action>
 
         <action name="UploadFrom">
-            <result name="success" type="tiles">/upload</result> 
+            <result name="success" type="tiles">/upload</result>            
         </action>
         
         <action name="Addcircle" class="com.AddAction" >
             <result name="success" type="tiles">/circle</result>
-            <result name="fail" type="tiles">/admin</result>
+            <result name="fail" type="tiles">/error.jsp</result>
         </action>
-        
+        <action name="Searchuser" class="com.AddAction" method="searchuser">
+            <result name="success" type="tiles">/circle</result>
+            <result name="fail" type="tiles">/error.jsp</result>
+        </action>
+        <action name="Searchuserfile" class="com.SearchUserFileAction">
+            <result name="successuser" type="tiles">/circle</result>
+            <result name="successfile" type="tiles">/searchview</result>
+            <result name="fail" type="tiles">/error.jsp</result>
+        </action>
+        <action name="Searchbyadmin">
+            <result name="success" type="tiles">/searchbyadmin</result>
+        </action>
         <action name="Myprofile" class="com.viewAction" method="execute">
             <result name="success" type="tiles">/myprofile</result> 
             <result name="fail" type="tiles">/Login.jsp</result> 
         </action>
-        
-        <action name="Logout" class="com.loginAction" method="logout">  
-            <result name="success">/Login.jsp</result>  
-        </action> 
-        
+                
         <action name="Myprofile" class="com.viewAction" method="execute">
             <result name="success" type="tiles">/myprofile</result> 
             <result name="fail" type="tiles">/Login.jsp</result> 
         </action>
-        <action name="Logout" class="com.loginAction" method="logout">  
-            <result name="success">/Login.jsp</result>  
+        <action name="Logout" class="com.LogoutAction">  
+            <result name="success">/index.jsp</result>  
         </action>  
 
         <action name="Uploadphoto" class="com.UploadAction" >  
-            <result name="success" type="tiles">/admin</result>  
+            <result name="success" type="redirect">/Myprofile</result>  
             <result name="fail">/error.jsp</result>  
         </action> 
                 
@@ -82,7 +94,10 @@
             <result name="success" type="redirect">/Mailbox</result>
             <result name="fail">/error.jsp</result>
         </action>
-       
+        <action name="Reportuser" class="com.SendemailAction">
+            <result name="success" type="redirect">/Myprofile</result>
+            <result name="fail">/error.jsp</result>
+        </action>    
         <action name="Sentmail" class="com.MailAction" method="sentmail">
             <result name="success" type="tiles">/mailbox</result>
             <result name="fail">/error.jsp</result>
@@ -145,7 +160,7 @@
         
         <action name="search" class="com.SearchAction">
             <result name="success" type="tiles">/searchview</result>
-            <result name="fail" type="tiles">/upload</result>
+            <result name="fail" type="tiles">/error.jsp</result>
         </action>
         
         <action name="searchtags" class="com.SearchtagsAction">
@@ -200,6 +215,34 @@
         </action>
         <action name="Addanswertoquestion" class="com.AddAnswerAction">
             <result name="success" type="redirect">/Questioncomments?idforumquestion=${idforumquestion}</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Updateimportantmail" class="com.MailAction" method="updateimportantmail">
+            <result name="success" type="redirect">/Mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Starredmail" class="com.MailAction" method="starredmail">
+            <result name="success" type="tiles">/mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Spammail" class="com.MailAction" method="spammail">
+            <result name="success" type="tiles">/mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Updatestarredmail" class="com.MailAction" method="updatestarredmail">
+            <result name="success" type="redirect">/Mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="Allread" class="com.MailAction" method="allread">
+            <result name="success" type="redirect">/Mailbox</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="activatedeactivate" class="com.ActivateDeactivateAction">
+            <result name="success" type="redirect">/Myprofile</result>
+            <result name="fail">/error.jsp</result>
+        </action>
+        <action name="enabledisable" class="com.EnableDisableAction">
+            <result name="success" type="redirect">/ViewProfile?UserName=${username}</result>
             <result name="fail">/error.jsp</result>
         </action>
     </package>     

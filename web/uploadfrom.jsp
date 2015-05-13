@@ -54,14 +54,14 @@
                                                 <select id="inputName" class="form-control" name="ftag">
                                                     <option>Select Tag</option>
                                                     <option>Video</option>
-                                                    <option>Movie</option>
+                                                    <option>Book</option>
                                                     <option>Software</option>
                                                     <option>Music</option>
                                                     <option>Sport</option>
                                                     <option>Game</option>
-                                                    <option>Tv Show</option>
                                                     <option>Project</option>
                                                     <option>Paper</option>
+                                                    <option>Other</option>
                                                 </select>
                                             </div>
 

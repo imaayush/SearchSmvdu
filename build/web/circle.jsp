@@ -10,12 +10,41 @@
 <%@page import="java.sql.Connection"%>
 <%@taglib uri="/struts-tags" prefix="s" %>
 
+<%
+    Connection con = Connections.conn();
+    String query;
+    String username = (String) session.getAttribute("username");
+    if (username.equals("admin")) {
+        query = "select distinct name from user where username!='" + username + "' AND username!='admin' AND status='Active'";
+    } else {
+        query = "select distinct name from user where username!='" + username + "' AND username!='admin'";
+    }
+    Statement st = con.createStatement();
+    ResultSet rs = st.executeQuery(query);
+    String Autostr = "";
+    while (rs.next()) {
+        Autostr = Autostr + "," + rs.getString(1);
+    }
+%>
+<script>
+    $(function () {
+        var s = "<%=Autostr%>";
+        var availableTags = s.split(",");
+
+        $("#search").autocomplete({
+            autoFocus: true,
+            source: availableTags
+        });
+    });
+</script>
+
 <div id="page-wrapper">
     <!--BEGIN TITLE & BREADCRUMB PAGE-->
     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
         <div class="page-header pull-left">
             <div class="page-title">
-                Add to Circle</div>
+                Add to Circle
+            </div>
         </div>
         <ol class="breadcrumb page-breadcrumb pull-right">
             <li><i class="fa fa-home"></i>&nbsp;<a href="home">Home</a></li>
@@ -37,19 +66,20 @@
                     </div>
 
                 </div>
-
                 <div class="col-lg-12">
-
                     <div class="page-content">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="panel">
                                     <div class="panel-body">
                                         <div id="grid-layout-table-1" class="box jplist">
-                                            <div class="jplist-ios-button"><i class="fa fa-sort"></i>jPList Actions</div>
-                                            <div class="jplist-panel box panel-top">
-
-                                            </div>
+                                            <div class="row mbl">
+                                                <form action="Searchuser">
+                                                    <div class="col-lg-6">
+                                                        <div class="input-group"><input id="search" name="name" type="text" class="form-control"><span class="input-group-btn"><button class="btn btn-white">Search</button></span></div>
+                                                    </div>
+                                                </form>
+                                            </div>                                         
                                             <div class="box text-shadow">
                                                 <%!
                                                     String userincircle;
@@ -86,13 +116,13 @@
                                                                             if (rs.next()) {
                                                                         %>
                                                                     <form action="Removefromcircle" method="post" >
-                                                                        <button class="btn btn-red" value="<s:property value="UserName"/>" name="username2">Remove from Circle</button></p>
+                                                                        <button class="btn btn-green" value="<s:property value="UserName"/>" name="username2"><span class="fa fa-circle-o"></span>&nbsp;&nbsp;Friends</button></p>
                                                                     </form>
                                                                     <%
                                                                     } else {
                                                                     %>
                                                                     <form action="Addtocircle" method="post" >
-                                                                        <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2">Add to Circle</button></p>
+                                                                        <button class="btn btn-blue" value="<s:property value="UserName"/>" name="username2">Add to Circles</button></p>
                                                                     </form>
                                                                     <%
                                                                         }

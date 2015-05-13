@@ -41,16 +41,21 @@ public class CommentAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String username = (String) session.getAttribute("username");
-        
-        Connection con = Connections.conn();
-        PreparedStatement stat = con.prepareStatement("insert into comments(idfiles, username, comment) values(?,?,?)");
-        stat.setString(1, idfiles);
-        stat.setString(2, username);
-        stat.setString(3, cmt);
-        stat.executeUpdate();
-        return "success";
+        try {
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            String username = (String) session.getAttribute("username");
+
+            Connection con = Connections.conn();
+            PreparedStatement stat = con.prepareStatement("insert into comments(idfiles, username, comment) values(?,?,?)");
+            stat.setString(1, idfiles);
+            stat.setString(2, username);
+            stat.setString(3, cmt);
+            stat.executeUpdate();
+            return "success";
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "fail";
+        }
     }
 
 }

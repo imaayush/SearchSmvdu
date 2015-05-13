@@ -32,6 +32,24 @@ public class ViewProfileAction extends ActionSupport {
     private String circle;
     private String likes;
     private String date;
+    private String status;
+    private String adminstatus;
+
+    public String getAdminstatus() {
+        return adminstatus;
+    }
+
+    public void setAdminstatus(String adminstatus) {
+        this.adminstatus = adminstatus;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getDate() {
         return date;
@@ -40,7 +58,7 @@ public class ViewProfileAction extends ActionSupport {
     public void setDate(String date) {
         this.date = date;
     }
-    
+
     ArrayList<Loginfo> loginfo = new ArrayList<Loginfo>();
 
     public ArrayList<Loginfo> getLoginfo() {
@@ -108,39 +126,46 @@ public class ViewProfileAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        Connection con = Connections.conn();
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        String User = request.getParameter("UserName");
-        setUserName(User);
-        Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image, dateuser from user where UserName='" + User + "'");
+        try {
+            Connection con = Connections.conn();
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            String User = request.getParameter("UserName");
+            setUserName(User);
+            Statement ps = con.createStatement();
+            ResultSet rs = ps.executeQuery("select Name ,Email ,Gender, image, dateuser,status, adminstatus from user where UserName='" + User + "'");
 
-        String x = LikeCircle.likecount(User);
-        setLikes(x);
-        x = LikeCircle.circlecount(User);
-        setCircle(x);
-        while (rs.next()) {
-            setName(rs.getString(1));
-            setEmail(rs.getString(2));
-            setGender(rs.getString(3));
-            setImage(rs.getString(4));
-            setDate(rs.getString(5));            
+            String x = LikeCircle.likecount(User);
+            setLikes(x);
+            x = LikeCircle.circlecount(User);
+            setCircle(x);
+            while (rs.next()) {
+                setName(rs.getString(1));
+                setEmail(rs.getString(2));
+                setGender(rs.getString(3));
+                setImage(rs.getString(4));
+                setDate(rs.getString(5));
+                setStatus(rs.getString(6));
+                setAdminstatus(rs.getString(7));
+            }
+            con.close();
+            con = Connections.conn();
+            ps = con.createStatement();
+            rs = ps.executeQuery("select active,activeid,time from log where username='" + User + "'");
+            while (rs.next()) {
+
+                Loginfo p = new Loginfo();
+
+                p.setActive(rs.getString(1));
+                p.setActiveid(rs.getString(2));
+                String s[] = rs.getString(3).split("\\.")[0].split("\\:");
+                p.setTime(s[0] + ":" + s[1]);
+
+                loginfo.add(p);
+            }
+            return "success";
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            return "fail";
         }
-        con.close();
-        con = Connections.conn();
-        ps = con.createStatement();
-        rs = ps.executeQuery("select active,activeid,time from log where username='" + User + "'");
-        while (rs.next()) {
-
-            Loginfo p = new Loginfo();
-
-            p.setActive(rs.getString(1));
-            p.setActiveid(rs.getString(2));
-            String s[] = rs.getString(3).split("\\.")[0].split("\\:");
-            p.setTime(s[0] + ":" +s[1]);
-            
-            loginfo.add(p);            
-        }        
-        return "success";
     }
 }

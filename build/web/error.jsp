@@ -8,10 +8,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>0hh Website Template | Home :: W3layouts</title>
+        <meta name="keywords" content="404 iphone web template, Andriod web template, Smartphone web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <link href="styles/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Error</h1>
+        <!--start-wrap--->
+        <div class="wrap">
+            <!---start-header---->
+            <div class="header">
+                <div class="logo">
+                    <h1><a href="#">Ohh</a></h1>
+                </div>
+            </div>
+            <!---End-header---->
+            <!--start-content------>
+            <div class="content">
+                <img src="images/error-img.png" title="error" />
+                <p><span><label>O</label>hh.....</span>You Requested the page that is no longer There.</p>
+                <a href="home">Back To Home</a>
+                <div class="copy-right">
+                    <p>&#169 All rights Reserved</p>
+                </div>
+            </div>
+            <!--End-Cotent------>
+        </div>
+        <!--End-wrap--->
     </body>
 </html>

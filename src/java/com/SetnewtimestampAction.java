@@ -18,23 +18,28 @@ import org.apache.struts2.ServletActionContext;
  * @author DKG
  */
 public class SetnewtimestampAction extends ActionSupport {
-    
+
     public SetnewtimestampAction() {
     }
-    
+
     public String execute() throws Exception {
-        HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String username = (String) session.getAttribute("username");
-        Connection con = Connections.conn();
         try {
-            String query = "update notification_status set notificationtime=? where username=?";            
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(2, username);
-            ps.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
-            ps.executeUpdate();
-        }catch(Exception e){
-            System.out.println(e.toString());
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            String username = (String) session.getAttribute("username");
+            Connection con = Connections.conn();
+            try {
+                String query = "update notification_status set notificationtime=? where username=?";
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setString(2, username);
+                ps.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+                ps.executeUpdate();
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+            return "success";
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            return "fail";
         }
-        return "success";
-    }    
+    }
 }

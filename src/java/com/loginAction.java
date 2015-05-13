@@ -81,16 +81,22 @@ public class loginAction extends ActionSupport implements SessionAware {
     @Override
     public void validate() {
 
-        String query = "select Password from user where UserName='" + username + "'";
+        String query = "select Password,adminstatus from user where UserName='" + username + "'";
         Connection con = Connections.conn();
         Statement st;
         try {
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
-                if (!rs.getString(1).equals(password)) {
-                    addActionMessage("Worng Password...!!!");
+                if (rs.getString(1).equals(password)) {
+                    if (rs.getString(2).equals("Disable")) {
+                        addActionMessage("Your Account has been blocked by admin...!!!");
+                    }
+                } else {
+                    addActionMessage("Worng username and Password...!!!");
                 }
+            } else {
+                addActionMessage("Worng username and Password...!!!");
             }
 
         } catch (SQLException ex) {
@@ -101,8 +107,7 @@ public class loginAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() throws Exception {
-
-        String query = "select Password ,Email from user where UserName='" + username + "'";
+        String query = "select Password ,Email,adminstatus from user where UserName='" + username + "'";
         Connection con = Connections.conn();
         Statement st;
         try {
@@ -111,6 +116,8 @@ public class loginAction extends ActionSupport implements SessionAware {
             if (rs.next()) {
                 if (!rs.getString(1).equals(password)) {
                     return "fail";
+                } else if (rs.getString(3).equals("Disable")) {
+                    return "fail";
                 } else {
                     sessionMap.put("email", rs.getString(2));
                     sessionMap.put("username", username);
@@ -118,11 +125,10 @@ public class loginAction extends ActionSupport implements SessionAware {
                     return "success";
                 }
             }
-
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.toString());
+            return "fail";
         }
-
         return "fail";
     }
 
@@ -146,14 +152,14 @@ public class loginAction extends ActionSupport implements SessionAware {
                 String s = rs.getString(8);
                 String s1[] = s.split("\\.");
                 n.setDatetime(s1[0]);
-                n.setImage(rs.getString(9));                
+                n.setImage(rs.getString(9));
                 note.add(n);
             }
-            
-        } catch (SQLException ex) {
+            return "success";
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            return "fail";
         }
-
-        return "success";
     }
 
     public String autocomplete1() {
@@ -168,16 +174,10 @@ public class loginAction extends ActionSupport implements SessionAware {
             while (rs.next()) {
                 Autostr = Autostr + "," + rs.getString(1);
             }
-        } catch (SQLException ex) {
+            return "success";
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            return "fail";
         }
-
-        return "success";
-    }
-
-    public String logout() {
-        if (sessionMap != null) {
-            sessionMap.invalidate();
-        }
-        return "success";
     }
 }

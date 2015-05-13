@@ -48,6 +48,7 @@ public class SearchAction extends ActionSupport {
     }
     
     public String execute() throws Exception {
+        try{
        Connection con = Connections.conn();
        Statement ps0 = con.createStatement();
         ResultSet rs0 = ps0.executeQuery("select filename,filetags,filedescription ,idfiles,datetime,viewed,indexfile from files where filename like '%"+searchtext+"' and filetags like '%"+ searchtext+"' and filedescription like '%"+ searchtext+"%' ORDER BY indexfile DESC" );
@@ -119,7 +120,9 @@ public class SearchAction extends ActionSupport {
         }
         con.close();
         return "success";
-    }
-    
-    
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "fail";
+        }
+    }   
 }
