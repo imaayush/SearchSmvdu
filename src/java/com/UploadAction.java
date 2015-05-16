@@ -27,9 +27,9 @@ public class UploadAction extends ActionSupport implements SessionAware {
     private String fileFileName;
     private String fileContentType;
     private SessionMap<String, Object> sessionMap;
-    
-    String filePath;    
-    
+
+    String filePath;
+
     public File getFile() {
         return file;
     }
@@ -57,21 +57,26 @@ public class UploadAction extends ActionSupport implements SessionAware {
     @Override
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap) map;
-    }  
+    }
 
     @Override
     public String execute() throws Exception {
-        //throw new UnsupportedOperationException("Not supported yet.");
-        HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String username = (String) session.getAttribute("username");
-        filePath = "C:\\Users\\DKG\\Documents\\NetBeansProjects\\SearchSmvdu\\web\\img";        
-        File destfile = new File(filePath, username + ".jpg");
-        FileUtils.copyFile(getFile(), destfile);
-        String path = "img/" + username + ".jpg";
-        String query = "update user set image='" + path + "' where username='" + username + "'";
-        Connection con = Connections.conn();
-        Statement st = con.createStatement();
-        st.executeUpdate(query);
-        return SUCCESS;
+        try {
+            //throw new UnsupportedOperationException("Not supported yet.");
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            String username = (String) session.getAttribute("username");
+            filePath = "C:\\Users\\DKG\\Documents\\NetBeansProjects\\SearchSmvdu\\web\\img";
+            File destfile = new File(filePath, username + ".jpg");
+            FileUtils.copyFile(getFile(), destfile);
+            String path = "img/" + username + ".jpg";
+            String query = "update user set image='" + path + "' where username='" + username + "'";
+            Connection con = Connections.conn();
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            return SUCCESS;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "fail";
+        }
     }
 }

@@ -7,4 +7,4 @@
 
 <jsp:include page="/temp_header.jsp"></jsp:include>
 <jsp:include page="/menu.jsp"></jsp:include>
-<jsp:include page="/SearchResult.jsp"></jsp:include>
+<jsp:include page="/image.jsp"></jsp:include>

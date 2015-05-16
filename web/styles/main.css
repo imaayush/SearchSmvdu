@@ -121,7 +121,7 @@ hr {
 #wrapper {
   width: 100%;
   min-height: 100%;
-  background-color: #3C3C3C;
+  background-color: #EFF3F4;
 }
 #page-wrapper {
   min-height: 100%;
@@ -1032,7 +1032,7 @@ background: #303030; /* Old browsers */
 .right-sidebar #page-wrapper {
   margin: 0 250px 0 0;
 }
-/* Begin Horizontal menu */
+/* Begin Horizontal*/
 /* Begin Left Sidebar Collapsed */
 .left-side-collapsed .navbar-static-side {
   width: 55px;
@@ -3590,7 +3590,7 @@ body.sidebar-icons #wrapper #page-wrapper {
 .mbl,
 .mvl,
 .mal {
-  margin-bottom: 20px !important;
+  margin-bottom:0px !important;
 }
 .mbxl,
 .mvxl,

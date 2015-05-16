@@ -29,7 +29,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button name="sendmail" value="Primary" class="btn btn-primary">Send</button>
                 </div>
             </div>
         </div>

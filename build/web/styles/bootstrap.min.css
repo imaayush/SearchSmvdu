@@ -3024,8 +3024,7 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 }
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
 	color: #fff;
-	background-color: #428bca
-}
+	background-color: #428bca}
 .nav-stacked>li {
 	float: none
 }

@@ -27,7 +27,7 @@ public class QuestionCommentAction extends ActionSupport {
     private String username;
     private String time;
     private String img;
-    
+
     ArrayList<Forum> forum = new ArrayList<Forum>();
 
     public ArrayList<Forum> getForum() {
@@ -82,37 +82,42 @@ public class QuestionCommentAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        Connection con = Connections.conn();
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        String idquestion = request.getParameter("idforumquestion");
-        Statement ps = con.createStatement();
-        ResultSet rs = ps.executeQuery("select idforumquestion,question,username,time from forumquestion where idforumquestion='" + idquestion + "'");
-        while (rs.next()) {
-            setIdforumquestion(rs.getString(1));
-            setQuestion(rs.getString(2));
-            setUsername(rs.getString(3));
-            setTime(rs.getString(4).split("\\.")[0]);
-            ps = con.createStatement();
-            rs = ps.executeQuery("select image from user where username='" + rs.getString(3) + "'");
+        try {
+            Connection con = Connections.conn();
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            String idquestion = request.getParameter("idforumquestion");
+            Statement ps = con.createStatement();
+            ResultSet rs = ps.executeQuery("select idforumquestion,question,username,time from forumquestion where idforumquestion='" + idquestion + "'");
             while (rs.next()) {
-                setImage(rs.getString(1));
+                setIdforumquestion(rs.getString(1));
+                setQuestion(rs.getString(2));
+                setUsername(rs.getString(3));
+                setTime(rs.getString(4).split("\\.")[0]);
+                ps = con.createStatement();
+                rs = ps.executeQuery("select image from user where username='" + rs.getString(3) + "'");
+                while (rs.next()) {
+                    setImage(rs.getString(1));
+                }
             }
+            ps = con.createStatement();
+            rs = ps.executeQuery("select username,time,answer,image from questiondetails natural join user where idforumquestion='" + idquestion + "'");
+            while (rs.next()) {
+                Forum f = new Forum();
+                f.setUsernameAnswer(rs.getString(1));
+                f.setTimeAnswer(rs.getString(2).split("\\.")[0]);
+                f.setAnswer(rs.getString(3));
+                f.setImage(rs.getString(4));
+                forum.add(f);
+            }
+
+            PreparedStatement stat = con.prepareStatement("update forumquestion set viewed=viewed+1 where idforumquestion='" + idquestion + "'");
+            stat.executeUpdate();
+
+            return SUCCESS;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "fail";
         }
-        ps = con.createStatement();
-        rs = ps.executeQuery("select username,time,answer,image from questiondetails natural join user where idforumquestion='" + idquestion + "'");
-        while (rs.next()) {
-            Forum f = new Forum();
-            f.setUsernameAnswer(rs.getString(1));
-            f.setTimeAnswer(rs.getString(2).split("\\.")[0]);
-            f.setAnswer(rs.getString(3));
-            f.setImage(rs.getString(4));
-            forum.add(f);
-        }
-        
-        PreparedStatement stat = con.prepareStatement("update forumquestion set viewed=viewed+1 where idforumquestion='" + idquestion +"'");
-        stat.executeUpdate();
-        
-        return SUCCESS;
     }
 
 }

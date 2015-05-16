@@ -2,8 +2,9 @@
 <%@taglib uri="/struts-tags" prefix="s"%>
 <div id="wrapper">
     <!--BEGIN SIDEBAR MENU-->
+    <br/><br/><br/>
     <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
-         data-position="right" class="navbar-default navbar-static-side">
+         data-position="right" class="navbar-default navbar-static-side" style="min-height: 100%; position: fixed; margin-top: -5px;">
         <div class="sidebar-collapse menu-scroll">
             <ul id="side-menu" class="nav">
                 <div class="clearfix"></div>
@@ -19,7 +20,7 @@
                 </li>
                 <li><a href="Recently"><i class="fa fa-envelope-o">
                             <div class="icon-bg bg-primary"></div>
-                        </i><span class="menu-title">Recentaly Added</span></a>
+                        </i><span class="menu-title">Recently Added</span></a>
 
                 </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Video</s:param></s:url>">
@@ -46,10 +47,10 @@
                         </i><span class="menu-title">Sports</span></a>
 
                 </li>
-                <li><a href="<s:url action="searchtags"><s:param name="tagname">Movie</s:param></s:url>">
-                        <i class="fa fa-th-list fa-fw">
+                <li><a href="<s:url action="searchtags"><s:param name="tagname">Book</s:param></s:url>">
+                        <i class="fa fa-book">
                             <div class="icon-bg bg-blue"></div>
-                        </i><span class="menu-title">Movies</span></a>
+                        </i><span class="menu-title">Books</span></a>
 
                 </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Game</s:param></s:url>">
@@ -58,20 +59,20 @@
                         </i><span class="menu-title">Games</span></a>
 
                 </li>
-                <li><a href="<s:url action="searchtags"><s:param name="tagname">Tv Show</s:param></s:url>">
-                       <i class="fa fa-file-video-o fa-fw">
-                            <div class="icon-bg bg-yellow"></div>
-                        </i><span class="menu-title">Tv Shows</span></a>
-                </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Project</s:param></s:url>">
-                       <i class="fa fa-university fa-fw">
+                       <i class="fa fa-file-video-o fa-fw">
                             <div class="icon-bg bg-yellow"></div>
                         </i><span class="menu-title">Projects</span></a>
                 </li>
                 <li><a href="<s:url action="searchtags"><s:param name="tagname">Paper</s:param></s:url>">
-                       <i class="fa fa-flag fa-fw">
+                       <i class="fa fa-university fa-fw">
                             <div class="icon-bg bg-yellow"></div>
                         </i><span class="menu-title">Papers</span></a>
+                </li>
+                <li><a href="<s:url action="searchtags"><s:param name="tagname">Other</s:param></s:url>">
+                       <i class="fa fa-database">
+                            <div class="icon-bg bg-yellow"></div>
+                        </i><span class="menu-title">Others</span></a>
                 </li>
             </ul>
         </div>

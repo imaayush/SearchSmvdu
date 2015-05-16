@@ -34,72 +34,84 @@
             <!--END BACK TO TOP-->
             <!--BEGIN TOPBAR-->
             <div id="header-topbar-option-demo" class="page-header-topbar">
-                <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+                <nav id="topbar" role="navigation" style="background-color: #0C1112;" data-step="3" class="navbar navbar-default navbar-static-top">
                     <div class="navbar-header">
-
-                        <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
-                    <div class="topbar-main">
-
-
+                        <a id="logo" href="index.jsp" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">SMVDU</span><span style="display: none" class="logo-text-icon">µ</span></a>
                     </div>
+                    <div style="float:right; padding: 15px; margin-right: 10px;">
+                        <a href ="About"><strong style="font-size: 14px;"><span class="fa fa-globe"></span>&nbsp;About Us</strong></a>
+                        <div/>
                 </nav>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+                <%@ taglib prefix="s" uri="/struts-tags" %>
 
 
-<!--END TOPBAR-->
-<s:if test="hasActionMessages()">
-    <div class="alert alert-danger" role="alert" style="width:30%; margin-left: 34% ;margin-top: 1%; " >
-        <s:actionmessage/>
-    </div>
-</s:if>
-<div id="wrapper">
-    <div class="col-lg-4" style="margin-left: 32%; margin-top: 8%;">
-        <div class="panel panel-orange">
-            <div class="panel-heading">
-                Login </div>
-            <div class="panel-body pan">
-                <form action="login" class="form-horizontal" method="post">
-                    <div class="form-body pal">
-                        <div class="form-group">
-                            <label for="inputName" class="col-md-3 control-label">
-                                User   Name</label>
-                            <div class="col-md-9">
-                                <div class="input-icon right">
-                                    <i class="fa fa-user"></i>
-                                    <input id="inputName" type="text" placeholder="" class="form-control" name="username"/></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword" class="col-md-3 control-label">
-                                Password</label>
-                            <div class="col-md-9">
-                                <div class="input-icon right">
-                                    <i class="fa fa-lock"></i>
-                                    <input id="inputPassword" type="password" placeholder="" class="form-control" name="password"/></div>
-                                <span class="help-block mbn"><a href="#"><small>Forgot password?</small> </a></span>
-                            </div>
-                        </div>
-                        <div class="form-group mbn">
-                            <div class="col-md-offset-3 col-md-6">
-                                <div class="checkbox">
-                                    <label>
-                                        <input tabindex="5" type="checkbox" />&nbsp; Keep me logged in</label></div>
-                            </div>
-                        </div>
+                <!--END TOPBAR-->
+                <s:if test="hasActionMessages()">
+                    <div class="alert alert-danger" role="alert" style="width:30%; margin-left: 34% ;margin-top: 1%; " >
+                        <s:actionmessage/>
                     </div>
-                    <div class="form-actions pal">
-                        <div class="form-group mbn">
-                            <div class="col-md-offset-3 col-md-6">
-                                <a href="Register.jsp" class="btn btn-primary">Register</a>&nbsp;&nbsp;
-                                <button type="submit" class="btn btn-primary">
-                                    Login</button>
+                </s:if>
+                <div id="wrapper">
+                    
+                    <div style="max-width: 450px; margin:auto; margin-top: 10%;">
+                        <div class="panel panel-orange">
+                            <div class="panel-heading">
+                                Sign In </div>
+                            <div class="panel-body pan">
+                                <form action="login" class="form-horizontal" method="post">
+                                    <div class="form-body pal">
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-md-3 control-label">
+                                                User Name</label>
+                                            <div class="col-md-9">
+                                                <div class="input-icon right">
+                                                    <i class="fa fa-user"></i>
+                                                    <input id="inputName" type="text" placeholder="" class="form-control" name="username" required/></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword" class="col-md-3 control-label">
+                                                Password</label>
+                                            <div class="col-md-9">
+                                                <div class="input-icon right">
+                                                    <i class="fa fa-lock"></i>
+                                                    <input id="inputPassword" type="password" placeholder="" class="form-control" name="password" required/></div>
+                                                <span class="help-block mbn">Forgot password? <a href="forgetpassword.jsp">click here</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mbn">
+                                            <div class="col-md-offset-3 col-md-6">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input tabindex="5" type="checkbox" />Keep me logged in</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions pal">
+                                        <div class="form-group mbn">
+                                            <div class="col-md-offset-3 col-md-6">
+                                                <a href="Register.jsp" class="btn btn-primary">Sign up</a>&nbsp;&nbsp;
+                                                <button type="submit" class="btn btn-primary">
+                                                    Log in</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+
                     </div>
-                </form>
+                    
+                    <div  >
+                         <center>
+                        <span>Android App </span><br>
+                        <a href="images/Share.apk">
+                        <img src="images/ic_launcher-web.png" alt="" style="width: 50px; height:50px;"/>
+                       </a>
+                        </center>
+                    </div>
+                </div>
             </div>
         </div>
-
-    </div>
-</div>
-</div>
+    </body>
+</html>

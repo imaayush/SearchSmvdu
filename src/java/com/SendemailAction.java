@@ -36,7 +36,16 @@ public class SendemailAction extends ActionSupport {
     private String important;
     private String categories;
     private String receiverUser;
+    private String sendmail;
     Connection con = Connections.conn();
+
+    public String getSendmail() {
+        return sendmail;
+    }
+
+    public void setSendmail(String sendmail) {
+        this.sendmail = sendmail;
+    }
 
     public String getReceiverUser() {
         return receiverUser;
@@ -111,8 +120,9 @@ public class SendemailAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
+        
         HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String User = (String) session.getAttribute("username");        
+        String User = (String) session.getAttribute("username");
         PreparedStatement ps;
         
         try {
@@ -127,8 +137,14 @@ public class SendemailAction extends ActionSupport {
                 setReceiverUser(rs1.getString(1));
             }
             
-            setImportant("No");
-            setCategories("Primary");
+            
+            if(sendmail.equals("Primary")){
+                setImportant("No");
+                setCategories("Primary");
+            }else{
+                setImportant("Yes");
+                setCategories("Spam");
+            }
             setReceiverstatus("Unread");
             setSenderstatus("Send");
             Timestamp time = new Timestamp(System.currentTimeMillis());
@@ -154,11 +170,9 @@ public class SendemailAction extends ActionSupport {
             }
             return "success";
 
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.toString());
-        }
-        return "fail";
-
+            return "fail";
+        } 
     }
-
 }

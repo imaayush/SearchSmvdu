@@ -91,32 +91,6 @@
                                                 </table>
                                             </div>
                                             <div class="box jplist-no-results text-shadow align-center"><p>No results found</p></div>
-                                            <div class="jplist-ios-button"><i class="fa fa-sort"></i>jPList Actions</div>
-                                            <div class="jplist-panel box panel-bottom">
-                                                <div data-control-type="drop-down" data-control-name="paging" data-control-action="paging" data-control-animate-to-top="true" class="jplist-drop-down form-control">
-                                                    <ul class="dropdown-menu">
-                                                        <li><span data-number="3"> 3 per page</span></li>
-                                                        <li><span data-number="5"> 5 per page</span></li>
-                                                        <li><span data-number="10" data-default="true"> 10 per page</span></li>
-                                                        <li><span data-number="all"> view all</span></li>
-                                                    </ul>
-                                                </div>
-                                                <div data-control-type="drop-down" data-control-name="sort" data-control-action="sort" data-control-animate-to-top="true" data-datetime-format="{month}/{day}/{year}" class="jplist-drop-down form-control">
-                                                    <ul class="dropdown-menu">
-                                                        <li><span data-path="default">Sort by</span></li>
-                                                        <li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
-                                                        <li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
-                                                        <li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
-                                                        <li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
-                                                        <li><span data-path=".like" data-order="asc" data-type="number" data-default="true">Likes asc</span></li>
-                                                        <li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
-                                                        <li><span data-path=".date" data-order="asc" data-type="datetime">Date asc</span></li>
-                                                        <li><span data-path=".date" data-order="desc" data-type="datetime">Date desc</span></li>
-                                                    </ul>
-                                                </div>
-                                                <div data-type="{start} - {end} of {all}" data-control-type="pagination-info" data-control-name="paging" data-control-action="paging" class="jplist-label btn btn-default"></div>
-                                                <div data-control-type="pagination" data-control-name="paging" data-control-action="paging" data-control-animate-to-top="true" class="jplist-pagination"></div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

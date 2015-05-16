@@ -106,42 +106,52 @@ public class EditAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        Connection con = Connections.conn();
-        name=fname + " " + lname;
-        setName(name);
-        HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String username = (String) session.getAttribute("username");
-        String sql = "select name, birthday, about, mobile from user where username='" + username + "'";
-        Statement st1 = con.createStatement();
-        ResultSet rs = st1.executeQuery(sql);        
-        while (rs.next()) {
-            if(fname.equals("") && lname.equals("")){
-                setName(rs.getString(1));
+        try {
+            Connection con = Connections.conn();
+            name = fname + " " + lname;
+            setName(name);
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            String username = (String) session.getAttribute("username");
+            String sql = "select name, birthday, about, mobile from user where username='" + username + "'";
+            Statement st1 = con.createStatement();
+            ResultSet rs = st1.executeQuery(sql);
+            while (rs.next()) {
+                if (fname.equals("") && lname.equals("")) {
+                    setName(rs.getString(1));
+                }
+                if (dates.equals("")) {
+                    setDates(rs.getString(2));
+                }
+                if (about.equals("")) {
+                    setAbout(rs.getString(3));
+                }
+                if (mobile.equals("")) {
+                    setMobile(rs.getString(4));
+                }
+                String query = "update user set name='" + name + "', gender='" + gender + "', birthday='" + dates + "', about='" + about + "', mobile='" + mobile + "'  where username = '" + username + "'";
+                Statement st = con.createStatement();
+                st.executeUpdate(query);
+
             }
-            if(dates.equals("")){
-                setDates(rs.getString(2));
-            }
-            if(about.equals("")){
-               setAbout(rs.getString(3));
-            }
-            if(mobile.equals("")){
-                setMobile(rs.getString(4));
-            }
-            String query = "update user set name='" + name + "', gender='" + gender + "', birthday='" + dates + "', about='" + about + "', mobile='" + mobile + "'  where username = '" + username + "'";
-            Statement st = con.createStatement();
-            st.executeUpdate(query);
-            
+            return "success";
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "fail";
         }
-        return "success";
     }
 
     public String changepassword() throws Exception {
-        HttpSession session = ServletActionContext.getRequest().getSession(false);
-        String username = (String) session.getAttribute("username");
-        Connection con = Connections.conn();
-        String query = "update user set password='" + password + "'  where username = '" + username + "'";
-        Statement st = con.createStatement();
-        st.executeUpdate(query);
-        return "success";
+        try {
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            String username = (String) session.getAttribute("username");
+            Connection con = Connections.conn();
+            String query = "update user set password='" + password + "'  where username = '" + username + "'";
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            return "success";
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return "fail";
+        }
     }
 }

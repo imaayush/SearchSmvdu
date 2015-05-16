@@ -129,6 +129,10 @@ public class FileuploadAction extends ActionSupport {
             st = con.createStatement();
             st.executeUpdate(query);
             
+            query = "delete from comments where idfiles='" + fileid + "'";
+            st = con.createStatement();
+            st.executeUpdate(query);
+            
             query = "delete from files where idfiles='" + fileid + "'";
             st = con.createStatement();
             st.executeUpdate(query);
